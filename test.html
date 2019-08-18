@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript TEST</title>
+    <script>
+        alert("Hello!!");
+        class Animal {
+            //            constructor(lv, hp, atk, dfc) {
+            //                this.lv = lv;
+            //                this.hp = hp;
+            //                this.atk = atk;
+            //                this.dfc = dfc;
+            //            }
+            constructor(obj) {
+                this.lv = obj.lv;
+                this.hp = obj.hp;
+                this.atk = obj.atk;
+                this.dfc = obj.dfc;
+            }
+            setHp = function (hp) {
+                this.hp = hp;
+            }
+            getHp = function () {
+                return this.hp;
+            }
+
+            setAtk = function (atk) {
+                this.atk = atk;
+            }
+            getAtk = function () {
+                return this.atk;
+            }
+
+            setDfc = function (dfc) {
+                this.dfc = dfc;
+            }
+            getDfc = function () {
+                return this.dfc;
+            }
+        }
+        //        var cat = new Animal(3, 12, 22, 32);
+        //        var dog = new Animal(4, 13, 23, 33);
+        var aliceObj = {
+            lv: 1,
+            hp: 10,
+            atk: 20,
+            dfc: 30
+        };
+        var bobObj = {
+            lv: 2,
+            hp: 11,
+            atk: 21,
+            dfc: 31
+        };
+        var alice = new Animal(aliceObj);
+        var bob = new Animal(bobObj);
+        function testFunc(myStat, eneStat) {
+            console.log("myStat.hp=" + myStat.hp);
+            console.log("myStat.hp=" + myStat.atk);
+            console.log("myStat.hp=" + myStat.dfc);
+            console.log("eneStat.hp=" + eneStat.hp);
+            console.log("eneStat.hp=" + eneStat.atk);
+            console.log("eneStat.hp=" + eneStat.dfc);
+        };
+        testFunc(alice, bob);
+//        testFunc(cat, dog);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
