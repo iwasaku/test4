@@ -607,6 +607,8 @@ let tweetButton = null;
 let restartButton = null;
 let tweetStr = null;
 
+console.log = function () { };  // ログを出す時にはコメントアウトする
+
 tm.main(function () {
     // アプリケーションクラスを生成
     let app = tm.display.CanvasApp("#world");
@@ -985,8 +987,7 @@ tm.define("GameScene", {
         tweetButton.onpointingstart = function () {
             var twitterURL = tm.social.Twitter.createURL({
                 type: "tweet",
-                //                text: "勇者" + myStatus.name + "は" + tweetStr,
-                text: "テスト",
+                text: "勇者" + myStatus.name + "は" + tweetStr,
                 hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
                 url: "https://iwasaku.github.io/test4/KMT/index.html",
             });
@@ -1445,11 +1446,12 @@ function CmdItemExec(btn) {
 function GameBattleStart() {
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
-            //            console.log("battleCtrl.turnCnt=" + battleCtrl.turnCnt);
-            //            console.log("battleCtrl.turnOwner=" + battleCtrl.turnOwner);
+            console.log("battleCtrl.turnCnt=" + battleCtrl.turnCnt);
+            console.log("battleCtrl.turnOwner=" + battleCtrl.turnOwner);
             battleCtrl.textBuff = [];
             messageWindowLabel.text = "";
             if (battleCtrl.turnOwner === 0) {
+                // プレイヤーのこうげき
                 let buffIdx = 0;
                 battleCtrl.turnOwner = 1;
                 switch (battleCtrl.gameModeOld) {
@@ -1550,6 +1552,7 @@ function GameBattleStart() {
                         break;
                 }
             } else {
+                // 敵のこうげき
                 battleCtrl.turnOwner = 0;
 
                 let eneGameModeOld = null;
@@ -1560,10 +1563,12 @@ function GameBattleStart() {
                 } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
                     eneGameModeOld = GAME_MODE.CMD_ATTACK;
                 } else {
-                    eneGameModeOld = GAME_MODE.CMD_ITEM_USE;
+                    eneGameModeOld = GAME_MODE.CMD_ATTACK;
+                    //                    eneGameModeOld = GAME_MODE.CMD_ITEM_USE;
                 }
                 switch (eneGameModeOld) {
                     case GAME_MODE.CMD_ATTACK:
+                        console.log("ATTACK");
                         let dmg = calcAttackDamage(eneStatus, myStatus, 1.0);
                         battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "の　こうげき！" };
                         if (dmg.val > 0) {
@@ -1584,16 +1589,19 @@ function GameBattleStart() {
                         }
                         break;
                     case GAME_MODE.CMD_DEFENCE:
+                        console.log("DEFENCE");
                         battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　みをまもっている！" };
                         battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                         eneStatus.addTmpAgi(1);
                         break;
                     case GAME_MODE.CMD_ESCAPE:
+                        console.log("ESCAPE");
                         battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　にげだした！" };
                         battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                         battleCtrl.isEscape = true;
                         break;
                     case GAME_MODE.CMD_ITEM_USE:
+                        console.log("ITEM_USE");
                         break;
                 }
             }
@@ -2085,21 +2093,21 @@ function calcAttackDamage(myStat, eneStat, scaleFactor) {
     }
     tmpDmg.val = Math.round(tmpDmg.val * scaleFactor);
     if (tmpDmg.val > 0) dmg = tmpDmg;
-    //    console.log(">>>>dmg=" + JSON.stringify(dmg));
+    console.log(">>>>dmg=" + JSON.stringify(dmg));
     return dmg;
 }
 // 通常攻撃ダメージ計算
 function calcNormalAattackDamage(myStat, eneStat) {
     let tmpAtk = myStat.calcAttack();
     let tmpDef = eneStat.calcDefence();
-    //    console.log(">" + tmpAtk + "," + tmpDef);
+    console.log(">" + tmpAtk + "," + tmpDef);
     tmpAtk = myStat.calcAttack() / 2;
     tmpDef = eneStat.calcDefence() / 4;
-    //    console.log(">>" + tmpAtk + "," + tmpDef);
+    console.log(">>" + tmpAtk + "," + tmpDef);
     let basicDmg = (myStat.calcAttack() / 2) - (eneStat.calcDefence() / 4);    // 「攻撃側の攻撃力」÷2 -「受ける側の守備力」÷4
     let range = (basicDmg / 16) + 1;    // ダメージ基本値÷16 + 1
     let rndDmg = (Math.random() * (range * 2)) - range;
-    //    console.log(">>>" + basicDmg + "," + rndDmg);
+    console.log(">>>" + basicDmg + "," + rndDmg);
     return basicDmg + rndDmg;
 }
 // 会心の一撃ダメージ計算
@@ -2155,7 +2163,7 @@ function decideGrowthType(name) {
     nameVal += (decideGrowthTypeSub(name.charAt(1)) * (8 ** 2));
     nameVal += (decideGrowthTypeSub(name.charAt(2)) * (8 ** 1));
     nameVal += (decideGrowthTypeSub(name.charAt(3)) * (8 ** 0));
-    //    console.log(name + ":" + nameVal + ":" + (nameVal % 24))
+    console.log(name + ":" + nameVal + ":" + (nameVal % 24))
     // ネムレス:83:11
     // うてな★:2423:23
     if ((nameVal === 83) || (nameVal === 2423)) {
@@ -2180,10 +2188,10 @@ function decideEnemy(count) {
     let enemy = null;
     let eaArray = enemyAppearTable[count];
     let target = Math.floor(Math.random() * 100) + 1;   // 1~100
-    //    console.log("target=" + target);
+    console.log("target=" + target);
     for (let ii = 0; ii < eaArray.length; ii++) {
         tmpRatio += eaArray[ii].ratio;
-        //        console.log("tmpRatio=" + tmpRatio);
+        console.log("tmpRatio=" + tmpRatio);
         if (tmpRatio < target) {
             continue;
         }
@@ -2203,10 +2211,10 @@ function decideMagic(enemyDef) {
     let tmpRatio = 0;
     let magic = null;
     let target = Math.floor(Math.random() * 100) + 1;   // 1~100
-    //    console.log("target=" + target);
+    console.log("target=" + target);
     for (let ii = 0; ii < enemyDef.magicList.length; ii++) {
         tmpRatio += enemyDef.magicList[ii].ratio;
-        //        console.log("tmpRatio=" + tmpRatio);
+        console.log("tmpRatio=" + tmpRatio);
         if (tmpRatio < target) {
             continue;
         }
@@ -2224,10 +2232,10 @@ function decideItem(enemyDef) {
     let tmpRatio = 0;
     let item = null;
     let target = Math.floor(Math.random() * 100) + 1;   // 1~100
-    //    console.log("target=" + target);
+    console.log("target=" + target);
     for (let ii = 0; ii < enemyDef.itemList.length; ii++) {
         tmpRatio += enemyDef.itemList[ii].ratio;
-        //        console.log("tmpRatio=" + tmpRatio);
+        console.log("tmpRatio=" + tmpRatio);
         if (tmpRatio < target) {
             continue;
         }
