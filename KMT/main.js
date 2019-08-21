@@ -987,8 +987,9 @@ tm.define("GameScene", {
         tweetButton.onpointingstart = function () {
             var twitterURL = tm.social.Twitter.createURL({
                 type: "tweet",
-                text: "勇者" + myStatus.name + "は" + tweetStr,
-                hashtags: "ネムレス #NEMLESSS #NMLS100",
+                //                text: "勇者" + myStatus.name + "は" + tweetStr,
+                text: "テスト",
+                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
                 url: "https://iwasaku.github.io/test4/KMT/index.html",
             });
             window.open(twitterURL);
