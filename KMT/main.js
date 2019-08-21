@@ -1011,6 +1011,7 @@ tm.define("GameScene", {
         restartButton.setAlpha(0);
         restartButton.sleep();
 
+        enemyCount = 0;
         gameMode = GAME_MODE.FADE_IN;
     },
 
