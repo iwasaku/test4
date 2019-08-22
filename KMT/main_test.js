@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST6",
+                    text: "NMLS ONE HUNDRED\nTEST7",
                     align: "center",
                 },
                 {
@@ -992,8 +992,8 @@ tm.define("GameScene", {
                 url: "https://iwasaku.github.io/test4/KMT/index.html",
             });
             //            window.location.href = twitterURL;
-            window.open().location.href = twitterURL;
-            //            window.open(twitterURL);
+            //            window.open().location.href = twitterURL;
+            window.open(twitterURL), "_tweet";
         };
         tweetButton.setAlpha(0);
         tweetButton.sleep();
