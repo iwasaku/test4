@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST5",
+                    text: "NMLS ONE HUNDRED\nTEST6",
                     align: "center",
                 },
                 {
@@ -975,24 +975,6 @@ tm.define("GameScene", {
             itemWindowReturnButton.setAlpha(0);
             itemWindowReturnButton.sleep();
         }
-        this.fromJSON({
-            children: [
-                {
-                    type: "FlatButton", name: "tweetButtonTest",
-                    init: [
-                        {
-                            text: "TWEET",
-                            fontFamily: FONT_FAMILY,
-                            fontSize: 32,
-                            bgColor: "hsl(240, 80%, 70%)",
-                        }
-                    ],
-                    x: SCREEN_CENTER_X - 160,
-                    y: 580,
-                    alpha: 0.0,
-                },
-            ]
-        });
         tweetButton = tm.app.FlatButton({
             width: 160,
             height: 60,
@@ -1009,8 +991,8 @@ tm.define("GameScene", {
                 hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
                 url: "https://iwasaku.github.io/test4/KMT/index.html",
             });
-            alert(tweetStr);
-            window.location.href = twitterURL;
+            //            window.location.href = twitterURL;
+            window.open().location.href = twitterURL;
             //            window.open(twitterURL);
         };
         tweetButton.setAlpha(0);
