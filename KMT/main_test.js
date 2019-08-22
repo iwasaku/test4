@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST11",
+                    text: "NMLS ONE HUNDRED\nTEST12",
                     align: "center",
                 },
                 {
@@ -1028,6 +1028,7 @@ tm.define("GameScene", {
                 hashtags: ["ネムレス", "NEMLESSS"],
                 url: "https://iwasaku.github.io/test4/SHU/",
             });
+            alert(twitterURL);
             window.open(twitterURL);
         };
 
