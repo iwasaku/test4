@@ -204,7 +204,8 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
+    //    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
+    [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },],
@@ -974,7 +975,24 @@ tm.define("GameScene", {
             itemWindowReturnButton.setAlpha(0);
             itemWindowReturnButton.sleep();
         }
-
+        this.fromJSON({
+            children: [
+                {
+                    type: "FlatButton", name: "tweetButtonTest",
+                    init: [
+                        {
+                            text: "TWEET",
+                            fontFamily: FONT_FAMILY,
+                            fontSize: 32,
+                            bgColor: "hsl(240, 80%, 70%)",
+                        }
+                    ],
+                    x: SCREEN_CENTER_X - 160,
+                    y: 580,
+                    alpha: 0.0,
+                },
+            ]
+        });
         tweetButton = tm.app.FlatButton({
             width: 160,
             height: 60,
@@ -984,15 +1002,6 @@ tm.define("GameScene", {
             bgColor: "#888",
         }).addChildTo(group1);
         tweetButton.setPosition(SCREEN_CENTER_X - 160, 650);
-        tweetButton.onpointingstart = function () {
-            var twitterURL = tm.social.Twitter.createURL({
-                type: "tweet",
-                text: "勇者" + myStatus.name + "は" + tweetStr,
-                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
-                url: "https://iwasaku.github.io/test4/KMT/index.html",
-            });
-            window.open(twitterURL);
-        };
         tweetButton.setAlpha(0);
         tweetButton.sleep();
 
@@ -1895,8 +1904,17 @@ function GameEnding() {
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
             battleCtrl.textBuff[1] = { frm: 90, cmd: TEXT_BUFFER_CMD.FINISH };
 
-            //            tweetButton.wakeUp();
-            //            tweetButton.setAlpha(1);
+            tweetButton.onpointingstart = function () {
+                var twitterURL = tm.social.Twitter.createURL({
+                    type: "tweet",
+                    text: "勇者" + myStatus.name + "は" + tweetStr,
+                    hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
+                    url: "https://iwasaku.github.io/test4/KMT/index.html",
+                });
+                window.open(twitterURL);
+            };
+            tweetButton.wakeUp();
+            tweetButton.setAlpha(1);
             restartButton.wakeUp();
             restartButton.setAlpha(1);
         // fall through
