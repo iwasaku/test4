@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST9",
+                    text: "NMLS ONE HUNDRED\nTEST11",
                     align: "center",
                 },
                 {
@@ -1002,6 +1002,34 @@ tm.define("GameScene", {
         };
         restartButton.setAlpha(0);
         restartButton.sleep();
+
+        this.fromJSON({
+            children: [
+                {
+                    type: "FlatButton", name: "tweetButtonTest",
+                    init: [
+                        {
+                            text: "TWEETTEST",
+                            fontFamily: FONT_FAMILY,
+                            fontSize: 32,
+                            bgColor: "hsl(240, 80%, 70%)",
+                        }
+                    ],
+                    x: SCREEN_CENTER_X,
+                    y: SCREEN_CENTER_Y,
+                    alpha: 1.0,
+                },
+            ]
+        });
+        this.tweetButtonTest.onclick = function () {
+            var twitterURL = tm.social.Twitter.createURL({
+                type: "tweet",
+                text: "SHRKN NG-NG スコア: ",
+                hashtags: ["ネムレス", "NEMLESSS"],
+                url: "https://iwasaku.github.io/test4/SHU/",
+            });
+            window.open(twitterURL);
+        };
 
         enemyCount = 0;
         gameMode = GAME_MODE.FADE_IN;
@@ -1891,18 +1919,6 @@ function GameEnding() {
             restartButton.wakeUp();
             restartButton.setAlpha(1);
 
-            // tweet ボタン
-            tweetButton.onpointingstart = function () {
-                var twitterURL = tm.social.Twitter.createURL({
-                    type: "tweet",
-                    text: "勇者" + myStatus.name + "は" + tweetStr,
-                    hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
-                    url: "https://iwasaku.github.io/test4/KMT/index.html",
-                });
-                //window.location.href = twitterURL;
-                //            window.open().location.href = twitterURL;
-                window.open(twitterURL, "_tweet");
-            };
         // fall through
         case GAME_SUB_MODE.MAIN:
             messageAndModeCtrl();
