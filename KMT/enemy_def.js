@@ -705,7 +705,7 @@ const ENEMY_DEF = defineEnum({
         gavasss: { min: 90, max: 100, },
     },
     ENEMY_26: {
-        name: "実写版",
+        name: "じっしゃ版",
         spriteName: "last",
         growthTypeIdx: { min: 5, max: 5 },
         lv: 30,

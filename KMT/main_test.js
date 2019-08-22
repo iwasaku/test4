@@ -604,8 +604,8 @@ let itemWindowItemButton = [];
 let itemWindowItemLabel = [];
 let itemWindowReturnButton = null;
 let itemWindowItemIdx = -1;
-let tweetButton = null;
 let restartButton = null;
+let tweetButtonSwitch = false;
 let tweetStr = null;
 
 console.log = function () { };  // ログを出す時にはコメントアウトする
@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST12",
+                    text: "NMLS ONE HUNDRED\nTEST13",
                     align: "center",
                 },
                 {
@@ -975,17 +975,6 @@ tm.define("GameScene", {
             itemWindowReturnButton.setAlpha(0);
             itemWindowReturnButton.sleep();
         }
-        tweetButton = tm.app.FlatButton({
-            width: 160,
-            height: 60,
-            text: "TWEET",
-            fontFamily: FONT_FAMILY,
-            fontSize: 32,
-            bgColor: "#888",
-        }).addChildTo(group1);
-        tweetButton.setPosition(SCREEN_CENTER_X - 160, 650);
-        tweetButton.setAlpha(0);
-        tweetButton.sleep();
 
         restartButton = tm.app.FlatButton({
             width: 160,
@@ -1006,31 +995,35 @@ tm.define("GameScene", {
         this.fromJSON({
             children: [
                 {
-                    type: "FlatButton", name: "tweetButtonTest",
+                    type: "FlatButton", name: "tweetButton",
                     init: [
                         {
-                            text: "TWEETTEST",
+                            text: "TWEET",
                             fontFamily: FONT_FAMILY,
                             fontSize: 32,
+                            width: 160,
+                            height: 60,
                             bgColor: "hsl(240, 80%, 70%)",
                         }
                     ],
-                    x: SCREEN_CENTER_X,
-                    y: SCREEN_CENTER_Y,
-                    alpha: 1.0,
+                    x: SCREEN_CENTER_X - 160,
+                    y: 650,
+                    alpha: 0.0,
                 },
             ]
         });
-        this.tweetButtonTest.onclick = function () {
+        this.tweetButton.onclick = function () {
             var twitterURL = tm.social.Twitter.createURL({
                 type: "tweet",
-                text: "SHRKN NG-NG スコア: ",
-                hashtags: ["ネムレス", "NEMLESSS"],
-                url: "https://iwasaku.github.io/test4/SHU/",
+                text: "勇者" + myStatus.name + "は" + tweetStr,
+                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
+                url: "https://iwasaku.github.io/test4/KMT/",
             });
-            alert(twitterURL);
             window.open(twitterURL);
         };
+        this.tweetButton.setAlpha(0);
+        this.tweetButton.sleep();
+        tweetButtonSwitch = false;
 
         enemyCount = 0;
         gameMode = GAME_MODE.FADE_IN;
@@ -1050,6 +1043,16 @@ tm.define("GameScene", {
         }
         gameMode.func();
 
+        if (tweetButtonSwitch != null) {
+            if (tweetButtonSwitch) {
+                this.tweetButton.setAlpha(1);
+                this.tweetButton.wakeUp();
+            } else {
+                this.tweetButton.setAlpha(0);
+                this.tweetButton.sleep();
+            }
+            tweetButtonSwitch = null;
+        }
         statusWindowHpLabel.text = "ＨＰ：" + toZenkaku(myStatus.getNowHp(), 4);
         statusWindowLvLabel.text = "ＬＶ：" + toZenkaku(myStatus.getLv(), 4);
         statusWindowGavasssLabel.text = "Ｇ　" + toZenkaku(myStatus.getGavasss(), 5);
@@ -1915,10 +1918,9 @@ function GameEnding() {
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
             battleCtrl.textBuff[1] = { frm: 90, cmd: TEXT_BUFFER_CMD.FINISH };
 
-            tweetButton.wakeUp();
-            tweetButton.setAlpha(1);
             restartButton.wakeUp();
             restartButton.setAlpha(1);
+            tweetButtonSwitch = true;
 
         // fall through
         case GAME_SUB_MODE.MAIN:
