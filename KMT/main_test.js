@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST2",
+                    text: "NMLS ONE HUNDRED\nTEST3",
                     align: "center",
                 },
                 {
@@ -1911,7 +1911,7 @@ function GameEnding() {
                     hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
                     url: "https://iwasaku.github.io/test4/KMT/index.html",
                 });
-                window.open(twitterURL, "_blank");
+                window.open("https://twitter.com/intent/tweet?text=テキストテキスト%0a改行もできるし%20スペースも&url=https://www.url.url/&hashtags=タグ,二つ目", "_blank");
             };
             tweetButton.wakeUp();
             tweetButton.setAlpha(1);
