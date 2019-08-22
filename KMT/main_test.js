@@ -685,7 +685,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nTEST8",
+                    text: "NMLS ONE HUNDRED\nTEST9",
                     align: "center",
                 },
                 {
@@ -984,17 +984,6 @@ tm.define("GameScene", {
             bgColor: "#888",
         }).addChildTo(group1);
         tweetButton.setPosition(SCREEN_CENTER_X - 160, 650);
-        tweetButton.onpointingstart = function () {
-            var twitterURL = tm.social.Twitter.createURL({
-                type: "tweet",
-                text: "勇者" + myStatus.name + "は" + tweetStr,
-                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
-                url: "https://iwasaku.github.io/test4/KMT/index.html",
-            });
-            window.location.href = twitterURL;
-            //            window.open().location.href = twitterURL;
-            //            window.open(twitterURL), "_tweet";
-        };
         tweetButton.setAlpha(0);
         tweetButton.sleep();
 
@@ -1901,6 +1890,19 @@ function GameEnding() {
             tweetButton.setAlpha(1);
             restartButton.wakeUp();
             restartButton.setAlpha(1);
+
+            // tweet ボタン
+            tweetButton.onpointingstart = function () {
+                var twitterURL = tm.social.Twitter.createURL({
+                    type: "tweet",
+                    text: "勇者" + myStatus.name + "は" + tweetStr,
+                    hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
+                    url: "https://iwasaku.github.io/test4/KMT/index.html",
+                });
+                //window.location.href = twitterURL;
+                //            window.open().location.href = twitterURL;
+                window.open(twitterURL, "_tweet");
+            };
         // fall through
         case GAME_SUB_MODE.MAIN:
             messageAndModeCtrl();
