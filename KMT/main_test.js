@@ -10,6 +10,9 @@ let ASSETS = {
     "frame_576_192": "./resource/frame_576_192.png",
     "frame_320_96": "./resource/frame_320_96.png",
 
+    "rip": "./resource/rip.png",
+    "maria": "./resource/maria.png",
+
     "pizzza": "./resource/pizzza.png",
     "negi": "./resource/negi.png",
     "gohan": "./resource/gohan.png",
@@ -204,7 +207,7 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
+    //    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
@@ -607,6 +610,7 @@ let itemWindowItemIdx = -1;
 let restartButton = null;
 let tweetButtonSwitch = false;
 let tweetStr = null;
+let endingGraphicSprite = null;
 
 console.log = function () { };  // ログを出す時にはコメントアウトする
 
@@ -833,7 +837,7 @@ tm.define("GameScene", {
             text: "こうげき",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#888",
+            bgColor: "#444",
         }).addChildTo(group1);
         cmdWindowAtkButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) - 105);
         cmdWindowAtkButton.onpointingstart = function () {
@@ -847,7 +851,7 @@ tm.define("GameScene", {
             text: "にげる",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#888",
+            bgColor: "#444",
         }).addChildTo(group1);
         cmdWindowEscButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) - 35);
         cmdWindowEscButton.onpointingstart = function () {
@@ -861,7 +865,7 @@ tm.define("GameScene", {
             text: "ぼうぎょ",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#888",
+            bgColor: "#444",
         }).addChildTo(group1);
         cmdWindowDefButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) + 35);
         cmdWindowDefButton.onpointingstart = function () {
@@ -875,7 +879,7 @@ tm.define("GameScene", {
             text: "どうぐ",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#888",
+            bgColor: "#444",
         }).addChildTo(group1);
         cmdWindowItemButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) + 105);
         cmdWindowItemButton.onpointingstart = function () {
@@ -965,7 +969,7 @@ tm.define("GameScene", {
                 text: "もどる",
                 fontFamily: FONT_FAMILY,
                 fontSize: 32,
-                bgColor: "#888",
+                bgColor: "#444",
             }).addChildTo(group2);
             let yIdx = Math.floor(ii / 2);
             itemWindowReturnButton.setPosition(SCREEN_CENTER_X, 70 * 7 + (yIdx * 70));
@@ -982,7 +986,7 @@ tm.define("GameScene", {
             text: "RESTERT",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#888",
+            bgColor: "#444",
         }).addChildTo(group1);
         restartButton.setPosition(SCREEN_CENTER_X + 160, 650);
         let self = this;
@@ -1003,7 +1007,7 @@ tm.define("GameScene", {
                             fontSize: 32,
                             width: 160,
                             height: 60,
-                            bgColor: "hsl(240, 80%, 70%)",
+                            bgColor: "#444",
                         }
                     ],
                     x: SCREEN_CENTER_X - 160,
@@ -1016,7 +1020,7 @@ tm.define("GameScene", {
             var twitterURL = tm.social.Twitter.createURL({
                 type: "tweet",
                 text: "勇者" + myStatus.name + "は" + tweetStr,
-                hashtags: ["NMLS100"],
+                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
                 url: "https://iwasaku.github.io/test4/KMT/",
             });
             window.open(twitterURL);
@@ -1024,6 +1028,10 @@ tm.define("GameScene", {
         this.tweetButton.setAlpha(0);
         this.tweetButton.sleep();
         tweetButtonSwitch = false;
+
+        if (endingGraphicSprite != null) {
+            endingGraphicSprite.remove();
+        }
 
         enemyCount = 0;
         gameMode = GAME_MODE.FADE_IN;
@@ -1095,7 +1103,7 @@ function enemyWindowCtrl(flag) {
     enemyWindowLabel.alpha = flag ? 1 : 0;
 }
 function enemyGraphicCtrl(flag) {
-    enemyGraphicSprite.alpha = flag ? 1 : 0;;
+    enemyGraphicSprite.alpha = flag ? 1 : 0;
 }
 function itemWindowCtrl(itemFlag, isDrop) {
     itemWindowSprite.alpha = itemFlag ? 1 : 0;
@@ -1900,15 +1908,19 @@ function GameEnding() {
             gameSubMode = GAME_SUB_MODE.MAIN;
 
             let tmpStr = "";
+            let tmpSpriteName = "";
             if (enemyCount === 0) {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１かいで　ちからつきた") + "\n";
                 tweetStr = "地下１階で力尽きた\n";
+                tmpSpriteName = "rip";
             } else if (enemyCount === 100) {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１００かい　すべてクリアした！") + "\n";
                 tweetStr = "地下１００階すべてクリアした\n";
+                tmpSpriteName = "maria";
             } else {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか" + toZenkaku(enemyCount, 1) + "かいまで　クリアした！") + "\n";
                 tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした\n";
+                tmpSpriteName = "rip";
             }
             if (myStatus.gavasss > 0) {
                 tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
@@ -1926,6 +1938,9 @@ function GameEnding() {
             restartButton.wakeUp();
             restartButton.setAlpha(1);
             tweetButtonSwitch = true;
+
+            endingGraphicSprite = new EnemySprite(tmpSpriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 128, 1.5, 1.5).addChildTo(group0);
+            endingGraphicSprite.alpha = 1;
 
         // fall through
         case GAME_SUB_MODE.MAIN:
