@@ -204,7 +204,7 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    //    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
+    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
@@ -1016,7 +1016,7 @@ tm.define("GameScene", {
             var twitterURL = tm.social.Twitter.createURL({
                 type: "tweet",
                 text: "勇者" + myStatus.name + "は" + tweetStr,
-                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
+                hashtags: ["NMLS100"],
                 url: "https://iwasaku.github.io/test4/KMT/",
             });
             window.open(twitterURL);
@@ -1911,8 +1911,13 @@ function GameEnding() {
                 tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした\n";
             }
             if (myStatus.gavasss > 0) {
+                tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
                 tmpStr += makeMessageWindowString(toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！") + "\n";
+                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "\n";
                 tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した\n";
+            } else {
+                tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった\n";
+                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "だった\n";
             }
 
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
