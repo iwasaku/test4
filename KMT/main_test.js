@@ -207,7 +207,7 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    //    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
+    [{ ene: ENEMY_DEF.ENEMY_0_SP, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
@@ -1925,7 +1925,7 @@ function GameEnding() {
             if (myStatus.gavasss > 0) {
                 tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
                 tmpStr += makeMessageWindowString(toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！") + "\n";
-                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "\n";
+                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "　だった！\n";
                 tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した\n";
             } else {
                 tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった\n";

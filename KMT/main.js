@@ -1924,7 +1924,7 @@ function GameEnding() {
             if (myStatus.gavasss > 0) {
                 tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
                 tmpStr += makeMessageWindowString(toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！") + "\n";
-                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "\n";
+                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "　だった！\n";
                 tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した\n";
             } else {
                 tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった\n";
