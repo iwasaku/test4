@@ -1939,7 +1939,7 @@ function GameEnding() {
             restartButton.setAlpha(1);
             tweetButtonSwitch = true;
 
-            endingGraphicSprite = new EnemySprite(tmpSpriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 128, 1.5, 1.5).addChildTo(group0);
+            endingGraphicSprite = new EnemySprite(tmpSpriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 240, 3, 3).addChildTo(group0);
             endingGraphicSprite.alpha = 1;
 
         // fall through
