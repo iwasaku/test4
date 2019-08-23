@@ -610,6 +610,7 @@ let restartButton = null;
 let tweetButtonSwitch = false;
 let tweetStr = null;
 let endingGraphicSprite = null;
+let endingNameLabel = null;
 
 console.log = function () { };  // ログを出す時にはコメントアウトする
 
@@ -720,6 +721,14 @@ tm.define("TitleScene", {
         mkNameCnt = 0;
         let self = this;
         myStatus = new CharaStatus();
+
+        if (endingGraphicSprite != null) {
+            endingGraphicSprite.remove();
+        }
+
+        if (endingNameLabel != null) {
+            endingNameLabel.remove();
+        }
 
         this.startButton.onpointingstart = function () {
             if (mkNameCnt >= 3) {
@@ -1028,9 +1037,16 @@ tm.define("GameScene", {
         this.tweetButton.sleep();
         tweetButtonSwitch = false;
 
-        if (endingGraphicSprite != null) {
-            endingGraphicSprite.remove();
-        }
+        endingNameLabel = tm.display.Label(" R.I.P.\n" + myStatus.name).addChildTo(group2);
+        endingNameLabel.setPosition(SCREEN_CENTER_X, SCREEN_CENTER_Y - 32 * 7)
+            .setFillStyle("#222")
+            .setAlign("center")
+            .setBaseline("bottom")
+            .setFontFamily(FONT_FAMILY)
+            .setFontSize(48);
+        endingNameLabel.shadowColor = "#000";
+        endingNameLabel.shadowBlur = 20;
+        endingNameLabel.alpha = 0;
 
         enemyCount = 0;
         gameMode = GAME_MODE.FADE_IN;
@@ -1912,14 +1928,17 @@ function GameEnding() {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１かいで　ちからつきた") + "\n";
                 tweetStr = "地下１階で力尽きた\n";
                 tmpSpriteName = "rip";
+                endingNameLabel.alpha = 0.7;
             } else if (enemyCount === 100) {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１００かい　すべてクリアした！") + "\n";
                 tweetStr = "地下１００階すべてクリアした\n";
                 tmpSpriteName = "maria";
+                endingNameLabel.alpha = 0;
             } else {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか" + toZenkaku(enemyCount, 1) + "かいまで　クリアした！") + "\n";
                 tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした\n";
                 tmpSpriteName = "rip";
+                endingNameLabel.alpha = 0.7;
             }
             if (myStatus.gavasss > 0) {
                 tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
