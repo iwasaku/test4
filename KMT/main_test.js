@@ -221,9 +221,8 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    //    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // Lv1   4
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // Lv1   4
     //[{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // Lv1   4
-    //[{ ene: ENEMY_DEF.ENEMY_1, ratio: 100 },],  // Lv1   4
 
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
