@@ -88,7 +88,7 @@ const ENEMY_DEF = defineEnum({
         gavasss: { min: 1, max: 5, },
     },
     ENEMY_2_P: {
-        name: "Ｎｅｇｇｉｋｋｏ",
+        name: "Ｎｅｇｉｋｋｋｏ",
         spriteName: "negikko",
         growthTypeIdx: { min: 0, max: 5 },
         lv: 4,
