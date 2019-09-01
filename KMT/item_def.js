@@ -217,7 +217,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
         name: '炎の巻物',
-        success: 90,  //　成功確率（％）
+        success: 99,  //　成功確率（％）
         min: 15,  //　最小ダメージ
         max: 25,  //　最大ダメージ
     },
@@ -226,7 +226,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
         name: '火炎の巻物',
-        success: 80,  //　成功確率（％）
+        success: 99,  //　成功確率（％）
         min: 25,  //　最小ダメージ
         max: 35,  //　最大ダメージ
     },
@@ -235,7 +235,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
         name: '焦熱地獄の巻物',
-        success: 70,  //　成功確率（％）
+        success: 99,  //　成功確率（％）
         min: 35,  //　最小ダメージ
         max: 45,  //　最大ダメージ
     },
@@ -244,7 +244,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.WATER,
         exec: ITEM_EXEC.USE,
         name: '小波の巻物',
-        success: 90,  //　成功確率（％）
+        success: 99,  //　成功確率（％）
         min: 15,  //　最小ダメージ
         max: 25,  //　最大ダメージ
     },
@@ -253,7 +253,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.WATER,
         exec: ITEM_EXEC.USE,
         name: '津波の巻物',
-        success: 80,  //　成功確率（％）
+        success: 99,  //　成功確率（％）
         min: 25,  //　最小ダメージ
         max: 35,  //　最大ダメージ
     },
@@ -262,7 +262,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.WATER,
         exec: ITEM_EXEC.USE,
         name: '大津波の巻物',
-        success: 70,  //　成功確率（％）
+        success: 99,  //　成功確率（％）
         min: 35,  //　最小ダメージ
         max: 45,  //　最大ダメージ
     },

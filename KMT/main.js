@@ -2452,7 +2452,7 @@ function getRandomValue(min, max) {
 function calcMagicDmgRatio(itemDef, eneDef) {
     let ratio = 1.0;
     if (eneDef.attr == ITEM_ATTR.ALL_P) {
-        ratio = 0.7;
+        ratio = 0.5;
     } else if (eneDef.attr == ITEM_ATTR.ALL_M) {
         ratio = 1.3;
     } else if (eneDef.attr == ITEM_ATTR.NEUTRAL) {
@@ -2460,7 +2460,7 @@ function calcMagicDmgRatio(itemDef, eneDef) {
     } else if (itemDef.attr == ITEM_ATTR.FIRE) {
         switch (eneDef.attr) {
             case ITEM_ATTR.FIRE:
-                ratio = 0.7;
+                ratio = 0.5;
                 break;
             case ITEM_ATTR.WATER:
                 ratio = 1.3;
@@ -2472,7 +2472,7 @@ function calcMagicDmgRatio(itemDef, eneDef) {
                 ratio = 1.3;
                 break;
             case ITEM_ATTR.WATER:
-                ratio = 0.7;
+                ratio = 0.5;
                 break;
         }
     } else {
