@@ -36,6 +36,28 @@ const ITEM_TYPE = defineEnum({
         id: 7,
     },
 });
+const ITEM_ATTR = defineEnum({
+    // 全ての属性にマイナス
+    ALL_M: {
+        id: -3,
+    },
+    // 全ての属性にプラス
+    ALL_P: {
+        id: -2,
+    },
+    // 中性
+    NEUTRAL: {
+        id: -1,
+    },
+    // 火
+    FIRE: {
+        id: 0,
+    },
+    // 水
+    WATER: {
+        id: 1,
+    },
+});
 const ITEM_EXEC = defineEnum({
     // ダミー
     DUMMY: {
@@ -190,54 +212,96 @@ const ITEM_DEF = defineEnum({
     },
 
     // 魔法（直接攻撃）
-    MAGIC_00: {
+    MAGIC_FIRE_LV1: {
         type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
-        name: 'ほのうのしょ',
-        success: 70,  //　成功確率（％）
+        name: '炎の巻物',
+        success: 90,  //　成功確率（％）
         min: 15,  //　最小ダメージ
         max: 25,  //　最大ダメージ
     },
-    MAGIC_01: {
+    MAGIC_FIRE_LV2: {
         type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
-        name: 'かえんのしょ',
-        success: 50,  //　成功確率（％）
-        min: 55,  //　最小ダメージ
-        max: 65,  //　最大ダメージ
+        name: '火炎の巻物',
+        success: 80,  //　成功確率（％）
+        min: 25,  //　最小ダメージ
+        max: 35,  //　最大ダメージ
+    },
+    MAGIC_FIRE_LV3: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.FIRE,
+        exec: ITEM_EXEC.USE,
+        name: '焦熱地獄の巻物',
+        success: 70,  //　成功確率（％）
+        min: 35,  //　最小ダメージ
+        max: 45,  //　最大ダメージ
+    },
+    MAGIC_WATER_LV1: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.WATER,
+        exec: ITEM_EXEC.USE,
+        name: '小波の巻物',
+        success: 90,  //　成功確率（％）
+        min: 15,  //　最小ダメージ
+        max: 25,  //　最大ダメージ
+    },
+    MAGIC_WATER_LV2: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.WATER,
+        exec: ITEM_EXEC.USE,
+        name: '津波の巻物',
+        success: 80,  //　成功確率（％）
+        min: 25,  //　最小ダメージ
+        max: 35,  //　最大ダメージ
+    },
+    MAGIC_WATER_LV3: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.WATER,
+        exec: ITEM_EXEC.USE,
+        name: '大津波の巻物',
+        success: 70,  //　成功確率（％）
+        min: 35,  //　最小ダメージ
+        max: 45,  //　最大ダメージ
     },
 
     // 魔法（間接攻撃）
-    MAGIC_02: {
+    MAGIC_04: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
+        attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'スリープのしょ', // 相手が３回眠る（３ターンスキップ）
+        name: 'ねむりの巻物', // 相手が３回眠る（３ターンスキップ）
         success: 40,  //　成功確率（％）
         min: 3,
         max: 3,
     },
-    MAGIC_03: {
+    MAGIC_05: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
+        attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'くらやみのしょ',   // 相手の攻撃命中率を半減
+        name: 'くらやみの巻物',   // 相手の攻撃命中率を半減
         success: 40,  //　成功確率（％）
         min: 45,
         max: 55,
     },
-    MAGIC_04: {
+    MAGIC_06: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
+        attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'アタックのしょ', // 攻撃力2倍
+        name: '攻めの巻物',
         success: 100,  //　成功確率（％）
-        min: 2,
+        min: 2, // 攻撃力2倍
         max: 2,
     },
-    MAGIC_05: {
+    MAGIC_07: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
+        attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'ガードのしょ',   // 防御力1.5倍
+        name: '受けの巻物',
         success: 100,  //　成功確率（％）
-        min: 1.5,
+        min: 1.5,   // 防御力1.5倍
         max: 1.5,
     },
 });

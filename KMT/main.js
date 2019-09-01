@@ -1,3 +1,5 @@
+//console.log = function () { };  // ログを出す時にはコメントアウトする
+
 let SCREEN_WIDTH = 640;              // スクリーン幅
 let SCREEN_HEIGHT = 1136;              // スクリーン高さ
 let SCREEN_CENTER_X = SCREEN_WIDTH / 2;   // スクリーン幅の半分
@@ -206,7 +208,7 @@ const expTable = [
 
     { lv: 21, atk: 95, agi: 90, hp: 149, exp: 33000 },
     { lv: 22, atk: 97, agi: 90, hp: 158, exp: 37000 },
-    { lv: 23, atk: 99, agi: 94, hp: 165, exp: 41000 },  // スラ仏だとこの辺で１００匹になるらしい(Lv.20~25)
+    { lv: 23, atk: 99, agi: 94, hp: 165, exp: 41000 },
     { lv: 24, atk: 103, agi: 98, hp: 170, exp: 45000 },
     { lv: 25, atk: 113, agi: 100, hp: 174, exp: 49000 },
     { lv: 26, atk: 117, agi: 105, hp: 180, exp: 53000 },
@@ -548,25 +550,6 @@ class CharaStatus {
     getItemList() {
         return this.itemList;
     }
-    setItemListDebug() {
-        this.itemList = [
-            { eqp: false, def: ITEM_DEF.WEAPON_00 },
-            { eqp: false, def: ITEM_DEF.WEAPON_01 },
-            { eqp: false, def: ITEM_DEF.SHIELD_00 },
-            { eqp: false, def: ITEM_DEF.SHIELD_01 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_01 },
-            { eqp: false, def: ITEM_DEF.MAGIC_00 },
-            { eqp: false, def: ITEM_DEF.MAGIC_01 },
-            { eqp: false, def: ITEM_DEF.MAGIC_02 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-        ];
-    }
 }
 
 let mkNameIdx = [0, 2, 4, 6];
@@ -625,8 +608,6 @@ let tweetButtonSwitch = false;
 let tweetStr = null;
 let endingGraphicSprite = null;
 let endingNameLabel = null;
-
-console.log = function () { };  // ログを出す時にはコメントアウトする
 
 tm.main(function () {
     // アプリケーションクラスを生成
@@ -703,7 +684,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα3 ver.",
+                    text: "NMLS ONE HUNDRED\nα4 ver.",
                     align: "center",
                 },
                 {
@@ -720,7 +701,7 @@ tm.define("TitleScene", {
                     type: "FlatButton", name: "startButton",
                     init: [
                         {
-                            text: "START",
+                            text: "はじめる",
                             fontFamily: FONT_FAMILY,
                             fontSize: 32,
                             bgColor: "hsl(240, 0%, 70%)",
@@ -1005,7 +986,7 @@ tm.define("GameScene", {
         restartButton = tm.app.FlatButton({
             width: 160,
             height: 60,
-            text: "RESTERT",
+            text: "もう一度",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
             bgColor: "#444",
@@ -1024,7 +1005,7 @@ tm.define("GameScene", {
                     type: "FlatButton", name: "tweetButton",
                     init: [
                         {
-                            text: "TWEET",
+                            text: "ツイート",
                             fontFamily: FONT_FAMILY,
                             fontSize: 32,
                             width: 160,
@@ -1064,6 +1045,7 @@ tm.define("GameScene", {
 
         enemyCount = 0;
         gameMode = GAME_MODE.FADE_IN;
+        gameSubMode = GAME_SUB_MODE.INIT;
     },
 
     onpointingstart: function () {
@@ -1180,7 +1162,7 @@ function itemWindowCtrl(itemFlag, isDrop) {
 フェードインの処理
 */
 function GameFadeIn() {
-    //    console.log("FadeIn");
+    console.log("FadeIn");
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             // 表示設定
@@ -1213,7 +1195,7 @@ function GameFadeIn() {
 『〜があらわれた！』の処理
 */
 function GameIntro() {
-    //    console.log("Intro");
+    console.log("Intro");
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             myStatus.setTmpAgi(0);
@@ -1435,7 +1417,7 @@ function CmdItem() {
 /* 
  */
 function CmdItemUse() {
-    //    console.log("CmdItemUse");
+    console.log("CmdItemUse");
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             // 表示内容設定
@@ -1512,13 +1494,44 @@ function GameBattleStart() {
             console.log("battleCtrl.turnOwner=" + battleCtrl.turnOwner);
             battleCtrl.textBuff = [];
             messageWindowLabel.text = "";
+            let buffIdx = 0;
+            let isPlayer = null;
+            let tmpAtkStatus = null;
+            let tmpDefStatus = null;
+            let tmpGameModeOld = null;
             if (battleCtrl.turnOwner === 0) {
                 // プレイヤーのこうげき
-                let buffIdx = 0;
+                isPlayer = true;
+                tmpAtkStatus = myStatus;
+                tmpDefStatus = eneStatus;
                 battleCtrl.turnOwner = 1;
-                switch (battleCtrl.gameModeOld) {
-                    case GAME_MODE.CMD_ATTACK:
+                tmpGameModeOld = battleCtrl.gameModeOld;
+            } else {
+                // 敵のこうげき
+                isPlayer = false;
+                tmpAtkStatus = eneStatus;
+                tmpDefStatus = myStatus;
+                battleCtrl.turnOwner = 0;
+
+                if ((eneStatus.eneDef.isEscape == true) && (myStatus.getAtk() >= eneStatus.getAtk() * 2) && (Math.random() <= 0.25)) {
+                    tmpGameModeOld = GAME_MODE.CMD_ESCAPE;
+                } else if (Math.random() <= 0.031) {
+                    tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
+                } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
+                    tmpGameModeOld = GAME_MODE.CMD_ATTACK;
+                } else {
+                    //tmpGameModeOld = GAME_MODE.CMD_ATTACK;
+                    tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
+                }
+            }
+
+            switch (tmpGameModeOld) {
+                case GAME_MODE.CMD_ATTACK:
+                    console.log("ATTACK");
+                    if (isPlayer) {
                         let dmg = calcAttackDamage(myStatus, eneStatus, 1.1);
+                        //dmg.val = 300;  //TEST
+                        //dmg.krt = true; //TEST
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "の　こうげき！" };
                         if (dmg.val > 0) {
                             let tmpText;
@@ -1526,7 +1539,7 @@ function GameBattleStart() {
                             else tmpText = "";
                             tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
-                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isMyStat: false, prm: -dmg.val };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: -dmg.val };
                             battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SPRITE_OFF };
                             battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SPRITE_ON };
                             battleCtrl.textBuff[buffIdx++] = { frm: 35, cmd: TEXT_BUFFER_CMD.SPRITE_OFF };
@@ -1536,13 +1549,44 @@ function GameBattleStart() {
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　ひらりと　みをかわした！" };
                             battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                         }
-                        break;
-                    case GAME_MODE.CMD_DEFENCE:
+                    } else {
+                        let dmg = calcAttackDamage(eneStatus, myStatus, 1.0);
+                        //dmg.val = 1;  //TEST
+                        //dmg.krt = false; //TEST
+                        battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "の　こうげき！" };
+                        if (dmg.val > 0) {
+                            let tmpText;
+                            if (dmg.krt) tmpText = "つうこんのいちげき！\n";
+                            else tmpText = "";
+                            tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: true, prm: -dmg.val };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 35, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
+                        } else {
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ひらりと　みをかわした！" };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
+                        }
+                    }
+                    break;
+                case GAME_MODE.CMD_DEFENCE:
+                    console.log("DEFENCE");
+                    if (isPlayer) {
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　みをまもっている！" };
                         battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                         myStatus.addTmpAgi(1);
-                        break;
-                    case GAME_MODE.CMD_ESCAPE:
+                    } else {
+                        battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　みをまもっている！" };
+                        battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
+                        eneStatus.addTmpAgi(1);
+
+                    }
+                    break;
+                case GAME_MODE.CMD_ESCAPE:
+                    if (isPlayer) {
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　にげだした！" };
                         // 成功失敗判定
                         if (Math.random() < (myStatus.getAgi() / (myStatus.getAgi() + eneStatus.calcDefence()))) {
@@ -1553,8 +1597,15 @@ function GameBattleStart() {
                             battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                             battleCtrl.isEscape = false;
                         }
-                        break;
-                    case GAME_MODE.CMD_ITEM_USE:
+                    } else {
+                        battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　にげだした！" };
+                        battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
+                        battleCtrl.isEscape = true;
+                    }
+                    break;
+                case GAME_MODE.CMD_ITEM_USE:
+                    console.log("ITEM_USE");
+                    if (isPlayer) {
                         // 武器・盾の装備はここにこない
                         // 魔法と薬草のみ
                         let tmpItem = myStatus.getItemList()[battleCtrl.useItemIdx].def;
@@ -1568,7 +1619,7 @@ function GameBattleStart() {
                                     tmpStr = myStatus.name + "は　ぜんかいした！"
                                 }
                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpStr };
-                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isMyStat: true, prm: tmpItem.value };
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: true, prm: tmpItem.value };
                                 break;
                             case ITEM_TYPE.HERB_1:
                                 // どくけしそう
@@ -1596,11 +1647,11 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmgVal = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmgVal = Math.round(getRandomValue(tmpItem.min, tmpItem.max) * calcMagicDmgRatio(tmpItem, eneStatus.eneDef));
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
-                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isMyStat: false, prm: -dmgVal };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: -dmgVal };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SPRITE_OFF };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SPRITE_ON };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 35, cmd: TEXT_BUFFER_CMD.SPRITE_OFF };
@@ -1611,61 +1662,63 @@ function GameBattleStart() {
                         }
                         battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                         myStatus.delItemList(battleCtrl.useItemIdx);
-                        break;
-                }
-            } else {
-                // 敵のこうげき
-                battleCtrl.turnOwner = 0;
+                    } else {
+                        let tmpItem = decideMagic(eneStatus.eneDef);
+                        battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　" + tmpItem.name + "を　つかった！" };
 
-                let eneGameModeOld = null;
-                if ((eneStatus.eneDef.isEscape == true) && (myStatus.getAtk() >= eneStatus.getAtk() * 2) && (Math.random() <= 0.25)) {
-                    eneGameModeOld = GAME_MODE.CMD_ESCAPE;
-                } else if (Math.random() <= 0.031) {
-                    eneGameModeOld = GAME_MODE.CMD_DEFENCE;
-                } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
-                    eneGameModeOld = GAME_MODE.CMD_ATTACK;
-                } else {
-                    eneGameModeOld = GAME_MODE.CMD_ATTACK;
-                    //                    eneGameModeOld = GAME_MODE.CMD_ITEM_USE;
-                }
-                switch (eneGameModeOld) {
-                    case GAME_MODE.CMD_ATTACK:
-                        console.log("ATTACK");
-                        let dmg = calcAttackDamage(eneStatus, myStatus, 1.0);
-                        battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "の　こうげき！" };
-                        if (dmg.val > 0) {
-                            let tmpText;
-                            if (dmg.krt) tmpText = "つうこんのいちげき！\n";
-                            else tmpText = "";
-                            tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
-                            battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
-                            battleCtrl.textBuff[2] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isMyStat: true, prm: -dmg.val };
-                            battleCtrl.textBuff[3] = { frm: 31, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
-                            battleCtrl.textBuff[4] = { frm: 33, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
-                            battleCtrl.textBuff[5] = { frm: 35, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
-                            battleCtrl.textBuff[6] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
-                            battleCtrl.textBuff[7] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
-                        } else {
-                            battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ひらりと　みをかわした！" };
-                            battleCtrl.textBuff[2] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
+                        switch (tmpItem.type) {
+                            case ITEM_TYPE.HERB_0:
+                                let tmpStr = "";
+                                if (tmpItem.value < 9999) {
+                                    tmpStr = myStatus.name + "は　" + toZenkaku(tmpItem.value, 1) + "ポイントかいふく！"
+                                } else {
+                                    tmpStr = myStatus.name + "は　ぜんかいした！"
+                                }
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpStr };
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: tmpItem.value };
+                                break;
+                            case ITEM_TYPE.HERB_1:
+                                // どくけしそう
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                break;
+                            case ITEM_TYPE.HERB_2:
+                                // けいけんのみ
+                                if (eneStatus.getLv() >= 30) {
+                                } else {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　" + "レベルがあがった" };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.LEVEL_UP };
+                                }
+                                break;
+                            case ITEM_TYPE.HERB_3:
+                                // いのちのみ
+                                if (myStatus.getMaxHpOfs() >= 100) {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                } else {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　" + "さいだいＨＰが　" + toZenkaku(tmpItem.value, 1) + "あがった" };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_MAX_HP, prm: tmpItem.value };
+                                }
+                                break;
+                            case ITEM_TYPE.MAGIC_DIRECT_ATTACK:
+                                // 直接攻撃
+                                if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                } else {
+                                    let dmgVal = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let tmpText = "";
+                                    tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: true, prm: -dmgVal };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 35, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
+                                }
+                                break;
                         }
-                        break;
-                    case GAME_MODE.CMD_DEFENCE:
-                        console.log("DEFENCE");
-                        battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　みをまもっている！" };
-                        battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
-                        eneStatus.addTmpAgi(1);
-                        break;
-                    case GAME_MODE.CMD_ESCAPE:
-                        console.log("ESCAPE");
-                        battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　にげだした！" };
-                        battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
-                        battleCtrl.isEscape = true;
-                        break;
-                    case GAME_MODE.CMD_ITEM_USE:
-                        console.log("ITEM_USE");
-                        break;
-                }
+                        battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
+                    }
+                    break;
             }
 
             // 表示コントロール
@@ -1740,17 +1793,21 @@ function GameBatleFinish() {
 
                 // アイテム獲得処理
                 let tmpItem = decideItem(eneStatus.eneDef);
-                tmpStr = makeMessageWindowString(eneStatus.name + "は　" + tmpItem.name + "　を　もっていた！") + "\n";
-                myStatus.addItemList(tmpItem)
-                if (myStatus.itemList.length <= 15) {
-                    tmpStr += makeMessageWindowString(myStatus.name + "は　" + tmpItem.name + "　を　てにいれた！");
+                if (tmpItem === null) {
                     battleCtrl.isItemFull = false;
                 } else {
-                    tmpStr += makeMessageWindowString("しかし　これいじょう　どうぐを　もつことはできない！");
-                    battleCtrl.isItemFull = true;
-                    battleCtrl.getItemName = tmpItem.name;
+                    tmpStr = makeMessageWindowString(eneStatus.name + "は　" + tmpItem.name + "　を　もっていた！") + "\n";
+                    myStatus.addItemList(tmpItem)
+                    if (myStatus.itemList.length <= 15) {
+                        tmpStr += makeMessageWindowString(myStatus.name + "は　" + tmpItem.name + "　を　てにいれた！");
+                        battleCtrl.isItemFull = false;
+                    } else {
+                        tmpStr += makeMessageWindowString("しかし　これいじょう　どうぐを　もつことはできない！");
+                        battleCtrl.isItemFull = true;
+                        battleCtrl.getItemName = tmpItem.name;
+                    }
+                    battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
                 }
-                battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
                 battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.FINISH };
             } else {
                 battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ちからつきた．．．" };
@@ -1874,7 +1931,8 @@ function GameWin() {
             gameCounter = 0;
             gameSubMode = GAME_SUB_MODE.MAIN;
 
-            let tmpStr = makeMessageWindowString("わたしを　たおすとは・・・みごとだ") + "\n";
+            let tmpStr = "";
+            tmpStr += makeMessageWindowString("わたしを　たおすとは・・・みごとだ") + "\n";
             tmpStr += makeMessageWindowString("だが、おまえのたたかいは　ほんとうにこれでおわりかな？") + "\n";
 
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
@@ -2001,7 +2059,7 @@ function messageAndModeCtrl() {
                 break;
 
             case TEXT_BUFFER_CMD.ADD_HP:
-                if (tmp.isMyStat) {
+                if (tmp.isPlayer) {
                     myStatus.addNowHp(tmp.prm);
                     if (myStatus.getNowHp() <= 0) {
                         battleCtrl.isDead = true;
@@ -2390,9 +2448,36 @@ function checkLevelUp() {
 function getRandomValue(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
-/*
-○○は　レベルがあがった！
-さいだいＨＰが　○あがった！
-ちからが　　○あがった！
-すばやさが　○あがった！
-*/
+
+function calcMagicDmgRatio(itemDef, eneDef) {
+    let ratio = 1.0;
+    if (eneDef.attr == ITEM_ATTR.ALL_P) {
+        ratio = 0.7;
+    } else if (eneDef.attr == ITEM_ATTR.ALL_M) {
+        ratio = 1.3;
+    } else if (eneDef.attr == ITEM_ATTR.NEUTRAL) {
+        ratio = 1.0;
+    } else if (itemDef.attr == ITEM_ATTR.FIRE) {
+        switch (eneDef.attr) {
+            case ITEM_ATTR.FIRE:
+                ratio = 0.7;
+                break;
+            case ITEM_ATTR.WATER:
+                ratio = 1.3;
+                break;
+        }
+    } else if (itemDef.attr == ITEM_ATTR.WATER) {
+        switch (eneDef.attr) {
+            case ITEM_ATTR.FIRE:
+                ratio = 1.3;
+                break;
+            case ITEM_ATTR.WATER:
+                ratio = 0.7;
+                break;
+        }
+    } else {
+        ratio = 1.0;
+    }
+    console.log("MagicDmgRatio=" + ratio)
+    return ratio;
+}
