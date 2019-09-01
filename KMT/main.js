@@ -10,49 +10,49 @@ let ASSETS = {
     "frame_576_192": "./resource/frame_576_192.png",
     "frame_320_96": "./resource/frame_320_96.png",
 
-    "rip": "./resource/rip.png",
-    "maria": "./resource/maria.png",
+    "rip": "./resource/rip.png?20190831",
+    "maria": "./resource/maria.png?20190831",
 
-    "pizzza": "./resource/pizzza.png",
-    "negi": "./resource/negi.png",
-    "gohan": "./resource/gohan.png",
-    "meat": "./resource/meat.png",
-    "small": "./resource/small.png",
-    "tissue": "./resource/tissue.png",
-    "ika": "./resource/ika.png",
-    "assassin": "./resource/assassin.png",
-    "cheese": "./resource/cheese.png",
-    "meso": "./resource/meso.png",
-    "nasa": "./resource/nasa.png",
-    "femo": "./resource/femo.png",
-    "perfect": "./resource/perfect.png",
-    "denden": "./resource/denden.png",
-    "baby": "./resource/baby.png",
-    "girl": "./resource/girl.png",
-    "kakin": "./resource/kakin.png",
-    "brachio": "./resource/brachio.png",
-    "ninja": "./resource/ninja.png",
-    "saint": "./resource/saint.png",
-    "champ": "./resource/champ.png",
-    "party": "./resource/party.png",
-    "glutton": "./resource/glutton.png",
-    "anger": "./resource/anger.png",
-    "comp": "./resource/comp.png",
+    "pizzza": "./resource/pizzza.png?20190831",
+    "negi": "./resource/negi.png?20190831",
+    "gohan": "./resource/gohan.png?20190831",
+    "meat": "./resource/meat.png?20190831",
+    "small": "./resource/small.png?20190831",
+    "tissue": "./resource/tissue.png?20190831",
+    "ika": "./resource/ika.png?20190831",
+    "assassin": "./resource/assassin.png?20190831",
+    "cheese": "./resource/cheese.png?20190831",
+    "meso": "./resource/meso.png?20190831",
+    "nasa": "./resource/nasa.png?20190831",
+    "femo": "./resource/femo.png?20190831",
+    "perfect": "./resource/perfect.png?20190831",
+    "denden": "./resource/denden.png?20190831",
+    "baby": "./resource/baby.png?20190831",
+    "girl": "./resource/girl.png?20190831",
+    "kakin": "./resource/kakin.png?20190831",
+    "brachio": "./resource/brachio.png?20190831",
+    "ninja": "./resource/ninja.png?20190831",
+    "saint": "./resource/saint.png?20190831",
+    "champ": "./resource/champ.png?20190831",
+    "party": "./resource/party.png?20190831",
+    "glutton": "./resource/glutton.png?20190831",
+    "anger": "./resource/anger.png?20190831",
+    "comp": "./resource/comp.png?20190831",
 
-    "negikko": "./resource/negikko.png",
-    "ice": "./resource/ice.png",
-    "kedama": "./resource/kedama.png",
-    "yurusan": "./resource/yurusan.png",
-    "stress": "./resource/stress.png",
-    "vibes": "./resource/vibes.png",
-    "maane": "./resource/maane.png",
-    "kikumimi": "./resource/kikumimi.png",
-    "nemimi": "./resource/nemimi.png",
-    "runaway": "./resource/runaway.png",
-    "ikacos": "./resource/ikacos.png",
-    "sad": "./resource/sad.png",
+    "negikko": "./resource/negikko.png?20190831",
+    "ice": "./resource/ice.png?20190831",
+    "kedama": "./resource/kedama.png?20190831",
+    "yurusan": "./resource/yurusan.png?20190831",
+    "stress": "./resource/stress.png?20190831",
+    "vibes": "./resource/vibes.png?20190831",
+    "maane": "./resource/maane.png?20190831",
+    "kikumimi": "./resource/kikumimi.png?20190831",
+    "nemimi": "./resource/nemimi.png?20190831",
+    "runaway": "./resource/runaway.png?20190831",
+    "ikacos": "./resource/ikacos.png?20190831",
+    "sad": "./resource/sad.png?20190831",
 
-    "last": "./resource/last.png",
+    "last": "./resource/last.png?20190831",
 
     "fallSE": "https://iwasaku.github.io/test3/SHU/resource/fall.mp3",    // 開発時用（mp3はfile://でのアクセスが拒否されるので、https://経由にする）
     //"fallSE": "./resource/fall.mp3",
@@ -937,7 +937,7 @@ tm.define("GameScene", {
         enemyWindowLabel.alpha = 0;
 
         // 敵画像
-        enemyGraphicSprite = new EnemySprite("pizzza", SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 1.5, 1.5).addChildTo(group0);
+        enemyGraphicSprite = new EnemySprite("pizzza", SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 3, 3).addChildTo(group0);
 
         // 道具ウィンドウ
         itemWindowSprite = new FrameSprite("frame_256_288", SCREEN_CENTER_X, SCREEN_CENTER_Y - 8 + (32 * 6), 2.3, 2.4).addChildTo(group2);
@@ -1052,7 +1052,7 @@ tm.define("GameScene", {
         tweetButtonSwitch = false;
 
         endingNameLabel = tm.display.Label(" R.I.P.\n" + myStatus.name).addChildTo(group2);
-        endingNameLabel.setPosition(SCREEN_CENTER_X, SCREEN_CENTER_Y - 32 * 7)
+        endingNameLabel.setPosition(SCREEN_CENTER_X + 16, SCREEN_CENTER_Y - 32 * 7)
             .setFillStyle("#222")
             .setAlign("center")
             .setBaseline("bottom")
@@ -1226,7 +1226,7 @@ function GameIntro() {
             // 表示内容設定
             enemyWindowLabel.text = eneStatus.name;
             enemyGraphicSprite.remove();
-            enemyGraphicSprite = new EnemySprite(eneStatus.eneDef.spriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 1.5, 1.5).addChildTo(group0);
+            enemyGraphicSprite = new EnemySprite(eneStatus.eneDef.spriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 3, 3).addChildTo(group0);
             let tmpText = makeMessageWindowString("ちか" + toZenkaku((enemyCount + 1), 1) + "かい") + "\n";
             tmpText += eneStatus.eneDef.name + "があらわれた！";
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
