@@ -411,6 +411,12 @@ class CharaStatus {
         this.itemList = [
             { eqp: false, def: ITEM_DEF.HERB_00 },
             { eqp: false, def: ITEM_DEF.HERB_00 },
+            { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV1 }, //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV2 }, //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV3 }, //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV1 },    //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV2 },    //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV3 },    //TEST
 
             //{ eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV1 }, //TEST
             //{ eqp: false, def: ITEM_DEF.MAGIC_WATER_LV1 },    //TEST
@@ -1678,7 +1684,9 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmgVal = Math.round(getRandomValue(tmpItem.min, tmpItem.max) * calcMagicDmgRatio(tmpItem, eneStatus.eneDef));
+                                    let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem, eneStatus.eneDef));
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -1734,7 +1742,9 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmgVal = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmgVal = Math.round((dmg1 + dmg2) / 2.0);
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -2483,15 +2493,15 @@ function getRandomValue(min, max) {
 function calcMagicDmgRatio(itemDef, eneDef) {
     let ratio = 1.0;
     if (eneDef.attr == ITEM_ATTR.ALL_P) {
-        ratio = 0.7;
+        ratio = 0.5;
     } else if (eneDef.attr == ITEM_ATTR.ALL_M) {
-        ratio = 1.3;
+        ratio = 2.0;
     } else if (eneDef.attr == ITEM_ATTR.NEUTRAL) {
         ratio = 1.0;
     } else if (itemDef.attr == ITEM_ATTR.FIRE) {
         switch (eneDef.attr) {
             case ITEM_ATTR.FIRE:
-                ratio = 0.7;
+                ratio = 0.5;
                 break;
             case ITEM_ATTR.WATER:
                 ratio = 1.3;
@@ -2503,7 +2513,7 @@ function calcMagicDmgRatio(itemDef, eneDef) {
                 ratio = 1.3;
                 break;
             case ITEM_ATTR.WATER:
-                ratio = 0.7;
+                ratio = 0.5;
                 break;
         }
     } else {

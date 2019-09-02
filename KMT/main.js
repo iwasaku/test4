@@ -276,7 +276,7 @@ const enemyAppearTable = [
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],  // Lv13 400
-    [{ ene: ENEMY_DEF.ENEMY_13_BS, ratio: 100 },],    // 50:中ボス（けいけんのみ50%）
+    [{ ene: ENEMY_DEF.ENEMY_13_BS, ratio: 100 },],    // 50:中ボス（けいけんのみ90%）
 
     [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],
@@ -298,7 +298,7 @@ const enemyAppearTable = [
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],  // Lv17 800
-    [{ ene: ENEMY_DEF.ENEMY_17_BS, ratio: 100 },],    // 70:中ボス（けいけんのみ50%）
+    [{ ene: ENEMY_DEF.ENEMY_17_BS, ratio: 100 },],    // 70:中ボス（けいけんのみ90%）
 
     [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],
@@ -309,7 +309,7 @@ const enemyAppearTable = [
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],  // Lv19 800
-    [{ ene: ENEMY_DEF.ENEMY_19_BS, ratio: 100 },],    // 80:中ボス
+    [{ ene: ENEMY_DEF.ENEMY_19_BS, ratio: 100 },],    // 80:中ボス（いのちのみ50%）
 
     [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],
@@ -320,7 +320,7 @@ const enemyAppearTable = [
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },], // Lv21 800
-    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],    // 90:中ボス
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],    // 90:中ボス（けいけんのみ90%）
 
     [{ ene: ENEMY_DEF.ENEMY_20, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_20, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 40 },],
@@ -363,8 +363,6 @@ class CharaStatus {
     }
     initPlayer() {
         //前提：this.name は設定済み
-        //        this.name = "ネムレス";
-        //        this.name = "うてな★";
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
         this.lv = 1;
@@ -1647,7 +1645,9 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmgVal = Math.round(getRandomValue(tmpItem.min, tmpItem.max) * calcMagicDmgRatio(tmpItem, eneStatus.eneDef));
+                                    let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem, eneStatus.eneDef));
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -1703,7 +1703,9 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmgVal = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
+                                    let dmgVal = Math.round((dmg1 + dmg2) / 2.0);
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -2454,7 +2456,7 @@ function calcMagicDmgRatio(itemDef, eneDef) {
     if (eneDef.attr == ITEM_ATTR.ALL_P) {
         ratio = 0.5;
     } else if (eneDef.attr == ITEM_ATTR.ALL_M) {
-        ratio = 1.3;
+        ratio = 2.0;
     } else if (eneDef.attr == ITEM_ATTR.NEUTRAL) {
         ratio = 1.0;
     } else if (itemDef.attr == ITEM_ATTR.FIRE) {
