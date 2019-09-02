@@ -150,35 +150,35 @@ const TEXT_BUFFER_CMD = defineEnum({
 
 // 成長タイプテーブル
 const growthTypeTable = [
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 0.0 },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 0.0 },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 0.0 },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 0.0 },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 0.0 },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 0.0 },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 0.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 0.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 0.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 0.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 0.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 0.0, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 1.0 },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 1.0 },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 1.0 },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 1.0 },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 1.0 },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 1.0 },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 1.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 1.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 1.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 1.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 1.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 1.0, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 2.0 },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 2.0 },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 2.0 },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 2.0 },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 2.0 },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 2.0 },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 2.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 2.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 2.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 2.0, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 3.0 },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 3.0 },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 3.0 },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 3.0 },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 3.0 },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 3.0 },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 3.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 3.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 3.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 3.0, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 1.0, hp: 1.0, bonus: 4.0 },
+    { atk: 1.0, agi: 1.0, hp: 1.0, bonus: 4.0, attr: ITEM_ATTR.ALL_P },
 ];
 
 // 経験値テーブル
@@ -395,7 +395,7 @@ class CharaStatus {
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
         //        this.lv = 1;
-        this.lv = 9;
+        this.lv = 15;    // TEST
         let li = getLevelInfo(this.lv);
         this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
         this.maxHpOfs = 0;
@@ -1686,7 +1686,7 @@ function GameBattleStart() {
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
                                     let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
-                                    let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem, eneStatus.eneDef));
+                                    let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr));
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -1744,7 +1744,7 @@ function GameBattleStart() {
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
                                     let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
-                                    let dmgVal = Math.round((dmg1 + dmg2) / 2.0);
+                                    let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem, myStatus.growthType.attr));
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -2490,30 +2490,35 @@ function getRandomValue(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-function calcMagicDmgRatio(itemDef, eneDef) {
+/**
+ * 
+ * @param {*} itemDef 
+ * @param {*} eneDef 
+ */
+function calcMagicDmgRatio(itemAttr, targetAttr) {
     let ratio = 1.0;
-    if (eneDef.attr == ITEM_ATTR.ALL_P) {
+    if (targetAttr == ITEM_ATTR.ALL_P) {
         ratio = 0.5;
-    } else if (eneDef.attr == ITEM_ATTR.ALL_M) {
+    } else if (targetAttr == ITEM_ATTR.ALL_M) {
         ratio = 2.0;
-    } else if (eneDef.attr == ITEM_ATTR.NEUTRAL) {
+    } else if (targetAttr == ITEM_ATTR.NEUTRAL) {
         ratio = 1.0;
-    } else if (itemDef.attr == ITEM_ATTR.FIRE) {
-        switch (eneDef.attr) {
+    } else if (itemAttr == ITEM_ATTR.FIRE) {
+        switch (targetAttr) {
             case ITEM_ATTR.FIRE:
-                ratio = 0.5;
+                ratio = 0.8;
                 break;
             case ITEM_ATTR.WATER:
-                ratio = 1.3;
+                ratio = 1.2;
                 break;
         }
-    } else if (itemDef.attr == ITEM_ATTR.WATER) {
-        switch (eneDef.attr) {
+    } else if (itemAttr == ITEM_ATTR.WATER) {
+        switch (targetAttr) {
             case ITEM_ATTR.FIRE:
-                ratio = 1.3;
+                ratio = 1.2;
                 break;
             case ITEM_ATTR.WATER:
-                ratio = 0.5;
+                ratio = 0.8;
                 break;
         }
     } else {

@@ -197,13 +197,13 @@ const ITEM_DEF = defineEnum({
         name: 'どくけしそう',
         value: 0,   // どくから回復
     },
-    HERB_04: {
+    HERB_EXP: {
         type: ITEM_TYPE.HERB_2,
         exec: ITEM_EXEC.USE,
         name: 'けいけんのみ',
         value: 0,   // Lv+1
     },
-    HERB_05: {
+    HERB_HP: {
         type: ITEM_TYPE.HERB_3,
         exec: ITEM_EXEC.USE,
         id: 5,
@@ -217,7 +217,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
         name: '炎の巻物',
-        success: 99,  //　成功確率（％）
+        success: 70,  //　成功確率（％）
         min: 15,  //　最小ダメージ
         max: 25,  //　最大ダメージ
     },
@@ -226,7 +226,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
         name: '火炎の巻物',
-        success: 99,  //　成功確率（％）
+        success: 60,  //　成功確率（％）
         min: 25,  //　最小ダメージ
         max: 35,  //　最大ダメージ
     },
@@ -235,7 +235,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         exec: ITEM_EXEC.USE,
         name: '焦熱地獄の巻物',
-        success: 99,  //　成功確率（％）
+        success: 50,  //　成功確率（％）
         min: 35,  //　最小ダメージ
         max: 45,  //　最大ダメージ
     },
@@ -244,7 +244,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.WATER,
         exec: ITEM_EXEC.USE,
         name: '小波の巻物',
-        success: 99,  //　成功確率（％）
+        success: 70,  //　成功確率（％）
         min: 15,  //　最小ダメージ
         max: 25,  //　最大ダメージ
     },
@@ -253,7 +253,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.WATER,
         exec: ITEM_EXEC.USE,
         name: '津波の巻物',
-        success: 99,  //　成功確率（％）
+        success: 60,  //　成功確率（％）
         min: 25,  //　最小ダメージ
         max: 35,  //　最大ダメージ
     },
@@ -262,7 +262,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.WATER,
         exec: ITEM_EXEC.USE,
         name: '大津波の巻物',
-        success: 99,  //　成功確率（％）
+        success: 50,  //　成功確率（％）
         min: 35,  //　最小ダメージ
         max: 45,  //　最大ダメージ
     },
