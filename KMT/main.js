@@ -1642,7 +1642,9 @@ function GameBattleStart() {
                                 break;
                             case ITEM_TYPE.MAGIC_DIRECT_ATTACK:
                                 // 直接攻撃
-                                if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                let tmpSuccessRatio = tmpItem.success + ((myStatus.getLv() - 9) * 1.875);// 最初に魔法を使うのがLv9
+                                if (tmpSuccessRatio > 100) tmpSuccessRatio = 100;
+                                if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
@@ -1700,7 +1702,9 @@ function GameBattleStart() {
                                 break;
                             case ITEM_TYPE.MAGIC_DIRECT_ATTACK:
                                 // 直接攻撃
-                                if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                let tmpSuccessRatio = tmpItem.success + ((eneStatus.getLv() - 9) * 1.875);// 最初に魔法を使うのがLv9
+                                if (tmpSuccessRatio > 90) tmpSuccessRatio = 90;
+                                if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);

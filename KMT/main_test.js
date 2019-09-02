@@ -232,6 +232,13 @@ const enemyAppearTable = [
     //[{ ene: ENEMY_DEF.ENEMY_6, ratio: 100 },],  // TEST
     //[{ ene: ENEMY_DEF.ENEMY_7, ratio: 100 },],  // TEST
     //[{ ene: ENEMY_DEF.ENEMY_8, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_9, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_10, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 100 },],  // TEST
@@ -395,7 +402,7 @@ class CharaStatus {
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
         //        this.lv = 1;
-        this.lv = 15;    // TEST
+        this.lv = 21;    // TEST
         let li = getLevelInfo(this.lv);
         this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
         this.maxHpOfs = 0;
@@ -1681,7 +1688,9 @@ function GameBattleStart() {
                                 break;
                             case ITEM_TYPE.MAGIC_DIRECT_ATTACK:
                                 // 直接攻撃
-                                if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                let tmpSuccessRatio = tmpItem.success + ((myStatus.getLv() - 9) * 1.875);// 最初に魔法を使うのがLv9
+                                if (tmpSuccessRatio > 100) tmpSuccessRatio = 100;
+                                if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
@@ -1739,7 +1748,9 @@ function GameBattleStart() {
                                 break;
                             case ITEM_TYPE.MAGIC_DIRECT_ATTACK:
                                 // 直接攻撃
-                                if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                let tmpSuccessRatio = tmpItem.success + ((eneStatus.getLv() - 9) * 1.875);// 最初に魔法を使うのがLv9
+                                if (tmpSuccessRatio > 90) tmpSuccessRatio = 90;
+                                if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
