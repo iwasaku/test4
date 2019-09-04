@@ -87,43 +87,43 @@ const ITEM_DEF = defineEnum({
     WEAPON_00: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'こんぼう',
+        name: 'きのえだ',
         value: 2,
     },
     WEAPON_01: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'せいどうのけん',
+        name: 'たけざお',
         value: 4,
     },
     WEAPON_02: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'もくせいバット',
+        name: 'ひのきの棒',
         value: 10,
     },
     WEAPON_03: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'きんぞくバット',
+        name: 'こん棒',
         value: 20,
     },
     WEAPON_04: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ひっさつのけん',
+        name: 'すごい棒',
         value: 28,
     },
     ITEM_05: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ステンレスのけん',
+        name: 'ものすごい棒',
         value: 30,
     },
     WEAPON_06: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ひっちゅうのけん',
+        name: 'ボス専用の棒',
         value: 30,  // 命中率100%、攻30
     },
 
@@ -131,44 +131,44 @@ const ITEM_DEF = defineEnum({
     SHIELD_00: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ベニヤのたて',
+        name: 'お鍋のふた',
         value: 2,
     },
     SHIELD_01: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ＦＲＰのたて',
+        name: 'アルミ鍋のふた',
         value: 4,
     },
     SHIELD_02: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'てつのたて',
+        name: 'かわの盾',
         value: 10,
     },
     SHIELD_03: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ぼうどくのたて',
+        name: 'てつの盾',
         value: 16,
     },
     SHIELD_04: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'まほうのたて',
-        value: 24,  // 特殊攻撃半減
+        name: 'すごい盾',
+        value: 24,
     },
     SHIELD_05: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ドラゴンのたて',
-        value: 24,  // 火炎暴風雪半減
+        name: 'ものすごい盾',
+        value: 40,
     },
     SHIELD_06: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'きめんのたて',
-        value: 40,
+        name: 'ボス専用の盾',
+        value: 16,
     },
 
     // 薬草

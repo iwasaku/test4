@@ -1647,9 +1647,10 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
-                                    let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
-                                    let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr));
+                                    let dmgBase = (getRandomValue(tmpItem.min, tmpItem.max) + getRandomValue(tmpItem.min, tmpItem.max)) / 2.0;
+                                    let magicDmgRatio = calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr);
+                                    let playerCorrection = (getRandomValue(1, 2) + getRandomValue(1, 2)) / 2.0;
+                                    let dmgVal = Math.round(dmgBase * magicDmgRatio * playerCorrection);
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
