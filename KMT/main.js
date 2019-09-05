@@ -1647,10 +1647,7 @@ function GameBattleStart() {
                                 if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
-                                    let dmgBase = (getRandomValue(tmpItem.min, tmpItem.max) + getRandomValue(tmpItem.min, tmpItem.max)) / 2.0;
-                                    let magicDmgRatio = calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr);
-                                    let playerCorrection = (getRandomValue(1, 2) + getRandomValue(1, 2)) / 2.0;
-                                    let dmgVal = Math.round(dmgBase * magicDmgRatio * playerCorrection);
+                                    let dmgVal = Math.round(getNormalDistribution(tmpItem.min, tmpItem.max) * calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr) * getNormalDistribution(1.0, 2.5));
                                     let tmpText = "";
                                     tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
@@ -2447,13 +2444,22 @@ function checkLevelUp() {
     }
     return ret;
 }
+
 /**
- * 
+ * 一様分布
  * @param {*} min 
  * @param {*} max 
  */
 function getRandomValue(min, max) {
     return Math.round(Math.random() * (max - min) + min);
+}
+/**
+ * 正規分布
+ * @param {*} min 
+ * @param {*} max 
+ */
+function getNormalDistribution(min, max) {
+    return (getRandomValue(min, max) + getRandomValue(min, max)) / 2.0;
 }
 
 /**
