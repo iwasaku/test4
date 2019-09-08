@@ -773,6 +773,9 @@ tm.define("LogoScene", {
             ENEMY_DEF.ENEMY_25,
             ENEMY_DEF.ENEMY_26
         ];
+        let testMagic = true;
+        let testItem = true;
+        let testAppear = true;
         testEnemyDefTbl.forEach((testEnemyDef) => {
             if (testEnemyDef.magicList.length !== 0) {
                 let testRatio = 0;
@@ -780,6 +783,7 @@ tm.define("LogoScene", {
                     testRatio += testMagic.ratio;
                 });
                 if (testRatio !== 100) {
+                    testMagic = false;
                     console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testRatio);
                 }
             }
@@ -790,10 +794,10 @@ tm.define("LogoScene", {
                     testRatio += testItem.ratio;
                 });
                 if (testRatio !== 100) {
+                    testItem = false;
                     console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testRatio);
                 }
             }
-
         });
         //
         {
@@ -804,11 +808,16 @@ tm.define("LogoScene", {
                     testRatio += ea.ratio;
                 });
                 if (testRatio !== 100) {
+                    testAppear = false;
                     console.log(ii + ":" + testRatio);
                 }
                 ii++;
             });
         }
+        console.log("Magic " + testMagic);
+        console.log("Item " + testItem);
+        console.log("Appear " + testAppear);
+
         this.app.replaceScene(TitleScene());
     }
 });
