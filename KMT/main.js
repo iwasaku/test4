@@ -1,4 +1,4 @@
-//console.log = function () { };  // ログを出す時にはコメントアウトする
+console.log = function () { };  // ログを出す時にはコメントアウトする
 
 let SCREEN_WIDTH = 640;              // スクリーン幅
 let SCREEN_HEIGHT = 1136;              // スクリーン高さ
@@ -682,7 +682,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα4.1 ver.",
+                    text: "NMLS ONE HUNDRED\nα5 ver.",
                     align: "center",
                 },
                 {
@@ -2009,23 +2009,23 @@ function GameEnding() {
                 endingNameLabel.alpha = 0.7;
             } else if (enemyCount === 100) {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１００かい　すべてクリアした！") + "\n";
-                tweetStr = "地下１００階すべてクリアした\n";
+                tweetStr = "地下１００階すべてクリアした！\n";
                 tmpSpriteName = "maria";
                 endingNameLabel.alpha = 0;
             } else {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか" + toZenkaku(enemyCount, 1) + "かいまで　クリアした！") + "\n";
-                tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした\n";
+                tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした！\n";
                 tmpSpriteName = "rip";
                 endingNameLabel.alpha = 0.7;
             }
             if (myStatus.gavasss > 0) {
-                tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
+                tmpStr += makeMessageWindowString("Lv" + toZenkaku(myStatus.lv, 1) + "だった！") + "\n";
                 tmpStr += makeMessageWindowString(toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！") + "\n";
-                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "　だった！\n";
-                tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した\n";
+                tweetStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
+                tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した！\n";
             } else {
-                tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった\n";
-                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "だった\n";
+                tmpStr += makeMessageWindowString("Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった！\n";
+                tweetStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
             }
 
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };

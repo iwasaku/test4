@@ -87,88 +87,88 @@ const ITEM_DEF = defineEnum({
     WEAPON_00: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'きのえだ',
+        name: 'ふつうの棒',
         value: 2,
     },
     WEAPON_01: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'たけざお',
+        name: 'すごい棒',
         value: 4,
     },
     WEAPON_02: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ひのきの棒',
-        value: 10,
+        name: 'ヤバい棒',
+        value: 7,
     },
     WEAPON_03: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'こん棒',
-        value: 20,
+        name: 'スーパーな棒',
+        value: 9,
     },
     WEAPON_04: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'すごい棒',
-        value: 28,
+        name: 'ハイパーな棒',
+        value: 11,
     },
-    ITEM_05: {
+    WEAPON_05: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ものすごい棒',
-        value: 30,
+        name: 'ウルトラな棒',
+        value: 14,
     },
     WEAPON_06: {
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
         name: 'ボス専用の棒',
-        value: 30,  // 命中率100%、攻30
+        value: 11,  // ボスだと20
     },
 
     // 盾
     SHIELD_00: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'お鍋のふた',
+        name: 'ふつうの盾',
         value: 2,
     },
     SHIELD_01: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'アルミ鍋のふた',
-        value: 4,
+        name: 'すごい盾',
+        value: 3,
     },
     SHIELD_02: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'かわの盾',
-        value: 10,
+        name: 'ヤバい盾',
+        value: 6,
     },
     SHIELD_03: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'てつの盾',
-        value: 16,
+        name: 'スーパーな盾',
+        value: 9,
     },
     SHIELD_04: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'すごい盾',
-        value: 24,
+        name: 'ハイパーな盾',
+        value: 10,
     },
     SHIELD_05: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
-        name: 'ものすごい盾',
-        value: 40,
+        name: 'ウルトラな盾',
+        value: 13,
     },
     SHIELD_06: {
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
         name: 'ボス専用の盾',
-        value: 16,
+        value: 10,  //ボスだと15
     },
 
     // 薬草

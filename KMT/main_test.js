@@ -188,34 +188,37 @@ const expTable = [
     { lv: 2, atk: 5, agi: 4, hp: 22, exp: 7 },
     { lv: 3, atk: 7, agi: 6, hp: 24, exp: 23 },
     { lv: 4, atk: 7, agi: 8, hp: 31, exp: 47 },
-    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 },  // この辺で10匹目になるらしい
+    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 }, //2  1
+
     { lv: 6, atk: 16, agi: 10, hp: 38, exp: 220 },
     { lv: 7, atk: 18, agi: 17, hp: 40, exp: 450 },
-    { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },  // 20匹
+    { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },
     { lv: 9, atk: 30, agi: 22, hp: 50, exp: 1300 },
-    { lv: 10, atk: 35, agi: 31, hp: 54, exp: 2000 },
+    { lv: 10, atk: 35, agi: 31, hp: 54, exp: 2000 }, //4    3
 
     { lv: 11, atk: 40, agi: 35, hp: 62, exp: 2900 },
     { lv: 12, atk: 48, agi: 40, hp: 63, exp: 4000 },
     { lv: 13, atk: 52, agi: 48, hp: 70, exp: 5500 },
     { lv: 14, atk: 60, agi: 55, hp: 78, exp: 7500 },
-    { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 },   // 50
+    { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 }, //7   6
+
     { lv: 16, atk: 72, agi: 70, hp: 92, exp: 13000 },
     { lv: 17, atk: 72, agi: 78, hp: 110, exp: 17000 },
     { lv: 18, atk: 85, agi: 84, hp: 115, exp: 21000 },
     { lv: 19, atk: 87, agi: 86, hp: 130, exp: 25000 },
-    { lv: 20, atk: 92, agi: 88, hp: 138, exp: 29000 },
+    { lv: 20, atk: 92, agi: 88, hp: 138, exp: 29000 }, //9  9
 
     { lv: 21, atk: 95, agi: 90, hp: 149, exp: 33000 },
     { lv: 22, atk: 97, agi: 90, hp: 158, exp: 37000 },
     { lv: 23, atk: 99, agi: 94, hp: 165, exp: 41000 },
     { lv: 24, atk: 103, agi: 98, hp: 170, exp: 45000 },
-    { lv: 25, atk: 113, agi: 100, hp: 174, exp: 49000 },
+    { lv: 25, atk: 113, agi: 100, hp: 174, exp: 49000 }, //11   10
+
     { lv: 26, atk: 117, agi: 105, hp: 180, exp: 53000 },
     { lv: 27, atk: 125, agi: 107, hp: 189, exp: 57000 },
     { lv: 28, atk: 130, agi: 115, hp: 195, exp: 61000 },
     { lv: 29, atk: 135, agi: 120, hp: 200, exp: 65000 },
-    { lv: 30, atk: 140, agi: 130, hp: 210, exp: 65535 },
+    { lv: 30, atk: 140, agi: 130, hp: 210, exp: 65535 }, //14   13
 
     { lv: -1, atk: -1, agi: -1, hp: -1, exp: 2147483647 },
 ];
@@ -232,6 +235,7 @@ const enemyAppearTable = [
     //[{ ene: ENEMY_DEF.ENEMY_6, ratio: 100 },],  // TEST
     //[{ ene: ENEMY_DEF.ENEMY_7, ratio: 100 },],  // TEST
     //[{ ene: ENEMY_DEF.ENEMY_8, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
@@ -391,7 +395,7 @@ class CharaStatus {
         this.tmpAgi = 0;    // 1ターンだけ上昇
         this.krt = 16;     // クリティカル確率（1000分率）。16なら約1.6%=約1/64の確率で、31なら約3.1%=約1/32の確率で『会心の一撃』が発生
         this.weapon = ITEM_DEF.EMPTY;
-        this.armor = ITEM_DEF.EMPTY;
+        this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
         this.itemList = [];
     }
@@ -413,17 +417,24 @@ class CharaStatus {
         this.tmpAgi = 0;
         this.krt = 16;
         this.weapon = ITEM_DEF.EMPTY;
-        this.armor = ITEM_DEF.EMPTY;
+        this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
         this.itemList = [
             { eqp: false, def: ITEM_DEF.HERB_00 },
             { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV1 }, //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV2 }, //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV3 }, //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV1 },    //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV2 },    //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV3 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_00 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_01 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_02 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_03 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_04 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_05 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_00 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_01 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_02 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_03 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_04 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_05 },    //TEST
+
 
             //{ eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV1 }, //TEST
             //{ eqp: false, def: ITEM_DEF.MAGIC_WATER_LV1 },    //TEST
@@ -449,7 +460,7 @@ class CharaStatus {
         this.tmpAgi = 0;
         this.krt = this.eneDef.krtRatio;
         this.weapon = ITEM_DEF.EMPTY;
-        this.armor = ITEM_DEF.EMPTY;
+        this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
         this.itemList = [];
     }
@@ -520,6 +531,7 @@ class CharaStatus {
     }
 
     calcAttack() {
+        console.log("calcAttack=" + (this.getAtk() + this.weapon.value));
         return this.getAtk() + this.weapon.value;
     }
 
@@ -552,7 +564,8 @@ class CharaStatus {
     }
 
     calcDefence() {
-        return (this.getAgi() / 2) + this.armor.value;
+        console.log("calcDefence=" + ((this.getAgi() / 2) + this.shield.value));
+        return (this.getAgi() / 2) + this.shield.value;
     }
 
     setWeapon(weapon) {
@@ -562,11 +575,11 @@ class CharaStatus {
         return this.weapon;
     }
 
-    setArmor(armor) {
-        this.armor = armor;
+    setShield(shield) {
+        this.shield = shield;
     }
-    getArmor() {
-        return this.armor;
+    getShield() {
+        return this.shield;
     }
 
     setGavasss(gavasss) {
@@ -1506,7 +1519,7 @@ function CmdItemExec(btn) {
         } else if (item.def.exec === ITEM_EXEC.EQUIP) {
             // 『装備』
             for (let ii = 0; ii < myStatus.itemList.length; ii++) {
-                // 備フラグを設定する
+                // 装備フラグを設定する
                 if (ii === btn.itemIdx) {
                     myStatus.itemList[ii].eqp = myStatus.itemList[ii].eqp ? false : true;
                 } else {
@@ -1543,6 +1556,20 @@ function GameBattleStart() {
             let tmpAtkStatus = null;
             let tmpDefStatus = null;
             let tmpGameModeOld = null;
+            // 装備設定
+            myStatus.weapon = ITEM_DEF.EMPTY;
+            myStatus.shield = ITEM_DEF.EMPTY;
+            for (let ii = 0; ii < myStatus.itemList.length; ii++) {
+                if (myStatus.itemList[ii].eqp) {
+                    if (myStatus.itemList[ii].def.type === ITEM_TYPE.WEAPON) {
+                        myStatus.weapon = myStatus.itemList[ii].def;
+                    }
+                    if (myStatus.itemList[ii].def.type === ITEM_TYPE.SHIELD) {
+                        myStatus.shield = myStatus.itemList[ii].def;
+                    }
+                }
+            }
+
             if (battleCtrl.turnOwner === 0) {
                 // プレイヤーのこうげき
                 isPlayer = true;
@@ -2055,23 +2082,23 @@ function GameEnding() {
                 endingNameLabel.alpha = 0.7;
             } else if (enemyCount === 100) {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１００かい　すべてクリアした！") + "\n";
-                tweetStr = "地下１００階すべてクリアした\n";
+                tweetStr = "地下１００階すべてクリアした！\n";
                 tmpSpriteName = "maria";
                 endingNameLabel.alpha = 0;
             } else {
                 tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか" + toZenkaku(enemyCount, 1) + "かいまで　クリアした！") + "\n";
-                tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした\n";
+                tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした！\n";
                 tmpSpriteName = "rip";
                 endingNameLabel.alpha = 0.7;
             }
             if (myStatus.gavasss > 0) {
-                tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "　だった！") + "\n";
+                tmpStr += makeMessageWindowString("Lv" + toZenkaku(myStatus.lv, 1) + "だった！") + "\n";
                 tmpStr += makeMessageWindowString(toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！") + "\n";
-                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "　だった！\n";
-                tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した\n";
+                tweetStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
+                tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した！\n";
             } else {
-                tmpStr += makeMessageWindowString(" Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった\n";
-                tweetStr += " Lv" + toZenkaku(myStatus.lv, 1) + "だった\n";
+                tmpStr += makeMessageWindowString("Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった！\n";
+                tweetStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
             }
 
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
