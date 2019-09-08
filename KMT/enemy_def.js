@@ -352,7 +352,7 @@ const ENEMY_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
-            { item: ITEM_DEF.HERB_00, ratio: 80 },
+            { item: ITEM_DEF.HERB_00, ratio: 70 },
             { item: ITEM_DEF.HERB_01, ratio: 20 },
             { item: ITEM_DEF.WEAPON_01, ratio: 5 },
             { item: ITEM_DEF.SHIELD_01, ratio: 5 },
@@ -422,7 +422,7 @@ const ENEMY_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
-            { item: ITEM_DEF.HERB_00, ratio: 45 },
+            { item: ITEM_DEF.HERB_00, ratio: 40 },
             { item: ITEM_DEF.HERB_01, ratio: 15 },
             { item: ITEM_DEF.HERB_02, ratio: 5 },
             { item: ITEM_DEF.MAGIC_WATER_LV1, ratio: 34 },
@@ -594,7 +594,7 @@ const ENEMY_DEF = defineEnum({
             { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 40 },
         ],
         itemList: [
-            { item: ITEM_DEF.HERB_00, ratio: 30 },
+            { item: ITEM_DEF.HERB_00, ratio: 20 },
             { item: ITEM_DEF.HERB_01, ratio: 20 },
             { item: ITEM_DEF.HERB_02, ratio: 15 },
             { item: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 20 },
@@ -619,7 +619,7 @@ const ENEMY_DEF = defineEnum({
         magicList: [],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 15 },
-            { item: ITEM_DEF.HERB_01, ratio: 30 },
+            { item: ITEM_DEF.HERB_01, ratio: 25 },
             { item: ITEM_DEF.HERB_02, ratio: 15 },
             { item: ITEM_DEF.MAGIC_WATER_LV1, ratio: 20 },
             { item: ITEM_DEF.MAGIC_WATER_LV2, ratio: 14 },

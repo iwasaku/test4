@@ -721,6 +721,94 @@ tm.define("LogoScene", {
     update: function (app) {
         // 時間が来たらタイトルへ
         //        if(++this.localTimer >= 5*app.fps)
+
+        //
+        const testEnemyDefTbl = [
+            ENEMY_DEF.ENEMY_0_BS,
+            ENEMY_DEF.ENEMY_0,
+            ENEMY_DEF.ENEMY_1,
+            ENEMY_DEF.ENEMY_2,
+            ENEMY_DEF.ENEMY_2_P,
+            ENEMY_DEF.ENEMY_3,
+            ENEMY_DEF.ENEMY_3_P,
+            ENEMY_DEF.ENEMY_4_BS,
+            ENEMY_DEF.ENEMY_4,
+            ENEMY_DEF.ENEMY_5,
+            ENEMY_DEF.ENEMY_5_P,
+            ENEMY_DEF.ENEMY_6,
+            ENEMY_DEF.ENEMY_6_P,
+            ENEMY_DEF.ENEMY_7,
+            ENEMY_DEF.ENEMY_8_BS,
+            ENEMY_DEF.ENEMY_8,
+            ENEMY_DEF.ENEMY_8_P,
+            ENEMY_DEF.ENEMY_9_BS,
+            ENEMY_DEF.ENEMY_9,
+            ENEMY_DEF.ENEMY_10,
+            ENEMY_DEF.ENEMY_10_P,
+            ENEMY_DEF.ENEMY_11_BS,
+            ENEMY_DEF.ENEMY_11,
+            ENEMY_DEF.ENEMY_12,
+            ENEMY_DEF.ENEMY_12_P,
+            ENEMY_DEF.ENEMY_13_BS,
+            ENEMY_DEF.ENEMY_13,
+            ENEMY_DEF.ENEMY_14,
+            ENEMY_DEF.ENEMY_14_P,
+            ENEMY_DEF.ENEMY_15_BS,
+            ENEMY_DEF.ENEMY_15,
+            ENEMY_DEF.ENEMY_16,
+            ENEMY_DEF.ENEMY_16_P,
+            ENEMY_DEF.ENEMY_17_BS,
+            ENEMY_DEF.ENEMY_17,
+            ENEMY_DEF.ENEMY_18,
+            ENEMY_DEF.ENEMY_18_P,
+            ENEMY_DEF.ENEMY_19_BS,
+            ENEMY_DEF.ENEMY_19,
+            ENEMY_DEF.ENEMY_20,
+            ENEMY_DEF.ENEMY_20_P,
+            ENEMY_DEF.ENEMY_21_BS,
+            ENEMY_DEF.ENEMY_21,
+            ENEMY_DEF.ENEMY_22,
+            ENEMY_DEF.ENEMY_23,
+            ENEMY_DEF.ENEMY_24,
+            ENEMY_DEF.ENEMY_25,
+            ENEMY_DEF.ENEMY_26
+        ];
+        testEnemyDefTbl.forEach((testEnemyDef) => {
+            if (testEnemyDef.magicList.length !== 0) {
+                let testRatio = 0;
+                testEnemyDef.magicList.forEach((testMagic) => {
+                    testRatio += testMagic.ratio;
+                });
+                if (testRatio !== 100) {
+                    console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testRatio);
+                }
+            }
+
+            if (testEnemyDef.itemList.length !== 0) {
+                let testRatio = 0;
+                testEnemyDef.itemList.forEach((testItem) => {
+                    testRatio += testItem.ratio;
+                });
+                if (testRatio !== 100) {
+                    console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testRatio);
+                }
+            }
+
+        });
+        //
+        {
+            let ii = 0;
+            enemyAppearTable.forEach((eaArray) => {
+                let testRatio = 0;
+                eaArray.forEach((ea) => {
+                    testRatio += ea.ratio;
+                });
+                if (testRatio !== 100) {
+                    console.log(ii + ":" + testRatio);
+                }
+                ii++;
+            });
+        }
         this.app.replaceScene(TitleScene());
     }
 });
