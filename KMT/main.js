@@ -188,10 +188,10 @@ const expTable = [
     { lv: 2, atk: 5, agi: 4, hp: 22, exp: 7 },
     { lv: 3, atk: 7, agi: 6, hp: 24, exp: 23 },
     { lv: 4, atk: 7, agi: 8, hp: 31, exp: 47 },
-    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 },  // この辺で10匹目になるらしい
+    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 },
     { lv: 6, atk: 16, agi: 10, hp: 38, exp: 220 },
     { lv: 7, atk: 18, agi: 17, hp: 40, exp: 450 },
-    { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },  // 20匹
+    { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },
     { lv: 9, atk: 30, agi: 22, hp: 50, exp: 1300 },
     { lv: 10, atk: 35, agi: 31, hp: 54, exp: 2000 },
 
@@ -199,7 +199,7 @@ const expTable = [
     { lv: 12, atk: 48, agi: 40, hp: 63, exp: 4000 },
     { lv: 13, atk: 52, agi: 48, hp: 70, exp: 5500 },
     { lv: 14, atk: 60, agi: 55, hp: 78, exp: 7500 },
-    { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 },   // 50
+    { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 },
     { lv: 16, atk: 72, agi: 70, hp: 92, exp: 13000 },
     { lv: 17, atk: 72, agi: 78, hp: 110, exp: 17000 },
     { lv: 18, atk: 85, agi: 84, hp: 115, exp: 21000 },
@@ -223,38 +223,38 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // Lv1   4
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
-    [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
+    [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_1, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 10 },],
-    [{ ene: ENEMY_DEF.ENEMY_1, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 10 },], // Lv3   8
+    [{ ene: ENEMY_DEF.ENEMY_1, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 10 },],
     [{ ene: ENEMY_DEF.ENEMY_2, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_3_P, ratio: 10 },], // Lv4   21
     [{ ene: ENEMY_DEF.ENEMY_2, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_3_P, ratio: 10 },],
-    [{ ene: ENEMY_DEF.ENEMY_4_BS, ratio: 100 },],    // 10:中ボス
+    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_3, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_3_P, ratio: 10 },],
+    [{ ene: ENEMY_DEF.ENEMY_4_BS, ratio: 100 },],
 
-    [{ ene: ENEMY_DEF.ENEMY_3, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_4, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 40 },], // Lv5   28
+    [{ ene: ENEMY_DEF.ENEMY_3, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_4, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_4, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_4, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 10 },],
     [{ ene: ENEMY_DEF.ENEMY_4, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 10 },],
-    [{ ene: ENEMY_DEF.ENEMY_4, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 10 },], // Lv6   58
+    [{ ene: ENEMY_DEF.ENEMY_4, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_5, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 10 },],
     [{ ene: ENEMY_DEF.ENEMY_5, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_5, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 10 },],
     [{ ene: ENEMY_DEF.ENEMY_5, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 10 },],
-    [{ ene: ENEMY_DEF.ENEMY_5, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 10 },], // Lv7  90
-    [{ ene: ENEMY_DEF.ENEMY_8_BS, ratio: 100 },],    // 20:中ボス
+    [{ ene: ENEMY_DEF.ENEMY_5, ratio: 20 }, { ene: ENEMY_DEF.ENEMY_6, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_5_P, ratio: 40 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 10 },],
+    [{ ene: ENEMY_DEF.ENEMY_8_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_6, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_6, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_6, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_6, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 40 },], // Lv8  100
+    [{ ene: ENEMY_DEF.ENEMY_6, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_6_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 40 },], // Lv9  140
-    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],    // 30:中ボス
+    [{ ene: ENEMY_DEF.ENEMY_7, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 40 },],
+    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_8, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_8, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_8_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 40 },],
@@ -264,75 +264,74 @@ const enemyAppearTable = [
     [{ ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 40 },],   // Lv11 220
-    [{ ene: ENEMY_DEF.ENEMY_11_BS, ratio: 100 },],    // 40:中ボス（いのちのみ50%）
+    [{ ene: ENEMY_DEF.ENEMY_9, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 40 },],
+    [{ ene: ENEMY_DEF.ENEMY_11_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_10, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_10, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_10, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_10, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 40 },],  // Lv12 300
+    [{ ene: ENEMY_DEF.ENEMY_10, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_10_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],  // Lv13 400
-    [{ ene: ENEMY_DEF.ENEMY_13_BS, ratio: 100 },],    // 50:中ボス（けいけんのみ90%）
+    [{ ene: ENEMY_DEF.ENEMY_11, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 40 },],
+    [{ ene: ENEMY_DEF.ENEMY_13_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],  // Lv14 500
+    [{ ene: ENEMY_DEF.ENEMY_12, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_12_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_12_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_12_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_12_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_12_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 30 },],
-    [{ ene: ENEMY_DEF.ENEMY_12_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 30 },],  // Lv15 600
-    [{ ene: ENEMY_DEF.ENEMY_15_BS, ratio: 100 },],    // 60:中ボス（いのちのみ50%）
+    [{ ene: ENEMY_DEF.ENEMY_12_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_13, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 30 },],
+    [{ ene: ENEMY_DEF.ENEMY_15_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_14, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_14, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_14, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_14, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 40 },],  // Lv16 800
+    [{ ene: ENEMY_DEF.ENEMY_14, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_14_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
-    [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],  // Lv17 800
-    [{ ene: ENEMY_DEF.ENEMY_17_BS, ratio: 100 },],    // 70:中ボス（けいけんのみ90%）
+    [{ ene: ENEMY_DEF.ENEMY_14_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_15, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 30 },],
+    [{ ene: ENEMY_DEF.ENEMY_17_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],  // Lv18 800
+    [{ ene: ENEMY_DEF.ENEMY_16, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_16_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
-    [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],  // Lv19 800
-    [{ ene: ENEMY_DEF.ENEMY_19_BS, ratio: 100 },],    // 80:中ボス（いのちのみ50%）
+    [{ ene: ENEMY_DEF.ENEMY_16_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_17, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 30 },],
+    [{ ene: ENEMY_DEF.ENEMY_19_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],  // Lv20 800
+    [{ ene: ENEMY_DEF.ENEMY_18, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_18_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
-    [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },], // Lv21 800
-    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],    // 90:中ボス（けいけんのみ90%）
+    [{ ene: ENEMY_DEF.ENEMY_18_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_19, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 30 },],
+    [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],
 
     [{ ene: ENEMY_DEF.ENEMY_20, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_20, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 40 },],
     [{ ene: ENEMY_DEF.ENEMY_20, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_20_P, ratio: 15 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 40 },],
-    [{ ene: ENEMY_DEF.ENEMY_20_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 },],  // Lv22 800
+    [{ ene: ENEMY_DEF.ENEMY_20_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_20_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_20_P, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_21, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_22, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_22, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_24, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_25, ratio: 30 },],
     [{ ene: ENEMY_DEF.ENEMY_22, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_24, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_25, ratio: 30 },],
-    [{ ene: ENEMY_DEF.ENEMY_22, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_24, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_25, ratio: 30 },],  // Lv23 800
-    [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],    // 100:ラスボス   Lv24
-
+    [{ ene: ENEMY_DEF.ENEMY_22, ratio: 10 }, { ene: ENEMY_DEF.ENEMY_23, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_24, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_25, ratio: 30 },],
+    [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],
 ];
 
 // 名前リール
@@ -403,7 +402,7 @@ class CharaStatus {
         this.tmpAgi = 0;
         this.krt = this.eneDef.krtRatio;
         this.weapon = ITEM_DEF.EMPTY;
-        this.armor = ITEM_DEF.EMPTY;
+        this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
         this.itemList = [];
     }
@@ -474,6 +473,7 @@ class CharaStatus {
     }
 
     calcAttack() {
+        console.log("calcAttack=" + (this.getAtk() + this.weapon.value));
         return this.getAtk() + this.weapon.value;
     }
 
@@ -506,7 +506,8 @@ class CharaStatus {
     }
 
     calcDefence() {
-        return (this.getAgi() / 2) + this.armor.value;
+        console.log("calcDefence=" + ((this.getAgi() / 2) + this.shield.value));
+        return (this.getAgi() / 2) + this.shield.value;
     }
 
     setWeapon(weapon) {
@@ -516,11 +517,11 @@ class CharaStatus {
         return this.weapon;
     }
 
-    setArmor(armor) {
-        this.armor = armor;
+    setShield(shield) {
+        this.shield = shield;
     }
-    getArmor() {
-        return this.armor;
+    getShield() {
+        return this.shield;
     }
 
     setGavasss(gavasss) {
@@ -1460,7 +1461,7 @@ function CmdItemExec(btn) {
         } else if (item.def.exec === ITEM_EXEC.EQUIP) {
             // 『装備』
             for (let ii = 0; ii < myStatus.itemList.length; ii++) {
-                // 備フラグを設定する
+                // 装備フラグを設定する
                 if (ii === btn.itemIdx) {
                     myStatus.itemList[ii].eqp = myStatus.itemList[ii].eqp ? false : true;
                 } else {
@@ -1497,6 +1498,20 @@ function GameBattleStart() {
             let tmpAtkStatus = null;
             let tmpDefStatus = null;
             let tmpGameModeOld = null;
+            // 装備設定
+            myStatus.weapon = ITEM_DEF.EMPTY;
+            myStatus.shield = ITEM_DEF.EMPTY;
+            for (let ii = 0; ii < myStatus.itemList.length; ii++) {
+                if (myStatus.itemList[ii].eqp) {
+                    if (myStatus.itemList[ii].def.type === ITEM_TYPE.WEAPON) {
+                        myStatus.weapon = myStatus.itemList[ii].def;
+                    }
+                    if (myStatus.itemList[ii].def.type === ITEM_TYPE.SHIELD) {
+                        myStatus.shield = myStatus.itemList[ii].def;
+                    }
+                }
+            }
+
             if (battleCtrl.turnOwner === 0) {
                 // プレイヤーのこうげき
                 isPlayer = true;

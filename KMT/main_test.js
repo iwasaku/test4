@@ -188,7 +188,7 @@ const expTable = [
     { lv: 2, atk: 5, agi: 4, hp: 22, exp: 7 },
     { lv: 3, atk: 7, agi: 6, hp: 24, exp: 23 },
     { lv: 4, atk: 7, agi: 8, hp: 31, exp: 47 },
-    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 }, //2  1
+    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 }, //2  2
 
     { lv: 6, atk: 16, agi: 10, hp: 38, exp: 220 },
     { lv: 7, atk: 18, agi: 17, hp: 40, exp: 450 },
@@ -226,16 +226,15 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    //    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // Lv1   4
-    //[{ ene: ENEMY_DEF.ENEMY_1, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_3, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_4, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_5, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_6, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_7, ratio: 100 },],  // TEST
-    //[{ ene: ENEMY_DEF.ENEMY_8, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_1, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_3, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_4, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_5, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_6, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_7, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_8, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_21_BS, ratio: 100 },],  // TEST
@@ -262,6 +261,7 @@ const enemyAppearTable = [
     [{ ene: ENEMY_DEF.ENEMY_25, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // TEST
 
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // Lv1   4
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 50 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 50 },],
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },], // Lv2   7
     [{ ene: ENEMY_DEF.ENEMY_0, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_1, ratio: 30 }, { ene: ENEMY_DEF.ENEMY_2, ratio: 40 },],
