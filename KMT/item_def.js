@@ -286,7 +286,7 @@ const ITEM_DEF = defineEnum({
         min: 45,
         max: 55,
     },
-    MAGIC_06: {
+    MAGIC_ATK_SCF: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
@@ -295,7 +295,7 @@ const ITEM_DEF = defineEnum({
         min: 2, // 攻撃力2倍
         max: 2,
     },
-    MAGIC_07: {
+    MAGIC_AGI_SCF: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,

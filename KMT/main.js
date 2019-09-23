@@ -352,11 +352,13 @@ class CharaStatus {
         this.nowHp = 0;     // 現在値
         this.nowAtk = 0;       // Lvから求めた値
         this.tmpAtk = 0;    // 1ターンだけ上昇
+        this.tmpAtkScf = 1;    // 1ターンだけn倍
         this.nowAgi = 0;       // Lvから求めた値
         this.tmpAgi = 0;    // 1ターンだけ上昇
+        this.tmpAgiScf = 1;    // 1ターンだけn倍
         this.krt = 16;     // クリティカル確率（1000分率）。16なら約1.6%=約1/64の確率で、31なら約3.1%=約1/32の確率で『会心の一撃』が発生
         this.weapon = ITEM_DEF.EMPTY;
-        this.armor = ITEM_DEF.EMPTY;
+        this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
         this.itemList = [];
     }
@@ -375,7 +377,7 @@ class CharaStatus {
         this.tmpAgi = 0;
         this.krt = 16;
         this.weapon = ITEM_DEF.EMPTY;
-        this.armor = ITEM_DEF.EMPTY;
+        this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
         this.itemList = [
             { eqp: false, def: ITEM_DEF.HERB_00 },
@@ -469,12 +471,24 @@ class CharaStatus {
         this.tmpAtk = tmpAtk;
     }
     getTmpAtk() {
-        return this.TmpAtk;
+        return this.tmpAtk;
+    }
+    setTmpAtkScf(tmpAtkScf) {
+        this.tmpAtkScf = tmpAtkScf;
+    }
+    addTmpAtkScf(tmpAtkScf) {
+        this.tmpAtkScf += tmpAtkScf;
+        if (this.tmpAtkScf > 2) {
+            this.tmpAtkScf = 2;
+        }
+    }
+    getTmpAtkScf() {
+        return this.tmpAtkScf;
     }
 
     calcAttack() {
-        console.log("calcAttack=" + (this.getAtk() + this.weapon.value));
-        return this.getAtk() + this.weapon.value;
+        console.log("calcAttack=" + (this.getAtk() + this.weapon.value) * this.tmpAtkScf);
+        return (this.getAtk() + this.weapon.value) * this.tmpAtkScf;
     }
 
     getAgi() {
@@ -490,12 +504,25 @@ class CharaStatus {
         this.tmpAgi = tmpAgi;
     }
     addTmpAgi(tmpAgi) {
-        if (this.tmpAgi < this.nowAgi) {
-            this.tmpAgi += tmpAgi;
+        this.tmpAgi += tmpAgi;
+        if (this.tmpAgi > this.nowAgi) {
+            this.tmpAgi = this.nowAgi;
         }
     }
     getTmpAgi() {
         return this.tmpAgi;
+    }
+    setTmpAgiScf(tmpAgiScf) {
+        this.tmpAgiScf = tmpAgiScf;
+    }
+    addTmpAgiScf(tmpAgiScf) {
+        this.tmpAgiScf += tmpAgiScf;
+        if (this.tmpAgiScf > 1.5) {
+            this.tmpAgiScf = 1.5;
+        }
+    }
+    getTmpAgiScf() {
+        return this.tmpAgiScf;
     }
 
     setKrt(krt) {
@@ -506,8 +533,8 @@ class CharaStatus {
     }
 
     calcDefence() {
-        console.log("calcDefence=" + ((this.getAgi() / 2) + this.shield.value));
-        return (this.getAgi() / 2) + this.shield.value;
+        console.log("calcDefence=" + ((this.getAgi() / 2) + this.shield.value) * this.tmpAgiScf);
+        return ((this.getAgi() / 2) + this.shield.value) * this.tmpAgiScf;
     }
 
     setWeapon(weapon) {
@@ -683,7 +710,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα5 ver.",
+                    text: "NMLS ONE HUNDRED\nα6 ver.",
                     align: "center",
                 },
                 {
@@ -1197,7 +1224,10 @@ function GameIntro() {
     console.log("Intro");
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
+            myStatus.setTmpAtk(0);
+            myStatus.setTmpAtkScf(1);
             myStatus.setTmpAgi(0);
+            myStatus.setTmpAgiScf(1);
             battleCtrl.textBuff = [];
             messageWindowLabel.text = "";
 
@@ -1641,6 +1671,7 @@ function GameBattleStart() {
                             case ITEM_TYPE.HERB_2:
                                 // けいけんのみ
                                 if (myStatus.getLv() >= 30) {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　" + "レベルがあがった" };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.LEVEL_UP };
@@ -1653,6 +1684,31 @@ function GameBattleStart() {
                                 } else {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　" + "さいだいＨＰが　" + toZenkaku(tmpItem.value, 1) + "あがった" };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_MAX_HP, prm: tmpItem.value };
+                                }
+                                break;
+                            case ITEM_TYPE.MAGIC_INDIRCT_ATTACK:
+                                // 間接攻撃
+                                switch (tmpItem) {
+                                    case ITEM_DEF.MAGIC_ATK_SCF:
+                                        let oldTempAtkScf = myStatus.getTmpAtkScf();
+                                        myStatus.addTmpAtkScf(1);
+                                        if (oldTempAtkScf == myStatus.getTmpAtkScf()) {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        } else {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "こうげきりょくが　" + toZenkaku(myStatus.getTmpAtkScf(), 1) + "ばいアップ" };
+                                        }
+                                        break;
+                                    case ITEM_DEF.MAGIC_AGI_SCF:
+                                        let oldTempAgiScf = myStatus.getTmpAgiScf();
+                                        myStatus.addTmpAgiScf(0.5);
+                                        if (oldTempAgiScf == myStatus.getTmpAgiScf()) {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        } else {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "ぼうぎょりょくが　" + toZenkaku(myStatus.getTmpAgiScf(), 1) + "ばいアップ" };
+                                        }
+                                        break;
+                                    default:
+                                        battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 }
                                 break;
                             case ITEM_TYPE.MAGIC_DIRECT_ATTACK:
