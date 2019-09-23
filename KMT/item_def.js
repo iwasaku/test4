@@ -291,7 +291,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
         name: '攻めの巻物',
-        success: 100,  //　成功確率（％）
+        success: 90,  //　成功確率（％）
         min: 2, // 攻撃力2倍
         max: 2,
     },
@@ -300,7 +300,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
         name: '受けの巻物',
-        success: 100,  //　成功確率（％）
+        success: 90,  //　成功確率（％）
         min: 1.5,   // 防御力1.5倍
         max: 1.5,
     },

@@ -710,7 +710,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα6 ver.",
+                    text: "NMLS ONE HUNDRED\nα6.1 ver.",
                     align: "center",
                 },
                 {
@@ -1690,21 +1690,29 @@ function GameBattleStart() {
                                 // 間接攻撃
                                 switch (tmpItem) {
                                     case ITEM_DEF.MAGIC_ATK_SCF:
-                                        let oldTempAtkScf = myStatus.getTmpAtkScf();
-                                        myStatus.addTmpAtkScf(1);
-                                        if (oldTempAtkScf == myStatus.getTmpAtkScf()) {
+                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
-                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "こうげきりょくが　" + toZenkaku(myStatus.getTmpAtkScf(), 1) + "ばいアップ" };
+                                            let oldTempAtkScf = myStatus.getTmpAtkScf();
+                                            myStatus.addTmpAtkScf(1);
+                                            if (oldTempAtkScf == myStatus.getTmpAtkScf()) {
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                            } else {
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "こうげきりょくが　" + toZenkaku(myStatus.getTmpAtkScf(), 1) + "ばいアップ" };
+                                            }
                                         }
                                         break;
                                     case ITEM_DEF.MAGIC_AGI_SCF:
-                                        let oldTempAgiScf = myStatus.getTmpAgiScf();
-                                        myStatus.addTmpAgiScf(0.5);
-                                        if (oldTempAgiScf == myStatus.getTmpAgiScf()) {
+                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
-                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "ぼうぎょりょくが　" + toZenkaku(myStatus.getTmpAgiScf(), 1) + "ばいアップ" };
+                                            let oldTempAgiScf = myStatus.getTmpAgiScf();
+                                            myStatus.addTmpAgiScf(0.5);
+                                            if (oldTempAgiScf == myStatus.getTmpAgiScf()) {
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                            } else {
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "ぼうぎょりょくが　" + toZenkaku(myStatus.getTmpAgiScf(), 1) + "ばいアップ" };
+                                            }
                                         }
                                         break;
                                     default:
@@ -2292,6 +2300,10 @@ function calcMagicDamageInternal(magic, eneStst) {
 // 物理攻撃ダメージ計算
 function calcAttackDamage(myStat, eneStat, scaleFactor) {
     let krtRnd = Math.floor(Math.random() * 1000);
+    if (myStat.tmpAtkScf > 1) {
+        // 攻めの巻物を使った時はクリティカルは出ない
+        krtRnd = 10000;
+    }
     let dmg = { val: 0, krt: false, };
     let tmpDmg = { val: 0, krt: false, };
     if (krtRnd <= myStat.krt) {
