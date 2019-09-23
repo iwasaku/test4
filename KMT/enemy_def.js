@@ -145,9 +145,8 @@ const ENEMY_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
-            { item: ITEM_DEF.HERB_00, ratio: 85 },
-            { item: ITEM_DEF.WEAPON_00, ratio: 5 },
-            { item: ITEM_DEF.SHIELD_00, ratio: 10 },
+            { item: ITEM_DEF.MAGIC_ATK_SCF, ratio: 50 },
+            { item: ITEM_DEF.MAGIC_AGI_SCF, ratio: 50 },
         ],
         gavasss: { min: 1, max: 5, },
     },
