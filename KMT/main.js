@@ -710,7 +710,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα6.1 ver.",
+                    text: "NMLS ONE HUNDRED\nα6.2 ver.",
                     align: "center",
                 },
                 {
