@@ -487,8 +487,9 @@ class CharaStatus {
     }
 
     calcAttack() {
-        console.log("calcAttack=" + (this.getAtk() + this.weapon.value) * this.tmpAtkScf);
-        return (this.getAtk() + this.weapon.value) * this.tmpAtkScf;
+        let ret = (this.getAtk() * this.tmpAtkScf) + this.weapon.value;
+        console.log("calcAttack=" + ret);
+        return ret;
     }
 
     getAgi() {
@@ -533,8 +534,9 @@ class CharaStatus {
     }
 
     calcDefence() {
-        console.log("calcDefence=" + ((this.getAgi() / 2) + this.shield.value) * this.tmpAgiScf);
-        return ((this.getAgi() / 2) + this.shield.value) * this.tmpAgiScf;
+        let ret = ((this.getAgi() / 2) * this.tmpAgiScf) + this.shield.value;
+        console.log("calcDefence=" + ret);
+        return ret;
     }
 
     setWeapon(weapon) {
@@ -710,7 +712,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα6.2 ver.",
+                    text: "NMLS ONE HUNDRED\nα6.3 ver.",
                     align: "center",
                 },
                 {

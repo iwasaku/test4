@@ -1102,10 +1102,10 @@ const ENEMY_DEF = defineEnum({
         spriteName: "last",
         growthTypeIdx: { min: 5, max: 5 },
         lv: 29,
-        hp: 0,
+        hp: 500,
         exp: { min: 700, max: 900 },
         attackRatio: 70,
-        krtRatio: 125,
+        krtRatio: 200,
         isEscape: false,
         attr: ITEM_ATTR.ALL_P,
         magicList: [
