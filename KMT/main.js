@@ -83,6 +83,9 @@ const GAME_MODE = defineEnum({
     BATTLE_START: {
         func: function () { GameBattleStart(); },
     },
+    CMD_PRE_SELECTER: {
+        func: function () { CmdPreSelecter(); },
+    },
     CMD_SELECTER: {
         func: function () { CmdSelector(); },
     },
@@ -97,6 +100,9 @@ const GAME_MODE = defineEnum({
     },
     CMD_ESCAPE: {
         func: function () { CmdEscape(); },
+    },
+    CMD_SLEEP: {
+        func: function () { CmdSleep(); },
     },
     BATTLE_FINISH: {
         func: function () { GameBatleFinish(); },
@@ -357,6 +363,8 @@ class CharaStatus {
         this.tmpAgi = 0;    // 1ターンだけ上昇
         this.tmpAgiScf = 1;    // 1ターンだけn倍
         this.krt = 16;     // クリティカル確率（1000分率）。16なら約1.6%=約1/64の確率で、31なら約3.1%=約1/32の確率で『会心の一撃』が発生
+        this.sleepStat = 0;     // ねむり状態（1:睡眠 0:通常 2:起床時）
+        this.sleepCnt = 0;     // ねむり状態の経過ターン数
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -376,6 +384,8 @@ class CharaStatus {
         this.nowAgi = Math.round((li.agi * this.growthType.agi) + this.growthType.bonus);
         this.tmpAgi = 0;
         this.krt = 16;
+        this.sleepStat = 0;
+        this.sleepCnt = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -403,6 +413,8 @@ class CharaStatus {
         this.nowAgi = Math.round((li.agi * this.growthType.agi) + this.growthType.bonus);
         this.tmpAgi = 0;
         this.krt = this.eneDef.krtRatio;
+        this.sleepStat = 0;
+        this.sleepCnt = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
@@ -531,6 +543,19 @@ class CharaStatus {
     }
     getKrt() {
         return this.krt;
+    }
+
+    setSleepStat(stat) {
+        this.sleepStat = stat;
+    }
+    getSleepStat() {
+        return this.sleepStat;
+    }
+    setSleepCnt(cnt) {
+        this.sleepCnt = cnt;
+    }
+    getSleepCnt() {
+        return this.sleepCnt;
     }
 
     calcDefence() {
@@ -712,7 +737,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα6.3 ver.",
+                    text: "NMLS ONE HUNDRED\nα7 ver.",
                     align: "center",
                 },
                 {
@@ -1005,7 +1030,7 @@ tm.define("GameScene", {
             let yIdx = Math.floor(ii / 2);
             itemWindowReturnButton.setPosition(SCREEN_CENTER_X, 70 * 7 + (yIdx * 70));
             itemWindowReturnButton.onpointingstart = function () {
-                gameModeReq = GAME_MODE.CMD_SELECTER;
+                gameModeReq = GAME_MODE.CMD_PRE_SELECTER;
             };
             itemWindowReturnButton.setAlpha(0);
             itemWindowReturnButton.sleep();
@@ -1279,7 +1304,7 @@ function GameIntro() {
             break;
         case GAME_SUB_MODE.FINISH:
             if (battleCtrl.initTurnOwner !== 1) {
-                gameMode = GAME_MODE.CMD_SELECTER;
+                gameMode = GAME_MODE.CMD_PRE_SELECTER;
                 gameSubMode = GAME_SUB_MODE.INIT;
             } else {
                 initBattleCtrl();
@@ -1287,6 +1312,70 @@ function GameIntro() {
                 gameMode = GAME_MODE.BATTLE_START;
                 gameSubMode = GAME_SUB_MODE.INIT;
             }
+            break;
+    }
+}
+
+/*
+コマンドセレクターに入る前のモード
+*/
+function CmdPreSelecter() {
+    switch (gameSubMode) {
+        case GAME_SUB_MODE.INIT:
+            // 表示内容設定
+            messageWindowLabel.text = "";
+
+            // 表示コントロール
+            statusWindowCtrl(true);
+            cmdWindowCtrl(false);
+            messageWindowCtrl(true);
+            enemyWindowCtrl(false);
+            enemyGraphicCtrl(true);
+            itemWindowCtrl(false, false);
+
+            gameSubMode = GAME_SUB_MODE.MAIN;
+
+            let buffIdx = 0;
+            gameCounter = 0;
+            battleCtrl.textBuff = [];
+            if (myStatus.sleepStat === 1) {
+                // 起床判定
+                let tmpRatio = 0;
+                if (myStatus.sleepCnt == 0) tmpRatio = 5;
+                else if (myStatus.sleepCnt == 1) tmpRatio = 25;
+                else if (myStatus.sleepCnt == 2) tmpRatio = 50;
+                else tmpRatio = 75;
+                if (Math.floor(Math.random() * 100) < tmpRatio) {
+                    myStatus.sleepStat = 2;
+                    myStatus.sleepCnt = 0;
+                } else {
+                    myStatus.sleepCnt++;
+                }
+            } else if (myStatus.sleepStat === 2) {
+                myStatus.sleepStat = 0;
+            }
+
+            // 表示設定
+            if (myStatus.sleepStat === 1) {
+                battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ネムっている！" };
+                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
+            } else if (myStatus.sleepStat === 2) {
+                battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　めをさました！" };
+                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
+            } else {
+                battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.FINISH };
+            }
+        // fall through
+        case GAME_SUB_MODE.MAIN:
+            messageAndModeCtrl();
+            break;
+        case GAME_SUB_MODE.FINISH:
+            if (myStatus.sleepStat === 0) {
+                gameMode = GAME_MODE.CMD_SELECTER;
+            } else {
+                gameMode = GAME_MODE.CMD_SLEEP;
+            }
+            gameSubMode = GAME_SUB_MODE.INIT;
             break;
     }
 }
@@ -1395,6 +1484,36 @@ function CmdDefence() {
 『逃げる』コマンド
 */
 function CmdEscape() {
+    switch (gameSubMode) {
+        case GAME_SUB_MODE.INIT:
+            // 表示内容設定
+            messageWindowLabel.text = "";
+
+            // 表示コントロール
+            statusWindowCtrl(true);
+            cmdWindowCtrl(false);
+            messageWindowCtrl(true);
+            enemyWindowCtrl(false);
+            enemyGraphicCtrl(true);
+            itemWindowCtrl(false, false);
+
+            gameSubMode = GAME_SUB_MODE.MAIN;
+        // fall through
+        case GAME_SUB_MODE.MAIN:
+            initBattleCtrl();
+        // fall through
+        case GAME_SUB_MODE.FINISH:
+            gameMode = GAME_MODE.BATTLE_START;
+            gameSubMode = GAME_SUB_MODE.INIT;
+            break;
+    }
+}
+
+/*
+『眠る』コマンド
+※モード制御用でコマンドセレクタでは選択できない
+*/
+function CmdSleep() {
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             // 表示内容設定
@@ -1550,7 +1669,12 @@ function GameBattleStart() {
                 tmpAtkStatus = myStatus;
                 tmpDefStatus = eneStatus;
                 battleCtrl.turnOwner = 1;
-                tmpGameModeOld = battleCtrl.gameModeOld;
+                if (myStatus.sleepStat === 1) {
+                    // コマンド選択後に眠らされた場合は上書きする
+                    tmpGameModeOld = GAME_MODE.CMD_SLEEP;
+                } else {
+                    tmpGameModeOld = battleCtrl.gameModeOld;
+                }
             } else {
                 // 敵のこうげき
                 isPlayer = false;
@@ -1558,14 +1682,15 @@ function GameBattleStart() {
                 tmpDefStatus = myStatus;
                 battleCtrl.turnOwner = 0;
 
-                if ((eneStatus.eneDef.isEscape == true) && (myStatus.getAtk() >= eneStatus.getAtk() * 2) && (Math.random() <= 0.25)) {
+                if (eneStatus.sleepStat === 1) {
+                    tmpGameModeOld = GAME_MODE.CMD_SLEEP;
+                } else if ((eneStatus.eneDef.isEscape === true) && (myStatus.getAtk() >= eneStatus.getAtk() * 2) && (Math.random() <= 0.25)) {
                     tmpGameModeOld = GAME_MODE.CMD_ESCAPE;
                 } else if (Math.random() <= 0.031) {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
                     tmpGameModeOld = GAME_MODE.CMD_ATTACK;
                 } else {
-                    //tmpGameModeOld = GAME_MODE.CMD_ATTACK;
                     tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
                 }
             }
@@ -1648,6 +1773,31 @@ function GameBattleStart() {
                         battleCtrl.isEscape = true;
                     }
                     break;
+                case GAME_MODE.CMD_SLEEP:
+                    if (isPlayer) {
+                        // プレイヤーの場合は何もしない
+                        battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.FINISH };
+                    } else {
+                        // 起床判定
+                        let tmpRatio = 0;
+                        if (eneStatus.sleepCnt == 0) tmpRatio = 0;
+                        else if (myStatus.sleepCnt == 1) tmpRatio = 25;
+                        else tmpRatio = 50;
+                        if (Math.floor(Math.random() * 100) < tmpRatio) {
+                            eneStatus.sleepStat = 2;
+                            eneStatus.sleepCnt = 0;
+                        } else {
+                            eneStatus.sleepCnt++;
+                        }
+                        if (eneStatus.sleepStat === 1) {
+                            battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　ネムっている！" };
+                        } else {
+                            battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　めをさました！" };
+                            eneStatus.sleepStat = 0;
+                        }
+                        battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
+                    }
+                    break;
                 case GAME_MODE.CMD_ITEM_USE:
                     console.log("ITEM_USE");
                     if (isPlayer) {
@@ -1700,7 +1850,7 @@ function GameBattleStart() {
                                             if (oldTempAtkScf == myStatus.getTmpAtkScf()) {
                                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                             } else {
-                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "こうげきりょくが　" + toZenkaku(myStatus.getTmpAtkScf(), 1) + "ばいアップ" };
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　こうげきりょくが　" + toZenkaku(myStatus.getTmpAtkScf(), 1) + "ばいアップ" };
                                             }
                                         }
                                         break;
@@ -1713,8 +1863,17 @@ function GameBattleStart() {
                                             if (oldTempAgiScf == myStatus.getTmpAgiScf()) {
                                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                             } else {
-                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　" + "ぼうぎょりょくが　" + toZenkaku(myStatus.getTmpAgiScf(), 1) + "ばいアップ" };
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "このバトルのあいだ　ぼうぎょりょくが　" + toZenkaku(myStatus.getTmpAgiScf(), 1) + "ばいアップ" };
                                             }
+                                        }
+                                        break;
+                                    case ITEM_DEF.MAGIC_SLEEP:
+                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        } else {
+                                            eneStatus.sleepStat = 1;
+                                            eneStatus.sleepCnt = 0;
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　ネムった！" };
                                         }
                                         break;
                                     default:
@@ -1745,6 +1904,11 @@ function GameBattleStart() {
                         myStatus.delItemList(battleCtrl.useItemIdx);
                     } else {
                         let tmpItem = decideMagic(eneStatus.eneDef);
+                        if (tmpItem == ITEM_DEF.MAGIC_SLEEP) {
+                            if (myStatus.sleepStat === 1) {
+                                tmpItem = decideAltMagic();
+                            }
+                        }
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　" + tmpItem.name + "を　つかった！" };
 
                         switch (tmpItem.type) {
@@ -1800,6 +1964,22 @@ function GameBattleStart() {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                                 }
                                 break;
+                            case ITEM_TYPE.MAGIC_INDIRCT_ATTACK:
+                                // 間接攻撃
+                                switch (tmpItem) {
+                                    case ITEM_DEF.MAGIC_SLEEP:
+                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        } else {
+                                            myStatus.sleepStat = 1;
+                                            myStatus.sleepCnt = 0;
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ネムってしまった！" };
+                                        }
+                                        break;
+                                    default:
+                                        battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                }
+                                break;
                         }
                         battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                     }
@@ -1830,7 +2010,7 @@ function GameBattleStart() {
                 if (battleCtrl.turnCnt < 2) {
                     gameMode = GAME_MODE.BATTLE_START;
                 } else {
-                    gameMode = GAME_MODE.CMD_SELECTER;
+                    gameMode = GAME_MODE.CMD_PRE_SELECTER;
                 }
             }
             gameSubMode = GAME_SUB_MODE.INIT;
@@ -2444,6 +2624,24 @@ function decideMagic(enemyDef) {
         }
         magic = enemyDef.magicList[ii].magic;
         break;
+    }
+    return magic;
+}
+
+/**
+ * 代替魔法選択
+ */
+function decideAltMagic() {
+    let target = Math.floor(Math.random() * 100);
+    let magic = null;
+    if (target < 25) {
+        magic = ITEM_DEF.MAGIC_FIRE_LV2;
+    } else if (target < 50) {
+        magic = ITEM_DEF.MAGIC_FIRE_LV3;
+    } else if (target < 70) {
+        magic = ITEM_DEF.MAGIC_WATER_LV2;
+    } else {
+        magic = ITEM_DEF.MAGIC_WATER_LV3;
     }
     return magic;
 }

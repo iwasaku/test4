@@ -268,11 +268,11 @@ const ITEM_DEF = defineEnum({
     },
 
     // 魔法（間接攻撃）
-    MAGIC_04: {
+    MAGIC_SLEEP: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'ねむりの巻物', // 相手が３回眠る（３ターンスキップ）
+        name: 'ネムりの巻物', // 相手が一定確率で眠る
         success: 40,  //　成功確率（％）
         min: 3,
         max: 3,
