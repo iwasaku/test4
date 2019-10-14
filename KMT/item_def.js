@@ -273,7 +273,7 @@ const ITEM_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
         name: 'ネムりの巻物', // 相手が一定確率で眠る
-        success: 40,  //　成功確率（％）
+        success: 30,  //　成功確率（％）
         min: 3,
         max: 3,
     },

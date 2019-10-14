@@ -2123,7 +2123,7 @@ function GameBattleStart() {
                                 // 間接攻撃
                                 switch (tmpItem) {
                                     case ITEM_DEF.MAGIC_SLEEP:
-                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                        if (Math.floor(Math.random() * 100) > (tmpItem.success + 20)) { // プレイヤーより成功率高めにする
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
                                             myStatus.sleepStat = 1;
