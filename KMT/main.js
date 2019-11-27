@@ -8,9 +8,22 @@ let SCREEN_CENTER_Y = SCREEN_HEIGHT / 2;  // スクリーン高さの半分
 let FONT_FAMILY = "'misaki_gothic','Meiryo',sans-serif";
 let ASSETS = {
     "fade_in": "./resource/fadein_8_amin.png",
-    "frame_256_288": "./resource/frame_256_288.png",
-    "frame_576_192": "./resource/frame_576_192.png",
-    "frame_320_96": "./resource/frame_320_96.png",
+
+    "frame_256_288_w": "./resource/frame_256_288_w.png",
+    "frame_256_288_g": "./resource/frame_256_288_g.png",
+    "frame_256_288_o": "./resource/frame_256_288_o.png",
+    "frame_256_288_r": "./resource/frame_256_288_r.png",
+    "frame_256_288_p": "./resource/frame_256_288_p.png",
+    "frame_576_192_w": "./resource/frame_576_192_w.png",
+    "frame_576_192_g": "./resource/frame_576_192_g.png",
+    "frame_576_192_o": "./resource/frame_576_192_o.png",
+    "frame_576_192_r": "./resource/frame_576_192_r.png",
+    "frame_576_192_p": "./resource/frame_576_192_p.png",
+    "frame_320_96_w": "./resource/frame_320_96_w.png",
+    "frame_320_96_g": "./resource/frame_320_96_g.png",
+    "frame_320_96_o": "./resource/frame_320_96_o.png",
+    "frame_320_96_r": "./resource/frame_320_96_r.png",
+    "frame_320_96_p": "./resource/frame_320_96_p.png",
 
     "rip": "./resource/rip.png?20190831",
     "maria": "./resource/maria.png?20190831",
@@ -55,9 +68,6 @@ let ASSETS = {
     "sad": "./resource/sad.png?20190831",
 
     "last": "./resource/last.png?20190831",
-
-    "fallSE": "https://iwasaku.github.io/test3/SHU/resource/fall.mp3",    // 開発時用（mp3はfile://でのアクセスが拒否されるので、https://経由にする）
-    //"fallSE": "./resource/fall.mp3",
 };
 
 // 定義
@@ -138,6 +148,12 @@ const TEXT_BUFFER_CMD = defineEnum({
         id: 1,
     },
     LEVEL_UP: {
+        id: 1,
+    },
+    TOXIN: {
+        id: 1,
+    },
+    ANTIDOTE: {
         id: 1,
     },
     SHAKE: {
@@ -365,6 +381,8 @@ class CharaStatus {
         this.krt = 16;     // クリティカル確率（1000分率）。16なら約1.6%=約1/64の確率で、31なら約3.1%=約1/32の確率で『会心の一撃』が発生
         this.sleepStat = 0;     // ねむり状態（1:睡眠 0:通常 2:起床時）
         this.sleepCnt = 0;     // ねむり状態の経過ターン数
+        this.statToxic = false;     // どく状態（false:通常 true:どく）
+        this.statCurse = false;     // のろい状態（false:通常 true:のろい）
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -737,7 +755,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα7 ver.",
+                    text: "NMLS ONE HUNDRED\nα8 ver.",
                     align: "center",
                 },
                 {
@@ -823,7 +841,7 @@ tm.define("GameScene", {
         fadeInSprite = new FadeInSprite().addChildTo(group3);
 
         // ステータスウインドウ
-        statusWindowSprite = new FrameSprite("frame_256_288", 256 / 2 + 32, 288 / 2 + 32, 1, 1).addChildTo(group0);
+        statusWindowSprite = new FrameSprite("frame_256_288_w", 256 / 2 + 32, 288 / 2 + 32, 1, 1).addChildTo(group0);
 
         statusWindowNameLabel = tm.display.Label("NAME").addChildTo(group0);
         statusWindowNameLabel.setPosition(256 / 2 - 32 * 1, 288 / 2 - 32 * 2)
@@ -886,7 +904,7 @@ tm.define("GameScene", {
         statusWindowGavasssLabel.text = "Ｇ　" + toZenkaku(10000, 5);
 
         // コマンドウィンドウ
-        cmdWindowSprite = new FrameSprite("frame_256_288", 256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160), 1, 1).addChildTo(group1);
+        cmdWindowSprite = new FrameSprite("frame_256_288_w", 256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160), 1, 1).addChildTo(group1);
         cmdWindowAtkButton = tm.app.FlatButton({
             width: 160,
             height: 60,
@@ -945,7 +963,7 @@ tm.define("GameScene", {
         cmdWindowItemButton.sleep();
 
         // メッセージウィンドウ
-        messageWindowSprite = new FrameSprite("frame_576_192", SCREEN_CENTER_X, SCREEN_CENTER_Y + 256, 1, 1).addChildTo(group0);
+        messageWindowSprite = new FrameSprite("frame_576_192_w", SCREEN_CENTER_X, SCREEN_CENTER_Y + 256, 1, 1).addChildTo(group0);
         messageWindowLabel = tm.display.Label("").addChildTo(group0);
         messageWindowLabel.setPosition(32 + 16, SCREEN_CENTER_Y + 192 + 24)
             .setFillStyle("#fff")
@@ -958,7 +976,7 @@ tm.define("GameScene", {
         messageWindowLabel.alpha = 0;
 
         // 敵ウィンドウ
-        enemyWindowSprite = new FrameSprite("frame_320_96", SCREEN_CENTER_X + 160 - 32, SCREEN_CENTER_Y + (32 * 4), 1, 1).addChildTo(group0);
+        enemyWindowSprite = new FrameSprite("frame_320_96_w", SCREEN_CENTER_X + 160 - 32, SCREEN_CENTER_Y + (32 * 4), 1, 1).addChildTo(group0);
         enemyWindowLabel = tm.display.Label("").addChildTo(group0);
         enemyWindowLabel.setPosition(SCREEN_CENTER_X - 16, SCREEN_CENTER_Y + (32 * 4.5))
             .setFillStyle("#fff")
@@ -974,7 +992,7 @@ tm.define("GameScene", {
         enemyGraphicSprite = new EnemySprite("pizzza", SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 3, 3).addChildTo(group0);
 
         // 道具ウィンドウ
-        itemWindowSprite = new FrameSprite("frame_256_288", SCREEN_CENTER_X, SCREEN_CENTER_Y - 8 + (32 * 6), 2.3, 2.4).addChildTo(group2);
+        itemWindowSprite = new FrameSprite("frame_256_288_w", SCREEN_CENTER_X, SCREEN_CENTER_Y - 8 + (32 * 6), 2.3, 2.4).addChildTo(group2);
         itemWindowLabel = tm.display.Label("どうぐ").addChildTo(group2);
         itemWindowLabel.setPosition(SCREEN_CENTER_X, SCREEN_CENTER_Y - 32 * 4)
             .setFillStyle("#fff")
@@ -1126,11 +1144,59 @@ tm.define("GameScene", {
             tweetButtonSwitch = null;
         }
         statusWindowHpLabel.text = "ＨＰ：" + toZenkaku(myStatus.getNowHp(), 4);
-        statusWindowLvLabel.text = "ＬＶ：" + toZenkaku(myStatus.getLv(), 4);
+        let lvStr = (myStatus.statToxic) ? "どく" : "ＬＶ";
+        statusWindowLvLabel.text = lvStr + "：" + toZenkaku(myStatus.getLv(), 4);
         statusWindowGavasssLabel.text = "Ｇ　" + toZenkaku(myStatus.getGavasss(), 5);
     }
 });
 
+
+function setColor(flag) {
+    let fontColor = "#ffffff";
+    let frame256x288Color = "frame_256_288_w";
+    let frame576x192Color = "frame_576_192_w";
+    let frame320x96Color = "frame_320_96_w";
+    if (flag) {
+        if (myStatus.statToxic) {
+            fontColor = "#7f007f"; // 紫
+            frame256x288Color = "frame_256_288_p";
+            frame576x192Color = "frame_576_192_p";
+            frame320x96Color = "frame_320_96_p";
+        } else {
+            let tmp = myStatus.getNowHp() / myStatus.getMaxHp();
+            if (tmp <= 0.05) {
+                fontColor = "#ff0000"; // 赤
+                frame256x288Color = "frame_256_288_r";
+                frame576x192Color = "frame_576_192_r";
+                frame320x96Color = "frame_320_96_r";
+            } else if (tmp <= 0.125) {
+                fontColor = "#ffa500"; // オレンジ
+                frame256x288Color = "frame_256_288_o";
+                frame576x192Color = "frame_576_192_o";
+                frame320x96Color = "frame_320_96_o";
+            } else if (tmp <= 0.25) {
+                fontColor = "#00ff00"; // 緑
+                frame256x288Color = "frame_256_288_g";
+                frame576x192Color = "frame_576_192_g";
+                frame320x96Color = "frame_320_96_g";
+            }
+        }
+    }
+    statusWindowNameLabel.setFillStyle(fontColor);
+    statusWindowHpLabel.setFillStyle(fontColor);
+    statusWindowMpLabel.setFillStyle(fontColor);
+    statusWindowLvLabel.setFillStyle(fontColor);
+    statusWindowGavasssLabel.setFillStyle(fontColor);
+    messageWindowLabel.setFillStyle(fontColor);
+    enemyWindowLabel.setFillStyle(fontColor);
+    itemWindowLabel.setFillStyle(fontColor);
+
+    statusWindowSprite.setImage(frame256x288Color);
+    cmdWindowSprite.setImage(frame256x288Color);
+    itemWindowSprite.setImage(frame256x288Color);
+    enemyWindowSprite.setImage(frame320x96Color);
+    messageWindowSprite.setImage(frame576x192Color);
+}
 
 function statusWindowCtrl(flag) {
     statusWindowSprite.alpha = flag ? 1 : 0;
@@ -1219,6 +1285,7 @@ function GameFadeIn() {
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             // 表示設定
+            setColor(true);
             statusWindowCtrl(false);
             cmdWindowCtrl(false);
             messageWindowCtrl(false);
@@ -1289,6 +1356,7 @@ function GameIntro() {
             }
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1326,6 +1394,7 @@ function CmdPreSelecter() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1388,6 +1457,7 @@ function CmdSelector() {
         case GAME_SUB_MODE.INIT:
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(true);
             messageWindowCtrl(false);
@@ -1433,6 +1503,7 @@ function CmdAttack() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1461,6 +1532,7 @@ function CmdDefence() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1490,6 +1562,7 @@ function CmdEscape() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1520,6 +1593,7 @@ function CmdSleep() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1547,6 +1621,7 @@ function CmdItem() {
         case GAME_SUB_MODE.INIT:
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(false);
@@ -1574,6 +1649,7 @@ function CmdItemUse() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -1684,9 +1760,17 @@ function GameBattleStart() {
 
                 if (eneStatus.sleepStat === 1) {
                     tmpGameModeOld = GAME_MODE.CMD_SLEEP;
-                } else if ((eneStatus.eneDef.isEscape === true) && (myStatus.getAtk() >= eneStatus.getAtk() * 2) && (Math.random() <= 0.25)) {
+                } else if (
+                    (myStatus.statToxic !== true) &&
+                    (eneStatus.eneDef.isEscape === true) &&
+                    (myStatus.getAtk() >= eneStatus.getAtk() * 2) &&
+                    (Math.random() <= 0.25)
+                ) {
                     tmpGameModeOld = GAME_MODE.CMD_ESCAPE;
-                } else if (Math.random() <= 0.031) {
+                } else if (
+                    (myStatus.statToxic !== true) &&
+                    (Math.random() <= 0.031)
+                ) {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
                     tmpGameModeOld = GAME_MODE.CMD_ATTACK;
@@ -1729,6 +1813,14 @@ function GameBattleStart() {
                             if (dmg.krt) tmpText = "つうこんのいちげき！\n";
                             else tmpText = "";
                             tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
+                            if (
+                                (myStatus.statToxic !== true) &&
+                                (Math.floor(Math.random() * 100) <= eneStatus.eneDef.toxicRatio)
+                            ) {
+                                tmpText += makeMessageWindowString("\n");
+                                tmpText += makeMessageWindowString(myStatus.name + "は　どくをうけた！");
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.TOXIN };
+                            }
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: true, prm: -dmg.val };
                             battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
@@ -1752,14 +1844,16 @@ function GameBattleStart() {
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　みをまもっている！" };
                         battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                         eneStatus.addTmpAgi(1);
-
                     }
                     break;
                 case GAME_MODE.CMD_ESCAPE:
                     if (isPlayer) {
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　にげだした！" };
                         // 成功失敗判定
-                        if (Math.random() < (myStatus.getAgi() / (myStatus.getAgi() + eneStatus.calcDefence()))) {
+                        if (
+                            (myStatus.statToxic !== true) &&
+                            (Math.random() < (myStatus.getAgi() / (myStatus.getAgi() + eneStatus.calcDefence())))
+                        ) {
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                             battleCtrl.isEscape = true;
                         } else {
@@ -1818,7 +1912,12 @@ function GameBattleStart() {
                                 break;
                             case ITEM_TYPE.HERB_1:
                                 // どくけしそう
-                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                if (myStatus.statToxic) {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "のからだから　どくそがきえた！" };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ANTIDOTE };
+                                } else {
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                }
                                 break;
                             case ITEM_TYPE.HERB_2:
                                 // けいけんのみ
@@ -1947,7 +2046,10 @@ function GameBattleStart() {
                                 // 直接攻撃
                                 let tmpSuccessRatio = tmpItem.success + ((eneStatus.getLv() - 9) * 1.875);// 最初に魔法を使うのがLv9
                                 if (tmpSuccessRatio > 90) tmpSuccessRatio = 90;
-                                if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
+                                if (
+                                    (myStatus.statToxic !== true) &&
+                                    (Math.floor(Math.random() * 100) > tmpSuccessRatio)
+                                ) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     let dmg1 = getRandomValue(tmpItem.min, tmpItem.max);
@@ -1968,7 +2070,10 @@ function GameBattleStart() {
                                 // 間接攻撃
                                 switch (tmpItem) {
                                     case ITEM_DEF.MAGIC_SLEEP:
-                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                        if (
+                                            (myStatus.statToxic !== true) &&
+                                            (Math.floor(Math.random() * 100) > tmpItem.success)
+                                        ) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
                                             myStatus.sleepStat = 1;
@@ -1987,6 +2092,7 @@ function GameBattleStart() {
             }
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2080,6 +2186,7 @@ function GameBatleFinish() {
             }
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2123,6 +2230,7 @@ function ItemDrop() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2153,6 +2261,7 @@ function ItemDropResult() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(true);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2186,6 +2295,7 @@ function GameWin() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(false);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2223,6 +2333,7 @@ function GameLoose() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(false);
             statusWindowCtrl(true);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2251,6 +2362,7 @@ function GameEnding() {
             messageWindowLabel.text = "";
 
             // 表示コントロール
+            setColor(false);
             statusWindowCtrl(false);
             cmdWindowCtrl(false);
             messageWindowCtrl(true);
@@ -2348,6 +2460,14 @@ function messageAndModeCtrl() {
                 let nextLvInfo = getLevelInfo(myStatus.getLv() + 1);
                 myStatus.setExp(nextLvInfo.exp);
                 checkLevelUp();
+                break;
+
+            case TEXT_BUFFER_CMD.TOXIN:
+                myStatus.statToxic = true;
+                break;
+
+            case TEXT_BUFFER_CMD.ANTIDOTE:
+                myStatus.statToxic = false;
                 break;
 
             case TEXT_BUFFER_CMD.SHAKE:
@@ -2497,6 +2617,10 @@ function calcAttackDamage(myStat, eneStat, scaleFactor) {
     }
     tmpDmg.val = Math.round(tmpDmg.val * scaleFactor);
     if (tmpDmg.val > 0) dmg = tmpDmg;
+    if (eneStat.statToxic) {
+        // どく状態の敵には最低でも+1のダメージ
+        dmg.val += 1;
+    }
     console.log(">>>>dmg=" + JSON.stringify(dmg));
     return dmg;
 }

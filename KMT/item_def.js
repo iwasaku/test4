@@ -190,7 +190,7 @@ const ITEM_DEF = defineEnum({
         name: 'すごいやくそう',
         value: 2100000000,   // 全回復
     },
-    HERB_03: {
+    HERB_ANTIDOTE: {
         type: ITEM_TYPE.HERB_1,
         exec: ITEM_EXEC.USE,
         id: 3,
