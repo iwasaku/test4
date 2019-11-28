@@ -277,6 +277,15 @@ const ITEM_DEF = defineEnum({
         min: 3,
         max: 3,
     },
+    MAGIC_CURSE: {
+        type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
+        attr: ITEM_ATTR.NEUTRAL,
+        exec: ITEM_EXEC.USE,
+        name: 'のろいの巻物',   // 相手の呪文を無効化
+        success: 100,  //　成功確率（％）
+        min: 0,
+        max: 0,
+    },
     MAGIC_05: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,

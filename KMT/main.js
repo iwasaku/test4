@@ -404,6 +404,8 @@ class CharaStatus {
         this.krt = 16;
         this.sleepStat = 0;
         this.sleepCnt = 0;
+        this.statToxic = false;
+        this.statCurse = false;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -433,6 +435,8 @@ class CharaStatus {
         this.krt = this.eneDef.krtRatio;
         this.sleepStat = 0;
         this.sleepCnt = 0;
+        this.statToxic = false;
+        this.statCurse = false;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
@@ -755,7 +759,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα8 ver.",
+                    text: "NMLS ONE HUNDRED\nα9 ver.",
                     align: "center",
                 },
                 {
@@ -1322,6 +1326,7 @@ function GameIntro() {
             myStatus.setTmpAtkScf(1);
             myStatus.setTmpAgi(0);
             myStatus.setTmpAgiScf(1);
+            myStatus.statCurse = false;
             battleCtrl.textBuff = [];
             messageWindowLabel.text = "";
 
@@ -1815,7 +1820,7 @@ function GameBattleStart() {
                             tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
                             if (
                                 (myStatus.statToxic !== true) &&
-                                (Math.floor(Math.random() * 100) <= eneStatus.eneDef.toxicRatio)
+                                (Math.floor(Math.random() * 100) < eneStatus.eneDef.toxicRatio)
                             ) {
                                 tmpText += makeMessageWindowString("\n");
                                 tmpText += makeMessageWindowString(myStatus.name + "は　どくをうけた！");
@@ -1941,7 +1946,10 @@ function GameBattleStart() {
                                 // 間接攻撃
                                 switch (tmpItem) {
                                     case ITEM_DEF.MAGIC_ATK_SCF:
-                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                        if (
+                                            (myStatus.statCurse === true) ||
+                                            (Math.floor(Math.random() * 100) > tmpItem.success)
+                                        ) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
                                             let oldTempAtkScf = myStatus.getTmpAtkScf();
@@ -1954,7 +1962,10 @@ function GameBattleStart() {
                                         }
                                         break;
                                     case ITEM_DEF.MAGIC_AGI_SCF:
-                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                        if (
+                                            (myStatus.statCurse === true) ||
+                                            (Math.floor(Math.random() * 100) > tmpItem.success)
+                                        ) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
                                             let oldTempAgiScf = myStatus.getTmpAgiScf();
@@ -1967,7 +1978,10 @@ function GameBattleStart() {
                                         }
                                         break;
                                     case ITEM_DEF.MAGIC_SLEEP:
-                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                        if (
+                                            (myStatus.statCurse === true) ||
+                                            (Math.floor(Math.random() * 100) > tmpItem.success)
+                                        ) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else {
                                             eneStatus.sleepStat = 1;
@@ -1983,7 +1997,10 @@ function GameBattleStart() {
                                 // 直接攻撃
                                 let tmpSuccessRatio = tmpItem.success + ((myStatus.getLv() - 9) * 1.875);// 最初に魔法を使うのがLv9
                                 if (tmpSuccessRatio > 100) tmpSuccessRatio = 100;
-                                if (Math.floor(Math.random() * 100) > tmpSuccessRatio) {
+                                if (
+                                    (myStatus.statCurse === true) ||
+                                    (Math.floor(Math.random() * 100) > tmpSuccessRatio)
+                                ) {
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 } else {
                                     let dmgVal = Math.round(getNormalDistribution(tmpItem.min, tmpItem.max) * calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr) * getNormalDistribution(1.0, 2.5));
@@ -2003,9 +2020,24 @@ function GameBattleStart() {
                         myStatus.delItemList(battleCtrl.useItemIdx);
                     } else {
                         let tmpItem = decideMagic(eneStatus.eneDef);
-                        if (tmpItem == ITEM_DEF.MAGIC_SLEEP) {
+                        if (tmpItem === ITEM_DEF.MAGIC_SLEEP) {
                             if (myStatus.sleepStat === 1) {
-                                tmpItem = decideAltMagic();
+                                for (; ;) {
+                                    let altMgc = decideMagic(eneStatus.eneDef);
+                                    if (altMgc === ITEM_DEF.MAGIC_SLEEP) continue;
+                                    tmpItem = altMgc;
+                                    break;
+                                }
+                            }
+                        }
+                        if (tmpItem === ITEM_DEF.MAGIC_CURSE) {
+                            if (myStatus.statCurse === true) {
+                                for (; ;) {
+                                    let altMgc = decideMagic(eneStatus.eneDef);
+                                    if (altMgc === ITEM_DEF.MAGIC_CURSE) continue;
+                                    tmpItem = altMgc;
+                                    break;
+                                }
                             }
                         }
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　" + tmpItem.name + "を　つかった！" };
@@ -2080,6 +2112,10 @@ function GameBattleStart() {
                                             myStatus.sleepCnt = 0;
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ネムってしまった！" };
                                         }
+                                        break;
+                                    case ITEM_DEF.MAGIC_CURSE:
+                                        myStatus.statCurse = true;
+                                        battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "のろいを　かけた！\n" + myStatus.name + "の　巻物は　ふうじられた！" };
                                         break;
                                     default:
                                         battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
@@ -2748,24 +2784,6 @@ function decideMagic(enemyDef) {
         }
         magic = enemyDef.magicList[ii].magic;
         break;
-    }
-    return magic;
-}
-
-/**
- * 代替魔法選択
- */
-function decideAltMagic() {
-    let target = Math.floor(Math.random() * 100);
-    let magic = null;
-    if (target < 25) {
-        magic = ITEM_DEF.MAGIC_FIRE_LV2;
-    } else if (target < 50) {
-        magic = ITEM_DEF.MAGIC_FIRE_LV3;
-    } else if (target < 70) {
-        magic = ITEM_DEF.MAGIC_WATER_LV2;
-    } else {
-        magic = ITEM_DEF.MAGIC_WATER_LV3;
     }
     return magic;
 }
