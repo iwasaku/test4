@@ -2343,8 +2343,8 @@ function GameWin() {
             gameSubMode = GAME_SUB_MODE.MAIN;
 
             let tmpStr = "";
-            tmpStr += makeMessageWindowString("わたしを　たおすとは・・・みごとだ") + "\n";
-            tmpStr += makeMessageWindowString("だが、おまえのたたかいは　ほんとうにこれでおわりかな？") + "\n";
+            tmpStr += makeMessageWindowString("わたしを　たおすとは．．．みごとだ") + "\n";
+            tmpStr += makeMessageWindowString("しかし　いずれ　だい２だい３の　ＮＭＬＳ　があらわれるだろう．．．") + "\n";
 
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
             battleCtrl.textBuff[1] = { frm: 300, cmd: TEXT_BUFFER_CMD.FINISH };

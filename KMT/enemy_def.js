@@ -10,6 +10,11 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 16,       // クリティカル確率（1000分率）。16なら約1.6%=約1/64の確率で、31なら約3.1%=約1/32の確率で『会心の一撃』が発生
         toxicRatio: 0,       // どく発生確率（％）
         isEscape: true,     // 『にげる』か？true:にげる false:にげない
+        useHealingHerbCount: 1,    // やくそう使用可能回数
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_00, ratio: 30 },
+            { item: ITEM_DEF.HERB_01, ratio: 70 },
+        ],
         attr: ITEM_ATTR.NEUTRAL,    // 魔法に対する属性
         magicList: [        // 使用魔法リスト。ratioは合計で100になるようにする
             { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 40 },
@@ -32,6 +37,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: false,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -50,6 +58,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -71,6 +82,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -92,6 +106,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 1,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -113,6 +130,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -134,6 +154,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 1,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -155,6 +178,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 1,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -175,6 +201,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 30,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -197,6 +226,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -221,6 +253,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -243,6 +278,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -267,6 +305,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -289,6 +330,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -311,6 +355,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -334,6 +381,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 30,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -361,6 +411,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -388,6 +441,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 99 },
@@ -415,6 +471,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 30,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 50 },
@@ -443,6 +502,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 50 },
@@ -470,6 +532,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 99 },
@@ -497,6 +562,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -522,6 +590,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 30,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 50 },
@@ -550,6 +621,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
@@ -581,6 +655,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 15,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 90 },
@@ -611,6 +688,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 30,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -639,6 +719,10 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 100,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 1,
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_00, ratio: 100 },
+        ],
         attr: ITEM_ATTR.ALL_M,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 30 },
@@ -665,6 +749,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 50,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.ALL_M,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -696,6 +783,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 50,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 97 },
@@ -726,6 +816,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 50,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -749,6 +842,11 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 100,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 1,
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_00, ratio: 50 },
+            { item: ITEM_DEF.HERB_01, ratio: 50 },
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -774,6 +872,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 55,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -805,6 +906,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 55,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -828,6 +932,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 65,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 97 },
@@ -859,6 +966,12 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 100,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 1,
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_00, ratio: 33 },
+            { item: ITEM_DEF.HERB_01, ratio: 33 },
+            { item: ITEM_DEF.HERB_02, ratio: 34 },
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -886,6 +999,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 65,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -917,6 +1033,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 65,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 90 },
@@ -946,6 +1065,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 72,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -968,6 +1090,11 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 100,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 1,
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_01, ratio: 50 },
+            { item: ITEM_DEF.HERB_02, ratio: 50 },
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -993,6 +1120,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 72,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -1023,6 +1153,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 80,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -1047,6 +1180,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 80,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 93 },
@@ -1078,6 +1214,12 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 100,
         toxicRatio: 10,
         isEscape: false,
+        useHealingHerbCount: 2,
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_00, ratio: 33 },
+            { item: ITEM_DEF.HERB_01, ratio: 33 },
+            { item: ITEM_DEF.HERB_02, ratio: 34 },
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -1103,6 +1245,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 92,
         toxicRatio: 5,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -1133,6 +1278,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 96,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
         itemList: [
@@ -1155,6 +1303,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 96,
         toxicRatio: 10,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 93 },
@@ -1184,6 +1335,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 96,
         toxicRatio: 0,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -1214,6 +1368,9 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 96,
         toxicRatio: 10,
         isEscape: true,
+        useHealingHerbCount: 0,
+        healingHerbList: [
+        ],
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -1244,6 +1401,11 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 200,
         toxicRatio: 25,
         isEscape: false,
+        useHealingHerbCount: 3,
+        healingHerbList: [
+            { item: ITEM_DEF.HERB_01, ratio: 50 },
+            { item: ITEM_DEF.HERB_02, ratio: 50 },
+        ],
         attr: ITEM_ATTR.ALL_P,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 10 },

@@ -846,14 +846,26 @@ tm.define("LogoScene", {
             ENEMY_DEF.ENEMY_25,
             ENEMY_DEF.ENEMY_26
         ];
+        let testHerb = true;
         let testMagic = true;
         let testItem = true;
         let testAppear = true;
         testEnemyDefTbl.forEach((testEnemyDef) => {
+            if (testEnemyDef.healingHerbList.length !== 0) {
+                let testRatio = 0;
+                testEnemyDef.healingHerbList.forEach((testElm) => {
+                    testRatio += testElm.ratio;
+                });
+                if (testRatio !== 100) {
+                    testHerb = false;
+                    console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testRatio);
+                }
+            }
+
             if (testEnemyDef.magicList.length !== 0) {
                 let testRatio = 0;
-                testEnemyDef.magicList.forEach((testMagic) => {
-                    testRatio += testMagic.ratio;
+                testEnemyDef.magicList.forEach((testElm) => {
+                    testRatio += testElm.ratio;
                 });
                 if (testRatio !== 100) {
                     testMagic = false;
@@ -863,8 +875,8 @@ tm.define("LogoScene", {
 
             if (testEnemyDef.itemList.length !== 0) {
                 let testRatio = 0;
-                testEnemyDef.itemList.forEach((testItem) => {
-                    testRatio += testItem.ratio;
+                testEnemyDef.itemList.forEach((testElm) => {
+                    testRatio += testElm.ratio;
                 });
                 if (testRatio !== 100) {
                     testItem = false;
@@ -887,6 +899,7 @@ tm.define("LogoScene", {
                 ii++;
             });
         }
+        console.log("Herb " + testHerb);
         console.log("Magic " + testMagic);
         console.log("Item " + testItem);
         console.log("Appear " + testAppear);
@@ -2495,8 +2508,8 @@ function GameWin() {
             gameSubMode = GAME_SUB_MODE.MAIN;
 
             let tmpStr = "";
-            tmpStr += makeMessageWindowString("わたしを　たおすとは・・・みごとだ") + "\n";
-            tmpStr += makeMessageWindowString("だが、おまえのたたかいは　ほんとうにこれでおわりかな？") + "\n";
+            tmpStr += makeMessageWindowString("わたしを　たおすとは．．．みごとだ") + "\n";
+            tmpStr += makeMessageWindowString("しかし　いずれ　だい２だい３の　ＮＭＬＳ　があらわれるだろう．．．") + "\n";
 
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
             battleCtrl.textBuff[1] = { frm: 300, cmd: TEXT_BUFFER_CMD.FINISH };
