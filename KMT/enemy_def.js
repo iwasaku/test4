@@ -490,7 +490,7 @@ const ENEMY_DEF = defineEnum({
         toxicRatio: 10,
         isEscape: false,
         useHealingHerbCountMax: 1,
-        useHealingHerbRatio: 10,
+        useHealingHerbRatio: 20,
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
@@ -523,7 +523,7 @@ const ENEMY_DEF = defineEnum({
         toxicRatio: 5,
         isEscape: true,
         useHealingHerbCountMax: 1,
-        useHealingHerbRatio: 2,
+        useHealingHerbRatio: 10,
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
@@ -648,7 +648,7 @@ const ENEMY_DEF = defineEnum({
         toxicRatio: 5,
         isEscape: true,
         useHealingHerbCountMax: 1,
-        useHealingHerbRatio: 5,
+        useHealingHerbRatio: 10,
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
