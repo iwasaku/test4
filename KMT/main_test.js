@@ -427,6 +427,7 @@ class CharaStatus {
         this.sleepCnt = 0;     // ねむり状態の経過ターン数
         this.statToxic = false;     // どく状態（false:通常 true:どく）
         this.statCurse = false;     // のろい状態（false:通常 true:のろい）
+        this.useHealingHerbCount = 0;   // やくそう使用回数 my:未使用
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -453,12 +454,16 @@ class CharaStatus {
         this.sleepCnt = 0;
         this.statToxic = false;
         this.statCurse = false;
+        this.useHealingHerbCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
         this.itemList = [
             { eqp: false, def: ITEM_DEF.HERB_00 },
             { eqp: false, def: ITEM_DEF.HERB_00 },
+            { eqp: false, def: ITEM_DEF.HERB_02 },
+            { eqp: false, def: ITEM_DEF.HERB_02 },
+            { eqp: false, def: ITEM_DEF.HERB_02 },
 
             { eqp: false, def: ITEM_DEF.MAGIC_ATK_SCF },    //TEST
             { eqp: false, def: ITEM_DEF.MAGIC_AGI_SCF },    //TEST
@@ -492,6 +497,7 @@ class CharaStatus {
         this.sleepCnt = 0;
         this.statToxic = false;
         this.statCurse = false;
+        this.useHealingHerbCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
@@ -859,6 +865,15 @@ tm.define("LogoScene", {
                 if (testRatio !== 100) {
                     testHerb = false;
                     console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testRatio);
+                }
+                if (testEnemyDef.useHealingHerbRatio === 0) {
+                    testHerb = false;
+                    console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testEnemyDef.healingHerbList.length + "&useRatio=" + testEnemyDef.useHealingHerbRatio);
+                }
+            } else {
+                if (testEnemyDef.useHealingHerbCountMax !== 0) {
+                    testHerb = false;
+                    console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testEnemyDef.healingHerbList.length + "&countMax=" + testEnemyDef.useHealingHerbCountMax);
                 }
             }
 
@@ -1895,6 +1910,7 @@ function GameBattleStart() {
             let tmpAtkStatus = null;
             let tmpDefStatus = null;
             let tmpGameModeOld = null;
+            let useHealingHerb = null;
             // 装備設定
             myStatus.weapon = ITEM_DEF.EMPTY;
             myStatus.shield = ITEM_DEF.EMPTY;
@@ -1927,7 +1943,7 @@ function GameBattleStart() {
                 tmpAtkStatus = eneStatus;
                 tmpDefStatus = myStatus;
                 battleCtrl.turnOwner = 0;
-
+                console.log("eneStatus=" + eneStatus.useHealingHerbCount + "," + eneStatus.eneDef.useHealingHerbCountMax + "," + eneStatus.getNowHp() + "," + eneStatus.getMaxHp());
                 if (eneStatus.sleepStat === 1) {
                     tmpGameModeOld = GAME_MODE.CMD_SLEEP;
                 } else if (
@@ -1938,6 +1954,14 @@ function GameBattleStart() {
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_ESCAPE;
                 } else if (
+                    (eneStatus.useHealingHerbCount < eneStatus.eneDef.useHealingHerbCountMax) &&
+                    ((eneStatus.getNowHp() / eneStatus.getMaxHp()) <= 0.25) &&
+                    ((Math.random() * 100) <= eneStatus.eneDef.useHealingHerbRatio)
+                ) {
+                    tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
+                    useHealingHerb = true;
+                    eneStatus.useHealingHerbCount++;
+                } else if (
                     (myStatus.statToxic !== true) &&
                     (Math.random() <= 0.031)
                 ) {
@@ -1946,6 +1970,7 @@ function GameBattleStart() {
                     tmpGameModeOld = GAME_MODE.CMD_ATTACK;
                 } else {
                     tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
+                    useHealingHerb = false;
                 }
             }
 
@@ -2184,27 +2209,39 @@ function GameBattleStart() {
                         battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                         myStatus.delItemList(battleCtrl.useItemIdx);
                     } else {
-                        let tmpItem = decideMagic(eneStatus.eneDef);
-                        if (tmpItem === ITEM_DEF.MAGIC_SLEEP) {
-                            if (myStatus.sleepStat === 1) {
-                                for (; ;) {
-                                    let altMgc = decideMagic(eneStatus.eneDef);
-                                    if (altMgc === ITEM_DEF.MAGIC_SLEEP) continue;
-                                    tmpItem = altMgc;
-                                    break;
+                        let tmpItem;
+                        if (useHealingHerb) {
+                            // 回復使用の場合
+                            tmpItem = decideHealingHerb(eneStatus.eneDef);
+                        } else {
+                            // 通常の場合
+                            tmpItem = decideMagic(eneStatus.eneDef);
+
+                            // ネムり中にはSLEEPは使わない
+                            if (tmpItem === ITEM_DEF.MAGIC_SLEEP) {
+                                if (myStatus.sleepStat === 1) {
+                                    for (; ;) {
+                                        let altMgc = decideMagic(eneStatus.eneDef);
+                                        if (altMgc === ITEM_DEF.MAGIC_SLEEP) continue;
+                                        tmpItem = altMgc;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // のろい中はCURSEを使わない
+                            if (tmpItem === ITEM_DEF.MAGIC_CURSE) {
+                                if (myStatus.statCurse === true) {
+                                    for (; ;) {
+                                        let altMgc = decideMagic(eneStatus.eneDef);
+                                        if (altMgc === ITEM_DEF.MAGIC_CURSE) continue;
+                                        tmpItem = altMgc;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                        if (tmpItem === ITEM_DEF.MAGIC_CURSE) {
-                            if (myStatus.statCurse === true) {
-                                for (; ;) {
-                                    let altMgc = decideMagic(eneStatus.eneDef);
-                                    if (altMgc === ITEM_DEF.MAGIC_CURSE) continue;
-                                    tmpItem = altMgc;
-                                    break;
-                                }
-                            }
-                        }
+
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　" + tmpItem.name + "を　つかった！" };
 
                         switch (tmpItem.type) {
@@ -2969,6 +3006,27 @@ function decideItem(enemyDef) {
             continue;
         }
         item = enemyDef.itemList[ii].item;
+        break;
+    }
+    return item;
+}
+
+/**
+ * 使用するやくそうの決定
+ * @param {*} enemyDef 
+ */
+function decideHealingHerb(enemyDef) {
+    let tmpRatio = 0;
+    let item = null;
+    let target = Math.floor(Math.random() * 100) + 1;   // 1~100
+    console.log("target=" + target);
+    for (let ii = 0; ii < enemyDef.healingHerbList.length; ii++) {
+        tmpRatio += enemyDef.healingHerbList[ii].ratio;
+        console.log("tmpRatio=" + tmpRatio);
+        if (tmpRatio < target) {
+            continue;
+        }
+        item = enemyDef.healingHerbList[ii].item;
         break;
     }
     return item;
