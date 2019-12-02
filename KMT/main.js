@@ -762,7 +762,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα10 ver.",
+                    text: "NMLS ONE HUNDRED\nα10.1 ver.",
                     align: "center",
                 },
                 {
@@ -1778,7 +1778,7 @@ function GameBattleStart() {
                     tmpGameModeOld = GAME_MODE.CMD_ESCAPE;
                 } else if (
                     (eneStatus.useHealingHerbCount < eneStatus.eneDef.useHealingHerbCountMax) &&
-                    ((eneStatus.getNowHp() / eneStatus.getMaxHp()) <= 0.25) &&
+                    (((eneStatus.getNowHp() / eneStatus.getMaxHp()) * 100) <= eneStatus.eneDef.useHealingHerbThreshold) &&
                     ((Math.random() * 100) <= eneStatus.eneDef.useHealingHerbRatio)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
@@ -2071,9 +2071,9 @@ function GameBattleStart() {
                             case ITEM_TYPE.HERB_0:
                                 let tmpStr = "";
                                 if (tmpItem.value < 9999) {
-                                    tmpStr = myStatus.name + "は　" + toZenkaku(tmpItem.value, 1) + "ポイントかいふく！"
+                                    tmpStr = eneStatus.name + "は　" + toZenkaku(tmpItem.value, 1) + "ポイントかいふく！"
                                 } else {
-                                    tmpStr = myStatus.name + "は　ぜんかいした！"
+                                    tmpStr = eneStatus.name + "は　ぜんかいした！"
                                 }
                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpStr };
                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: tmpItem.value };

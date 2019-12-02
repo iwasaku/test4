@@ -248,11 +248,10 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_1, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
@@ -428,6 +427,7 @@ class CharaStatus {
         this.statToxic = false;     // どく状態（false:通常 true:どく）
         this.statCurse = false;     // のろい状態（false:通常 true:のろい）
         this.useHealingHerbCount = 0;   // やくそう使用回数 my:未使用
+        this.useMagicCount = 0;          // 巻物使用回数 my:未使用
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -440,7 +440,7 @@ class CharaStatus {
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
         //        this.lv = 1;
-        this.lv = 1;    // TEST
+        this.lv = 8;    // TEST
         let li = getLevelInfo(this.lv);
         this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
         this.maxHpOfs = 0;
@@ -455,12 +455,14 @@ class CharaStatus {
         this.statToxic = false;
         this.statCurse = false;
         this.useHealingHerbCount = 0;
+        this.useMagicCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
         this.itemList = [
             { eqp: false, def: ITEM_DEF.HERB_00 },
             { eqp: false, def: ITEM_DEF.HERB_00 },
+            { eqp: false, def: ITEM_DEF.HERB_02 },
             { eqp: false, def: ITEM_DEF.HERB_02 },
             { eqp: false, def: ITEM_DEF.HERB_02 },
             { eqp: false, def: ITEM_DEF.HERB_02 },
@@ -498,6 +500,7 @@ class CharaStatus {
         this.statToxic = false;
         this.statCurse = false;
         this.useHealingHerbCount = 0;
+        this.useMagicCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
@@ -869,6 +872,10 @@ tm.define("LogoScene", {
                 if (testEnemyDef.useHealingHerbRatio === 0) {
                     testHerb = false;
                     console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testEnemyDef.healingHerbList.length + "&useRatio=" + testEnemyDef.useHealingHerbRatio);
+                }
+                if (testEnemyDef.useHealingHerbThreshold === 0) {
+                    testHerb = false;
+                    console.log(testEnemyDef.lv + ":" + testEnemyDef.name + "=" + testEnemyDef.healingHerbList.length + "&useThreshold=" + testEnemyDef.useHealingHerbThreshold);
                 }
             } else {
                 if (testEnemyDef.useHealingHerbCountMax !== 0) {
@@ -1955,7 +1962,7 @@ function GameBattleStart() {
                     tmpGameModeOld = GAME_MODE.CMD_ESCAPE;
                 } else if (
                     (eneStatus.useHealingHerbCount < eneStatus.eneDef.useHealingHerbCountMax) &&
-                    ((eneStatus.getNowHp() / eneStatus.getMaxHp()) <= 0.25) &&
+                    (((eneStatus.getNowHp() / eneStatus.getMaxHp()) * 100) <= eneStatus.eneDef.useHealingHerbThreshold) &&
                     ((Math.random() * 100) <= eneStatus.eneDef.useHealingHerbRatio)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
@@ -2248,9 +2255,9 @@ function GameBattleStart() {
                             case ITEM_TYPE.HERB_0:
                                 let tmpStr = "";
                                 if (tmpItem.value < 9999) {
-                                    tmpStr = myStatus.name + "は　" + toZenkaku(tmpItem.value, 1) + "ポイントかいふく！"
+                                    tmpStr = eneStatus.name + "は　" + toZenkaku(tmpItem.value, 1) + "ポイントかいふく！"
                                 } else {
-                                    tmpStr = myStatus.name + "は　ぜんかいした！"
+                                    tmpStr = eneStatus.name + "は　ぜんかいした！"
                                 }
                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpStr };
                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: tmpItem.value };
