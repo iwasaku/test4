@@ -67,7 +67,7 @@ let ASSETS = {
     "ikacos": "./resource/ikacos.png?20190831",
     "sad": "./resource/sad.png?20190831",
 
-    "last": "./resource/last.png?20190831",
+    "last": "./resource/last.png?20191205",
 };
 
 // 定義
@@ -762,7 +762,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα10.1 ver.",
+                    text: "NMLS ONE HUNDRED\nα10.2 ver.",
                     align: "center",
                 },
                 {
@@ -1789,11 +1789,15 @@ function GameBattleStart() {
                     (Math.random() <= 0.031)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
-                } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
-                    tmpGameModeOld = GAME_MODE.CMD_ATTACK;
-                } else {
+                } else if (
+                    (eneStatus.useMagicCount < eneStatus.eneDef.useMagicCountMax) &&
+                    (Math.floor(Math.random() * 100) > eneStatus.eneDef.attackRatio)
+                ) {
                     tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
                     useHealingHerb = false;
+                    eneStatus.useMagicCount++;
+                } else {
+                    tmpGameModeOld = GAME_MODE.CMD_ATTACK;
                 }
             }
 

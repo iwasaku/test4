@@ -431,7 +431,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 4,
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -464,7 +464,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 2,
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -497,7 +497,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 2,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 99 },
@@ -531,7 +531,7 @@ const ENEMY_DEF = defineEnum({
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 4,
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 50 },
@@ -566,7 +566,7 @@ const ENEMY_DEF = defineEnum({
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 2,
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 50 },
@@ -599,7 +599,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 2,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 99 },
@@ -664,7 +664,7 @@ const ENEMY_DEF = defineEnum({
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 6,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 50 },
@@ -699,7 +699,7 @@ const ENEMY_DEF = defineEnum({
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 3,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
@@ -736,7 +736,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 3,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 90 },
@@ -807,12 +807,12 @@ const ENEMY_DEF = defineEnum({
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 6,
         attr: ITEM_ATTR.ALL_M,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 30 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 40 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 30 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 45 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 35 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 1 },
@@ -840,7 +840,7 @@ const ENEMY_DEF = defineEnum({
         healingHerbList: [
             { item: ITEM_DEF.HERB_00, ratio: 100 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 3,
         attr: ITEM_ATTR.ALL_M,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -877,7 +877,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 3,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 97 },
@@ -944,11 +944,11 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_00, ratio: 50 },
             { item: ITEM_DEF.HERB_01, ratio: 50 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 8,
         attr: ITEM_ATTR.WATER,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV1, ratio: 25 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV1, ratio: 20 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 70 },
         ],
         itemList: [
@@ -977,7 +977,7 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_00, ratio: 75 },
             { item: ITEM_DEF.HERB_01, ratio: 25 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 4,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
@@ -1043,7 +1043,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 4,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 97 },
@@ -1083,11 +1083,11 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 33 },
             { item: ITEM_DEF.HERB_02, ratio: 33 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 8,
         attr: ITEM_ATTR.FIRE,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 30 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 15 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 20 },
             { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 60 },
             { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 5 },
         ],
@@ -1119,11 +1119,11 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 32 },
             { item: ITEM_DEF.HERB_02, ratio: 16 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 4,
         attr: ITEM_ATTR.FIRE,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 30 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV1, ratio: 25 },
             { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 60 },
             { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 5 },
         ],
@@ -1156,7 +1156,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 4,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 90 },
@@ -1221,11 +1221,11 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 50 },
             { item: ITEM_DEF.HERB_02, ratio: 50 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 10,
         attr: ITEM_ATTR.WATER,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 35 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 20 },
             { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 60 },
         ],
         itemList: [
@@ -1254,12 +1254,12 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 75 },
             { item: ITEM_DEF.HERB_01, ratio: 25 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 15 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 15 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 70 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 5 },
@@ -1320,7 +1320,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 93 },
@@ -1360,12 +1360,12 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 33 },
             { item: ITEM_DEF.HERB_02, ratio: 34 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 10,
         attr: ITEM_ATTR.FIRE,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 15 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 30 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 60 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 2 },
@@ -1394,12 +1394,12 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 32 },
             { item: ITEM_DEF.HERB_02, ratio: 16 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 5,
         attr: ITEM_ATTR.FIRE,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 15 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 70 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 5 },
@@ -1458,7 +1458,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
             { magic: ITEM_DEF.MAGIC_CURSE, ratio: 93 },
@@ -1493,12 +1493,12 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 5,
         attr: ITEM_ATTR.FIRE,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 15 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 70 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 5 },
@@ -1529,12 +1529,12 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbRatio: 0,
         healingHerbList: [
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 12,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 15 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 30 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 60 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 5 },
@@ -1567,15 +1567,15 @@ const ENEMY_DEF = defineEnum({
             { item: ITEM_DEF.HERB_01, ratio: 50 },
             { item: ITEM_DEF.HERB_02, ratio: 50 },
         ],
-        useMagicCountMax: 0,
+        useMagicCountMax: 12,
         attr: ITEM_ATTR.ALL_P,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 10 },
-            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 35 },
+            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 5 },
             { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 35 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 25 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 5 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 35 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 25 },
         ],
         itemList: [],
         gavasss: { min: 1000, max: 1000, },

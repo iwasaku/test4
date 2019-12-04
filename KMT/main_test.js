@@ -67,7 +67,7 @@ let ASSETS = {
     "ikacos": "./resource/ikacos.png?20190831",
     "sad": "./resource/sad.png?20190831",
 
-    "last": "./resource/last.png?20190831",
+    "last": "./resource/last.png?20191205",
 };
 
 // 定義
@@ -248,10 +248,7 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
-    [{ ene: ENEMY_DEF.ENEMY_9_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_1, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
@@ -440,7 +437,7 @@ class CharaStatus {
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
         //        this.lv = 1;
-        this.lv = 8;    // TEST
+        this.lv = 26;    // TEST
         let li = getLevelInfo(this.lv);
         this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
         this.maxHpOfs = 0;
@@ -1973,11 +1970,15 @@ function GameBattleStart() {
                     (Math.random() <= 0.031)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
-                } else if (Math.floor(Math.random() * 100) <= eneStatus.eneDef.attackRatio) {
-                    tmpGameModeOld = GAME_MODE.CMD_ATTACK;
-                } else {
+                } else if (
+                    (eneStatus.useMagicCount < eneStatus.eneDef.useMagicCountMax) &&
+                    (Math.floor(Math.random() * 100) > eneStatus.eneDef.attackRatio)
+                ) {
                     tmpGameModeOld = GAME_MODE.CMD_ITEM_USE;
                     useHealingHerb = false;
+                    eneStatus.useMagicCount++;
+                } else {
+                    tmpGameModeOld = GAME_MODE.CMD_ATTACK;
                 }
             }
 
