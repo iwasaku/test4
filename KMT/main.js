@@ -768,7 +768,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα11 ver.",
+                    text: "NMLS ONE HUNDRED\nα11.1 ver.",
                     align: "center",
                 },
                 {
@@ -1828,6 +1828,7 @@ function GameBattleStart() {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (
                     (eneStatus.eneDef.isSnatch === true) &&
+                    (myStatus.itemList.length >= 3) &&
                     (Math.random() <= 0.70)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_SNATCH;

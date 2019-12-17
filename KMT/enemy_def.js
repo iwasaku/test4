@@ -680,7 +680,7 @@ const ENEMY_DEF = defineEnum({
         krtRatio: 30,
         toxicRatio: 10,
         isEscape: false,
-        isSnatch: false,
+        isSnatch: true,
         useHealingHerbThreshold: 33,
         useHealingHerbCountMax: 1,
         useHealingHerbRatio: 25,

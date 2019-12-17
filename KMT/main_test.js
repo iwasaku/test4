@@ -2008,6 +2008,7 @@ function GameBattleStart() {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (
                     (eneStatus.eneDef.isSnatch === true) &&
+                    (myStatus.itemList.length >= 3) &&
                     (Math.random() <= 0.70)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_SNATCH;
