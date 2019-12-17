@@ -114,6 +114,9 @@ const GAME_MODE = defineEnum({
     CMD_SLEEP: {
         func: function () { CmdSleep(); },
     },
+    CMD_SNATCH: {
+        func: function () { CmdSnatch(); },
+    },
     BATTLE_FINISH: {
         func: function () { GameBatleFinish(); },
     },
@@ -384,6 +387,7 @@ class CharaStatus {
         this.statToxic = false;     // どく状態（false:通常 true:どく）
         this.statCurse = false;     // のろい状態（false:通常 true:のろい）
         this.useHealingHerbCount = 0;   // やくそう使用回数 my:未使用
+        this.useMagicCount = 0;          // 巻物使用回数 my:未使用
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -408,6 +412,7 @@ class CharaStatus {
         this.statToxic = false;
         this.statCurse = false;
         this.useHealingHerbCount = 0;
+        this.useMagicCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = 0;
@@ -440,6 +445,7 @@ class CharaStatus {
         this.statToxic = false;
         this.statCurse = false;
         this.useHealingHerbCount = 0;
+        this.useMagicCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
         this.shield = ITEM_DEF.EMPTY;
         this.gavasss = this.eneDef.gavasss.base + Math.floor(Math.random() * this.eneDef.gavasss.ofs);
@@ -762,7 +768,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα10.2 ver.",
+                    text: "NMLS ONE HUNDRED\nα11 ver.",
                     align: "center",
                 },
                 {
@@ -1622,6 +1628,37 @@ function CmdSleep() {
 }
 
 /*
+『かばんにてをつっこむ』コマンド
+※プレイヤーは選択できない
+*/
+function CmdSnatch() {
+    switch (gameSubMode) {
+        case GAME_SUB_MODE.INIT:
+            // 表示内容設定
+            messageWindowLabel.text = "";
+
+            // 表示コントロール
+            setColor(true);
+            statusWindowCtrl(true);
+            cmdWindowCtrl(false);
+            messageWindowCtrl(true);
+            enemyWindowCtrl(false);
+            enemyGraphicCtrl(true);
+            itemWindowCtrl(false, false);
+
+            gameSubMode = GAME_SUB_MODE.MAIN;
+        // fall through
+        case GAME_SUB_MODE.MAIN:
+            initBattleCtrl();
+        // fall through
+        case GAME_SUB_MODE.FINISH:
+            gameMode = GAME_MODE.BATTLE_START;
+            gameSubMode = GAME_SUB_MODE.INIT;
+            break;
+    }
+}
+
+/*
 『どうぐ』コマンド
 */
 function CmdItem() {
@@ -1790,6 +1827,11 @@ function GameBattleStart() {
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (
+                    (eneStatus.eneDef.isSnatch === true) &&
+                    (Math.random() <= 0.70)
+                ) {
+                    tmpGameModeOld = GAME_MODE.CMD_SNATCH;
+                } else if (
                     (eneStatus.useMagicCount < eneStatus.eneDef.useMagicCountMax) &&
                     (Math.floor(Math.random() * 100) > eneStatus.eneDef.attackRatio)
                 ) {
@@ -1913,6 +1955,36 @@ function GameBattleStart() {
                         }
                         battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                     }
+                    break;
+                case GAME_MODE.CMD_SNATCH:
+                    if (isPlayer) {
+                        // プレイヤーは来ないはず
+                    } else {
+                        battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　かばんにてをつっこんだ！" };
+                        let tmpItemNum = myStatus.itemList.length;
+                        for (let ii = 0; ii < myStatus.itemList.length; ii++) {
+                            if (myStatus.itemList[ii].eqp) {
+                                tmpItemNum--;
+                            }
+                        }
+
+                        if ((tmpItemNum == 0) || (Math.random() <= 0.25)) {
+                            // 持ち物０もしくは25%の確率で失敗
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもとられなかった！" };
+                        } else {
+                            let tmpItemName;
+                            for (; ;) {
+                                let tmpIdx = Math.floor(Math.random() * tmpItemNum);
+                                if (!myStatus.itemList[tmpIdx].eqp) {
+                                    tmpItemName = myStatus.getItemList()[tmpIdx].def.name;
+                                    myStatus.delItemList(tmpIdx);
+                                    break;
+                                }
+                            }
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpItemName + "を　ぬすまれた！！" };
+                        }
+                    }
+                    battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                     break;
                 case GAME_MODE.CMD_ITEM_USE:
                     console.log("ITEM_USE");

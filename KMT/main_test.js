@@ -114,6 +114,9 @@ const GAME_MODE = defineEnum({
     CMD_SLEEP: {
         func: function () { CmdSleep(); },
     },
+    CMD_SNATCH: {
+        func: function () { CmdSnatch(); },
+    },
     BATTLE_FINISH: {
         func: function () { GameBatleFinish(); },
     },
@@ -248,7 +251,15 @@ const expTable = [
 // 敵出現テーブル
 // ratioは足して100になるようにする
 const enemyAppearTable = [
-    [{ ene: ENEMY_DEF.ENEMY_26, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
+    [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_0_BS, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_1, ratio: 100 },],  // TEST
     [{ ene: ENEMY_DEF.ENEMY_2, ratio: 100 },],  // TEST
@@ -436,8 +447,7 @@ class CharaStatus {
         //        this.name = "うてな★";
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
-        //        this.lv = 1;
-        this.lv = 26;    // TEST
+        this.lv = 1;
         let li = getLevelInfo(this.lv);
         this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
         this.maxHpOfs = 0;
@@ -458,19 +468,14 @@ class CharaStatus {
         this.gavasss = 0;
         this.itemList = [
             { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_00 },
-            { eqp: false, def: ITEM_DEF.HERB_02 },
-            { eqp: false, def: ITEM_DEF.HERB_02 },
-            { eqp: false, def: ITEM_DEF.HERB_02 },
+            { eqp: false, def: ITEM_DEF.HERB_01 },
             { eqp: false, def: ITEM_DEF.HERB_02 },
 
             { eqp: false, def: ITEM_DEF.MAGIC_ATK_SCF },    //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_AGI_SCF },    //TEST
             { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV1 }, //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_WATER_LV1 },    //TEST
-            { eqp: false, def: ITEM_DEF.MAGIC_SLEEP },    //TEST
-            //{ eqp: false, def: ITEM_DEF.WEAPON_00 },    //TEST
-            //{ eqp: false, def: ITEM_DEF.SHIELD_00 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_00 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_01 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_00 },    //TEST
         ];
     }
     initEnemy(enemyDef) {
@@ -1803,6 +1808,37 @@ function CmdSleep() {
 }
 
 /*
+『かばんにてをつっこむ』コマンド
+※プレイヤーは選択できない
+*/
+function CmdSnatch() {
+    switch (gameSubMode) {
+        case GAME_SUB_MODE.INIT:
+            // 表示内容設定
+            messageWindowLabel.text = "";
+
+            // 表示コントロール
+            setColor(true);
+            statusWindowCtrl(true);
+            cmdWindowCtrl(false);
+            messageWindowCtrl(true);
+            enemyWindowCtrl(false);
+            enemyGraphicCtrl(true);
+            itemWindowCtrl(false, false);
+
+            gameSubMode = GAME_SUB_MODE.MAIN;
+        // fall through
+        case GAME_SUB_MODE.MAIN:
+            initBattleCtrl();
+        // fall through
+        case GAME_SUB_MODE.FINISH:
+            gameMode = GAME_MODE.BATTLE_START;
+            gameSubMode = GAME_SUB_MODE.INIT;
+            break;
+    }
+}
+
+/*
 『どうぐ』コマンド
 */
 function CmdItem() {
@@ -1971,6 +2007,11 @@ function GameBattleStart() {
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (
+                    (eneStatus.eneDef.isSnatch === true) &&
+                    (Math.random() <= 0.70)
+                ) {
+                    tmpGameModeOld = GAME_MODE.CMD_SNATCH;
+                } else if (
                     (eneStatus.useMagicCount < eneStatus.eneDef.useMagicCountMax) &&
                     (Math.floor(Math.random() * 100) > eneStatus.eneDef.attackRatio)
                 ) {
@@ -2094,6 +2135,36 @@ function GameBattleStart() {
                         }
                         battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
                     }
+                    break;
+                case GAME_MODE.CMD_SNATCH:
+                    if (isPlayer) {
+                        // プレイヤーは来ないはず
+                    } else {
+                        battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　かばんにてをつっこんだ！" };
+                        let tmpItemNum = myStatus.itemList.length;
+                        for (let ii = 0; ii < myStatus.itemList.length; ii++) {
+                            if (myStatus.itemList[ii].eqp) {
+                                tmpItemNum--;
+                            }
+                        }
+
+                        if ((tmpItemNum == 0) || (Math.random() <= 0.25)) {
+                            // 持ち物０もしくは25%の確率で失敗
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもとられなかった！" };
+                        } else {
+                            let tmpItemName;
+                            for (; ;) {
+                                let tmpIdx = Math.floor(Math.random() * tmpItemNum);
+                                if (!myStatus.itemList[tmpIdx].eqp) {
+                                    tmpItemName = myStatus.getItemList()[tmpIdx].def.name;
+                                    myStatus.delItemList(tmpIdx);
+                                    break;
+                                }
+                            }
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpItemName + "を　ぬすまれた！！" };
+                        }
+                    }
+                    battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                     break;
                 case GAME_MODE.CMD_ITEM_USE:
                     console.log("ITEM_USE");
