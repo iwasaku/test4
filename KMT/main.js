@@ -768,7 +768,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα11.1 ver.",
+                    text: "NMLS ONE HUNDRED\nα11.2 ver.",
                     align: "center",
                 },
                 {
@@ -1828,7 +1828,7 @@ function GameBattleStart() {
                     tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
                 } else if (
                     (eneStatus.eneDef.isSnatch === true) &&
-                    (myStatus.itemList.length >= 3) &&
+                    (myStatus.itemList.length >= 1) &&
                     (Math.random() <= 0.70)
                 ) {
                     tmpGameModeOld = GAME_MODE.CMD_SNATCH;
@@ -1962,27 +1962,44 @@ function GameBattleStart() {
                         // プレイヤーは来ないはず
                     } else {
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　かばんにてをつっこんだ！" };
-                        let tmpItemNum = myStatus.itemList.length;
+                        let tmpMyItemNum = myStatus.itemList.length;
                         for (let ii = 0; ii < myStatus.itemList.length; ii++) {
                             if (myStatus.itemList[ii].eqp) {
-                                tmpItemNum--;
+                                tmpMyItemNum--;
                             }
                         }
 
-                        if ((tmpItemNum == 0) || (Math.random() <= 0.25)) {
+                        if (false) {
                             // 持ち物０もしくは25%の確率で失敗
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもとられなかった！" };
                         } else {
-                            let tmpItemName;
-                            for (; ;) {
-                                let tmpIdx = Math.floor(Math.random() * tmpItemNum);
-                                if (!myStatus.itemList[tmpIdx].eqp) {
-                                    tmpItemName = myStatus.getItemList()[tmpIdx].def.name;
-                                    myStatus.delItemList(tmpIdx);
-                                    break;
+                            let tmpSnatchItemName;
+                            let tmpSnatchItemIdx;
+                            let tmpSnatchSuccess = false;
+                            for (let ii = 0; ii < 10000; ii++) {
+                                tmpSnatchItemIdx = Math.floor(Math.random() * tmpMyItemNum);
+                                if (myStatus.itemList[tmpSnatchItemIdx].eqp) continue; // 装備中のアイテムはぬすめない
+                                tmpSnatchSuccess = true;
+                                break;
+                            }
+                            if (tmpSnatchSuccess) {
+                                if (battleCtrl.turnCnt === 0) { // 敵が先行
+                                    if (battleCtrl.gameModeOld === GAME_MODE.CMD_ITEM_USE) {    // プレイヤーがアイテムを使おうとしている
+                                        if (tmpSnatchItemIdx === battleCtrl.useItemIdx) {   // プレイヤーが使おうとしているアイテムは盗めない
+                                            tmpSnatchSuccess = false;
+                                        } else if (tmpSnatchItemIdx < battleCtrl.useItemIdx) { // プレイヤーが使おうとしているアイテムより前のアイテム
+                                            battleCtrl.useItemIdx--;    // 使うアイテムを1つ前にずらす
+                                        }
+                                    }
                                 }
                             }
-                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpItemName + "を　ぬすまれた！！" };
+                            if (tmpSnatchSuccess) {
+                                tmpSnatchItemName = myStatus.getItemList()[tmpSnatchItemIdx].def.name;
+                                myStatus.delItemList(tmpSnatchItemIdx);
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpSnatchItemName + "を　ぬすまれた！！" };
+                            } else {
+                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもとられなかった！" };
+                            }
                         }
                     }
                     battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
