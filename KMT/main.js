@@ -1969,7 +1969,7 @@ function GameBattleStart() {
                             }
                         }
 
-                        if (false) {
+                        if ((tmpMyItemNum == 0) || (Math.random() <= 0.25)) {
                             // 持ち物０もしくは25%の確率で失敗
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもとられなかった！" };
                         } else {
