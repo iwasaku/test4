@@ -450,7 +450,7 @@ class CharaStatus {
         //        this.name = "うてな★";
         this.growthType = decideGrowthType(this.name);
         this.exp = 0;
-        this.lv = 11;
+        this.lv = 1;
         let li = getLevelInfo(this.lv);
         this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
         this.maxHpOfs = 0;
@@ -484,8 +484,8 @@ class CharaStatus {
             { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV1 },    //TEST
             { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV2 },    //TEST
             { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV2 },    //TEST
-            { eqp: false, def: ITEM_DEF.WEAPON_01 },    //TEST
-            { eqp: false, def: ITEM_DEF.SHIELD_00 },    //TEST
+            { eqp: false, def: ITEM_DEF.WEAPON_06 },    //TEST
+            { eqp: false, def: ITEM_DEF.SHIELD_06 },    //TEST
         ];
     }
     initEnemy(enemyDef) {
@@ -599,7 +599,15 @@ class CharaStatus {
     }
 
     calcAttack() {
-        let ret = (this.getAtk() * this.tmpAtkScf) + this.weapon.value;
+        let weaponValue = this.weapon.value;
+        if (this.weapon === ITEM_DEF.WEAPON_06) {
+            if (eneStatus.eneDef != null) {
+                if (eneStatus.eneDef === ENEMY_DEF.ENEMY_26) {
+                    weaponValue = weaponValue * 2;
+                }
+            }
+        }
+        let ret = (this.getAtk() * this.tmpAtkScf) + weaponValue;
         console.log("calcAttack=" + ret);
         return ret;
     }
@@ -659,7 +667,15 @@ class CharaStatus {
     }
 
     calcDefence() {
-        let ret = ((this.getAgi() / 2) * this.tmpAgiScf) + this.shield.value;
+        let shieldValue = this.shield.value;
+        if (this.shield === ITEM_DEF.SHIELD_06) {
+            if (eneStatus.eneDef != null) {
+                if (eneStatus.eneDef === ENEMY_DEF.ENEMY_26) {
+                    shieldValue = shieldValue * 2;
+                }
+            }
+        }
+        let ret = ((this.getAgi() / 2) * this.tmpAgiScf) + shieldValue;
         console.log("calcDefence=" + ret);
         return ret;
     }

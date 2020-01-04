@@ -536,7 +536,15 @@ class CharaStatus {
     }
 
     calcAttack() {
-        let ret = (this.getAtk() * this.tmpAtkScf) + this.weapon.value;
+        let weaponValue = this.weapon.value;
+        if (this.weapon === ITEM_DEF.WEAPON_06) {
+            if (eneStatus.eneDef != null) {
+                if (eneStatus.eneDef === ENEMY_DEF.ENEMY_26) {
+                    weaponValue = weaponValue * 2;
+                }
+            }
+        }
+        let ret = (this.getAtk() * this.tmpAtkScf) + weaponValue;
         console.log("calcAttack=" + ret);
         return ret;
     }
@@ -596,7 +604,15 @@ class CharaStatus {
     }
 
     calcDefence() {
-        let ret = ((this.getAgi() / 2) * this.tmpAgiScf) + this.shield.value;
+        let shieldValue = this.shield.value;
+        if (this.shield === ITEM_DEF.SHIELD_06) {
+            if (eneStatus.eneDef != null) {
+                if (eneStatus.eneDef === ENEMY_DEF.ENEMY_26) {
+                    shieldValue = shieldValue * 2;
+                }
+            }
+        }
+        let ret = ((this.getAgi() / 2) * this.tmpAgiScf) + shieldValue;
         console.log("calcDefence=" + ret);
         return ret;
     }
@@ -774,7 +790,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα12.2 ver.",
+                    text: "NMLS ONE HUNDRED\nα12.3 ver.",
                     align: "center",
                 },
                 {

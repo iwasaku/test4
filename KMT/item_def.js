@@ -124,7 +124,7 @@ const ITEM_DEF = defineEnum({
         type: ITEM_TYPE.WEAPON,
         exec: ITEM_EXEC.EQUIP,
         name: 'ボス専用の棒',
-        value: 11,  // ボスだと20
+        value: 8,  // ボスだと２倍
     },
 
     // 盾
@@ -168,7 +168,7 @@ const ITEM_DEF = defineEnum({
         type: ITEM_TYPE.SHIELD,
         exec: ITEM_EXEC.EQUIP,
         name: 'ボス専用の盾',
-        value: 10,  //ボスだと15
+        value: 8,  //ボスだと2倍
     },
 
     // 薬草
