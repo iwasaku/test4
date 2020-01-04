@@ -286,14 +286,23 @@ const ITEM_DEF = defineEnum({
         min: 0,
         max: 0,
     },
-    MAGIC_05: {
+    MAGIC_DARKNESS_LV1: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'くらやみの巻物',   // 相手の攻撃命中率を半減
-        success: 40,  //　成功確率（％）
-        min: 45,
-        max: 55,
+        name: 'あんこくの巻物',   // 相手の攻撃命中率を半減
+        success: 50,  //　成功確率（％）
+        min: 75,
+        max: 75,
+    },
+    MAGIC_DARKNESS_LV2: {
+        type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
+        attr: ITEM_ATTR.NEUTRAL,
+        exec: ITEM_EXEC.USE,
+        name: 'しっこくの巻物',   // 相手の攻撃命中率を半減
+        success: 25,  //　成功確率（％）
+        min: 25,
+        max: 25,
     },
     MAGIC_ATK_SCF: {
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,

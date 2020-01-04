@@ -434,6 +434,7 @@ class CharaStatus {
         this.sleepCnt = 0;     // ねむり状態の経過ターン数
         this.statToxic = false;     // どく状態（false:通常 true:どく）
         this.statCurse = false;     // のろい状態（false:通常 true:のろい）
+        this.statDarkness = 0;     // くらやみ状態（0:通常 1:くらやみ 2:まっくらやみ）
         this.useHealingHerbCount = 0;   // やくそう使用回数 my:未使用
         this.useMagicCount = 0;          // 巻物使用回数 my:未使用
         this.weapon = ITEM_DEF.EMPTY;
@@ -461,6 +462,7 @@ class CharaStatus {
         this.sleepCnt = 0;
         this.statToxic = false;
         this.statCurse = false;
+        this.statDarkness = 0;
         this.useHealingHerbCount = 0;
         this.useMagicCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
@@ -470,10 +472,15 @@ class CharaStatus {
             { eqp: false, def: ITEM_DEF.HERB_00 },
             { eqp: false, def: ITEM_DEF.HERB_01 },
             { eqp: false, def: ITEM_DEF.HERB_02 },
+            { eqp: false, def: ITEM_DEF.HERB_02 },
+            { eqp: false, def: ITEM_DEF.HERB_02 },
 
             { eqp: false, def: ITEM_DEF.MAGIC_ATK_SCF },    //TEST
             { eqp: false, def: ITEM_DEF.MAGIC_FIRE_LV1 }, //TEST
-            { eqp: false, def: ITEM_DEF.WEAPON_00 },    //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV1 },    //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV1 },    //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV2 },    //TEST
+            { eqp: false, def: ITEM_DEF.MAGIC_DARKNESS_LV2 },    //TEST
             { eqp: false, def: ITEM_DEF.WEAPON_01 },    //TEST
             { eqp: false, def: ITEM_DEF.SHIELD_00 },    //TEST
         ];
@@ -501,6 +508,7 @@ class CharaStatus {
         this.sleepCnt = 0;
         this.statToxic = false;
         this.statCurse = false;
+        this.statDarkness = 0;
         this.useHealingHerbCount = 0;
         this.useMagicCount = 0;
         this.weapon = ITEM_DEF.EMPTY;
@@ -1516,6 +1524,7 @@ function GameIntro() {
             myStatus.setTmpAgi(0);
             myStatus.setTmpAgiScf(1);
             myStatus.statCurse = false;
+            myStatus.statDarkness = 0;
             battleCtrl.textBuff = [];
             messageWindowLabel.text = "";
 
@@ -2165,10 +2174,17 @@ function GameBattleStart() {
                             if (tmpSnatchSuccess) {
                                 if (battleCtrl.turnCnt === 0) { // 敵が先行
                                     if (battleCtrl.gameModeOld === GAME_MODE.CMD_ITEM_USE) {    // プレイヤーがアイテムを使おうとしている
+<<<<<<< Updated upstream
                                         if (tmpSnatchItemIdx === battleCtrl.useItemIdx) {   // プレイヤーが使おうとしているアイテムは盗めない
                                             tmpSnatchSuccess = false;
                                         } else if (tmpSnatchItemIdx < battleCtrl.useItemIdx) { // プレイヤーが使おうとしているアイテムより前のアイテム
                                             battleCtrl.useItemIdx--;    // 使うアイテムを1つ前にずらす
+=======
+                                        if (tmpSnatchItemIdx === battleCtrl.useItemIdx) {   // プレイヤーが使おうとしているアイテム
+                                            tmpSnatchSuccess = false;   // ぬすめない
+                                        } else if (tmpSnatchItemIdx < battleCtrl.useItemIdx) { // プレイヤーが使おうとしているアイテムより前のアイテム
+                                            battleCtrl.useItemIdx--;    // プレイヤーが使うアイテムを1つ前にずらす
+>>>>>>> Stashed changes
                                         }
                                     }
                                 }
@@ -2276,6 +2292,23 @@ function GameBattleStart() {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　ネムった！" };
                                         }
                                         break;
+                                    case ITEM_DEF.MAGIC_DARKNESS_LV1:
+                                    case ITEM_DEF.MAGIC_DARKNESS_LV2:
+                                        if (
+                                            (myStatus.statDarkness !== 0) ||
+                                            (Math.floor(Math.random() * 100) > tmpItem.success)
+                                        ) {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        } else if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV1) {
+                                            eneStatus.statDarkness = 1;
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　暗闇につつまれ このバトルのあいだ　ごうげきが　あたりにくくなった！" };
+                                        } else if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV2) {
+                                            eneStatus.statDarkness = 2;
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　まっ暗闇につつまれ　このバトルのあいだ　ごうげきが　あたりにくくなった！" };
+                                        } else {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        }
+                                        break;
                                     default:
                                         battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                 }
@@ -2332,6 +2365,19 @@ function GameBattleStart() {
                                     for (; ;) {
                                         let altMgc = decideMagic(eneStatus.eneDef);
                                         if (altMgc === ITEM_DEF.MAGIC_CURSE) continue;
+                                        tmpItem = altMgc;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // くらやみ中はDARKNESSを使わない
+                            if ((tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV1) || (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV2)) {
+                                if (myStatus.statDarkness !== 0) {
+                                    for (; ;) {
+                                        let altMgc = decideMagic(eneStatus.eneDef);
+                                        if (altMgc === ITEM_DEF.MAGIC_DARKNESS_LV1) continue;
+                                        if (altMgc === ITEM_DEF.MAGIC_DARKNESS_LV2) continue;
                                         tmpItem = altMgc;
                                         break;
                                     }
@@ -2415,6 +2461,22 @@ function GameBattleStart() {
                                     case ITEM_DEF.MAGIC_CURSE:
                                         myStatus.statCurse = true;
                                         battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "のろいを　かけた！\n" + myStatus.name + "の　巻物は　ふうじられた！" };
+                                        break;
+                                    case ITEM_DEF.MAGIC_DARKNESS_LV1:
+                                    case ITEM_DEF.MAGIC_DARKNESS_LV2:
+                                        if (Math.floor(Math.random() * 100) > tmpItem.success) {
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                        } else {
+                                            if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV1) {
+                                                myStatus.statDarkness = 1;
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　暗闇につつまれた　このバトルのあいだ　ごうげきが　あたりにくくなってしまった！" };
+                                            } else if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV2) {
+                                                myStatus.statDarkness = 2;
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　まっ暗闇につつまれた　このバトルのあいだ　ごうげきが　あたりにくくなってしまった！" };
+                                            } else {
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
+                                            }
+                                        }
                                         break;
                                     default:
                                         battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
@@ -2951,6 +3013,21 @@ function calcAttackDamage(myStat, eneStat, scaleFactor) {
         tmpDmg.krt = false;
     }
     tmpDmg.val = Math.round(tmpDmg.val * scaleFactor);
+
+    // 暗闇中は25%の確率でミス
+    if (myStat.statDarkness === 1) {
+        if (Math.floor(Math.random() * 100) < 25) {
+            tmpDmg.val = 0;
+            tmpDmg.krt = false;
+        }
+    }
+    // まっ暗闇中は50%の確率でミス
+    if (myStat.statDarkness === 2) {
+        if (Math.floor(Math.random() * 100) < 50) {
+            tmpDmg.val = 0;
+            tmpDmg.krt = false;
+        }
+    }
     if (tmpDmg.val > 0) dmg = tmpDmg;
     if (eneStat.statToxic) {
         // どく状態の敵には最低でも+1のダメージ
@@ -3156,7 +3233,7 @@ function makeMessageWindowString(inStr) {
     for (let ii = 0; ii < inStr.length; ii += num) {
         ret += inStr.slice(ii, ii + num) + "\n";
     }
-    return ret.slice(0, -1);    // 最後の改行を削除
+    return ret.replace('\n\n', '\n').slice(0, -1);    // 最後の改行を削除
 }
 
 /**

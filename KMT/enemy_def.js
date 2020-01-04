@@ -45,8 +45,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -70,8 +69,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -98,8 +96,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -126,8 +123,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -154,8 +150,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -182,8 +177,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -210,8 +204,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -237,8 +230,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -266,8 +258,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -297,8 +288,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -326,8 +316,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -357,8 +346,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -386,8 +374,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -415,8 +402,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -445,8 +431,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 4,
         attr: ITEM_ATTR.FIRE,
         magicList: [
@@ -479,8 +464,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 2,
         attr: ITEM_ATTR.FIRE,
         magicList: [
@@ -513,8 +497,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 2,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
@@ -618,8 +601,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 2,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
@@ -652,8 +634,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -759,8 +740,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 3,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
@@ -796,8 +776,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -904,8 +883,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 3,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
@@ -941,8 +919,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -1045,8 +1022,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -1075,8 +1051,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 4,
         attr: ITEM_ATTR.WATER,
         magicList: [
@@ -1191,8 +1166,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 4,
         attr: ITEM_ATTR.WATER,
         magicList: [
@@ -1227,8 +1201,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -1329,8 +1302,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -1360,8 +1332,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
@@ -1473,8 +1444,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 0,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [],
@@ -1502,8 +1472,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
@@ -1538,8 +1507,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 5,
         attr: ITEM_ATTR.FIRE,
         magicList: [
@@ -1575,8 +1543,7 @@ const ENEMY_DEF = defineEnum({
         useHealingHerbThreshold: 0,
         useHealingHerbCountMax: 0,
         useHealingHerbRatio: 0,
-        healingHerbList: [
-        ],
+        healingHerbList: [],
         useMagicCountMax: 12,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
