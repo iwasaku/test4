@@ -771,7 +771,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα12 ver.",
+                    text: "NMLS ONE HUNDRED\nα12.1 ver.",
                     align: "center",
                 },
                 {
@@ -2103,16 +2103,16 @@ function GameBattleStart() {
                                     case ITEM_DEF.MAGIC_DARKNESS_LV1:
                                     case ITEM_DEF.MAGIC_DARKNESS_LV2:
                                         if (
-                                            (myStatus.statDarkness !== 0) ||
+                                            (eneStatus.statDarkness !== 0) ||
                                             (Math.floor(Math.random() * 100) > tmpItem.success)
                                         ) {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         } else if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV1) {
                                             eneStatus.statDarkness = 1;
-                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　暗闇につつまれ このバトルのあいだ　ごうげきが　あたりにくくなった！" };
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "めに　すなが　はいった！\nこのバトルのあいだ　" + eneStatus.name + "の　こうげきが　あたりにくくなった！" };
                                         } else if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV2) {
                                             eneStatus.statDarkness = 2;
-                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　まっ暗闇につつまれ　このバトルのあいだ　ごうげきが　あたりにくくなった！" };
+                                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "めに　すなが　はいった！\nこのバトルのあいだ　" + eneStatus.name + "の　こうげきが　あたりにくくなった！" };
                                         } else {
                                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                         }
@@ -2268,7 +2268,7 @@ function GameBattleStart() {
                                         break;
                                     case ITEM_DEF.MAGIC_CURSE:
                                         myStatus.statCurse = true;
-                                        battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "のろいを　かけた！\n" + myStatus.name + "の　巻物は　ふうじられた！" };
+                                        battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: eneStatus.name + "は　のろいを　かけた！\n" + myStatus.name + "の　巻物は　ふうじられた！" };
                                         break;
                                     case ITEM_DEF.MAGIC_DARKNESS_LV1:
                                     case ITEM_DEF.MAGIC_DARKNESS_LV2:
@@ -2277,10 +2277,10 @@ function GameBattleStart() {
                                         } else {
                                             if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV1) {
                                                 myStatus.statDarkness = 1;
-                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　暗闇につつまれた　このバトルのあいだ　ごうげきが　あたりにくくなってしまった！" };
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "めに　すなが　はいった！\nこのバトルのあいだ　" + myStatus.name + "の　こうげきが　あたりにくくなった！" };
                                             } else if (tmpItem === ITEM_DEF.MAGIC_DARKNESS_LV2) {
                                                 myStatus.statDarkness = 2;
-                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　まっ暗闇につつまれた　このバトルのあいだ　ごうげきが　あたりにくくなってしまった！" };
+                                                battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "めに　すなが　はいった！\nこのバトルのあいだ　" + myStatus.name + "の　こうげきが　あたりにくくなった！" };
                                             } else {
                                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　なにもおこらなかった！" };
                                             }
@@ -3036,12 +3036,21 @@ function toZenkaku(hankaku, digit) {
  * @param {*} inStr 
  */
 function makeMessageWindowString(inStr) {
+    let tmpInStrList = inStr.split('\n');
+    let ret = "";
+    for (let tmpInStr of tmpInStrList) {
+        let tmp = makeMessageWindowStringInternal(tmpInStr) + "\n";
+        ret += tmp.replace('\n\n', '\n');
+    }
+    return ret.replace('\n\n', '\n').slice(0, -1);
+}
+function makeMessageWindowStringInternal(inStr) {
     let num = 17;   // １行１７文字
     let ret = "";
     for (let ii = 0; ii < inStr.length; ii += num) {
         ret += inStr.slice(ii, ii + num) + "\n";
     }
-    return ret.replace('\n\n', '\n').slice(0, -1);    // 最後の改行を削除
+    return ret.replace('\n\n', '\n');
 }
 
 /**

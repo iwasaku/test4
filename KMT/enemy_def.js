@@ -744,7 +744,8 @@ const ENEMY_DEF = defineEnum({
         useMagicCountMax: 3,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 90 },
+            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV1, ratio: 10 },
             { magic: ITEM_DEF.MAGIC_WATER_LV1, ratio: 9 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 1 },
         ],
@@ -887,7 +888,8 @@ const ENEMY_DEF = defineEnum({
         useMagicCountMax: 3,
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 97 },
+            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 87 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV1, ratio: 10 },
             { magic: ITEM_DEF.MAGIC_WATER_LV1, ratio: 2 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 1 },
         ],
@@ -1055,7 +1057,8 @@ const ENEMY_DEF = defineEnum({
         useMagicCountMax: 4,
         attr: ITEM_ATTR.WATER,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 97 },
+            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 87 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV1, ratio: 10 },
             { magic: ITEM_DEF.MAGIC_WATER_LV1, ratio: 1 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 2 },
         ],
@@ -1336,7 +1339,9 @@ const ENEMY_DEF = defineEnum({
         useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 93 },
+            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 80 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV1, ratio: 10 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV2, ratio: 3 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 6 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 1 },
         ],
@@ -1476,7 +1481,8 @@ const ENEMY_DEF = defineEnum({
         useMagicCountMax: 5,
         attr: ITEM_ATTR.WATER,
         magicList: [
-            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 93 },
+            { magic: ITEM_DEF.MAGIC_CURSE, ratio: 83 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV2, ratio: 10 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 6 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 1 },
         ],
@@ -1512,8 +1518,9 @@ const ENEMY_DEF = defineEnum({
         attr: ITEM_ATTR.FIRE,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 20 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV2, ratio: 10 },
             { magic: ITEM_DEF.MAGIC_FIRE_LV2, ratio: 10 },
-            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 70 },
+            { magic: ITEM_DEF.MAGIC_FIRE_LV3, ratio: 60 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 5 },
@@ -1548,8 +1555,9 @@ const ENEMY_DEF = defineEnum({
         attr: ITEM_ATTR.NEUTRAL,
         magicList: [
             { magic: ITEM_DEF.MAGIC_SLEEP, ratio: 30 },
+            { magic: ITEM_DEF.MAGIC_DARKNESS_LV2, ratio: 10 },
             { magic: ITEM_DEF.MAGIC_WATER_LV2, ratio: 10 },
-            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 60 },
+            { magic: ITEM_DEF.MAGIC_WATER_LV3, ratio: 50 },
         ],
         itemList: [
             { item: ITEM_DEF.HERB_00, ratio: 5 },

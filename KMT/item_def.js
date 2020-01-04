@@ -290,8 +290,8 @@ const ITEM_DEF = defineEnum({
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'あんこくの巻物',   // 相手の攻撃命中率を半減
-        success: 50,  //　成功確率（％）
+        name: '砂けむりの巻物',   // 相手の攻撃成功率が75%になる
+        success: 75,  //　成功確率（％）
         min: 75,
         max: 75,
     },
@@ -299,8 +299,8 @@ const ITEM_DEF = defineEnum({
         type: ITEM_TYPE.MAGIC_INDIRCT_ATTACK,
         attr: ITEM_ATTR.NEUTRAL,
         exec: ITEM_EXEC.USE,
-        name: 'しっこくの巻物',   // 相手の攻撃命中率を半減
-        success: 25,  //　成功確率（％）
+        name: '砂あらしの巻物',   // 相手の攻撃成功率が50%になる
+        success: 50,  //　成功確率（％）
         min: 25,
         max: 25,
     },
