@@ -771,11 +771,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-<<<<<<< Updated upstream
-                    text: "NMLS ONE HUNDRED\nα11.2 ver.",
-=======
                     text: "NMLS ONE HUNDRED\nα12 ver.",
->>>>>>> Stashed changes
                     align: "center",
                 },
                 {
@@ -1993,17 +1989,10 @@ function GameBattleStart() {
                             if (tmpSnatchSuccess) {
                                 if (battleCtrl.turnCnt === 0) { // 敵が先行
                                     if (battleCtrl.gameModeOld === GAME_MODE.CMD_ITEM_USE) {    // プレイヤーがアイテムを使おうとしている
-<<<<<<< Updated upstream
-                                        if (tmpSnatchItemIdx === battleCtrl.useItemIdx) {   // プレイヤーが使おうとしているアイテムは盗めない
-                                            tmpSnatchSuccess = false;
-                                        } else if (tmpSnatchItemIdx < battleCtrl.useItemIdx) { // プレイヤーが使おうとしているアイテムより前のアイテム
-                                            battleCtrl.useItemIdx--;    // 使うアイテムを1つ前にずらす
-=======
                                         if (tmpSnatchItemIdx === battleCtrl.useItemIdx) {   // プレイヤーが使おうとしているアイテム
                                             tmpSnatchSuccess = false;   // ぬすめない
                                         } else if (tmpSnatchItemIdx < battleCtrl.useItemIdx) { // プレイヤーが使おうとしているアイテムより前のアイテム
                                             battleCtrl.useItemIdx--;    // プレイヤーが使うアイテムを1つ前にずらす
->>>>>>> Stashed changes
                                         }
                                     }
                                 }
