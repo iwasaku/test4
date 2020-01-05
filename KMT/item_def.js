@@ -239,6 +239,25 @@ const ITEM_DEF = defineEnum({
         min: 35,  //　最小ダメージ
         max: 45,  //　最大ダメージ
     },
+    // ラスボス専用
+    MAGIC_FIRE_LV4: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.FIRE,
+        exec: ITEM_EXEC.USE,
+        name: '火炎の巻物',
+        success: 75,  //　成功確率（％）
+        min: 50,  //　最小ダメージ
+        max: 100,  //　最大ダメージ
+    },
+    MAGIC_FIRE_LV5: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.FIRE,
+        exec: ITEM_EXEC.USE,
+        name: '焦熱地獄の巻物',
+        success: 75,  //　成功確率（％）
+        min: 50,  //　最小ダメージ
+        max: 150,  //　最大ダメージ
+    },
     MAGIC_WATER_LV1: {
         type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
         attr: ITEM_ATTR.WATER,
@@ -265,6 +284,26 @@ const ITEM_DEF = defineEnum({
         success: 50,  //　成功確率（％）
         min: 35,  //　最小ダメージ
         max: 45,  //　最大ダメージ
+    },
+    // ラスボス専用
+    MAGIC_WATER_LV4: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.WATER,
+        exec: ITEM_EXEC.USE,
+        name: '津波の巻物',
+        success: 75,  //　成功確率（％）
+        min: 50,  //　最小ダメージ
+        max: 100,  //　最大ダメージ
+    },
+    // ラスボス専用
+    MAGIC_WATER_LV5: {
+        type: ITEM_TYPE.MAGIC_DIRECT_ATTACK,
+        attr: ITEM_ATTR.WATER,
+        exec: ITEM_EXEC.USE,
+        name: '大津波の巻物',
+        success: 75,  //　成功確率（％）
+        min: 50,  //　最小ダメージ
+        max: 150,  //　最大ダメージ
     },
 
     // 魔法（間接攻撃）

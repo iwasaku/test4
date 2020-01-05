@@ -2086,8 +2086,8 @@ function GameBattleStart() {
                             let tmpText;
                             if (dmg.krt) tmpText = "かいしんのいちげき！\n";
                             else tmpText = "";
-                            tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
-                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
+                            tmpText += eneStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ";
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpText };
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: -dmg.val };
                             battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SPRITE_OFF };
                             battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SPRITE_ON };
@@ -2107,16 +2107,15 @@ function GameBattleStart() {
                             let tmpText;
                             if (dmg.krt) tmpText = "つうこんのいちげき！\n";
                             else tmpText = "";
-                            tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ");
+                            tmpText += myStatus.name + "は　" + toZenkaku(dmg.val, 1) + "のダメージ";
                             if (
                                 (myStatus.statToxic !== true) &&
                                 (Math.floor(Math.random() * 100) < eneStatus.eneDef.toxicRatio)
                             ) {
-                                tmpText += makeMessageWindowString("\n");
-                                tmpText += makeMessageWindowString(myStatus.name + "は　どくをうけた！");
+                                tmpText += "\n" + myStatus.name + "は　どくをうけた！";
                                 battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.TOXIN };
                             }
-                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: tmpText };
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: true, prm: -dmg.val };
                             battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
                             battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
@@ -2636,10 +2635,14 @@ function GameBatleFinish() {
                 gameMode = GAME_MODE.FADE_IN;
             } else if (battleCtrl.isWin) {
                 enemyCount++;
-                if (battleCtrl.isItemFull) {
-                    gameMode = GAME_MODE.ITEM_DROP;
+                if (enemyCount >= 100) {
+                    gameMode = GAME_MODE.WIN;
                 } else {
-                    gameMode = GAME_MODE.FADE_IN;
+                    if (battleCtrl.isItemFull) {
+                        gameMode = GAME_MODE.ITEM_DROP;
+                    } else {
+                        gameMode = GAME_MODE.FADE_IN;
+                    }
                 }
             } else {
                 gameMode = GAME_MODE.ENDING;
@@ -2734,12 +2737,9 @@ function GameWin() {
             gameCounter = 0;
             gameSubMode = GAME_SUB_MODE.MAIN;
 
-            let tmpStr = "";
-            tmpStr += makeMessageWindowString("わたしを　たおすとは．．．みごとだ") + "\n";
-            tmpStr += makeMessageWindowString("しかし　いずれ　だい２だい３の　ＮＭＬＳ　があらわれるだろう．．．") + "\n";
-
-            battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
-            battleCtrl.textBuff[1] = { frm: 300, cmd: TEXT_BUFFER_CMD.FINISH };
+            battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: "こ．．．このわたしが　やられるとは．．．おまえは　いったい　なにものだ．．．" };
+            battleCtrl.textBuff[1] = { frm: 150, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　わたしを　たおしても　だい２　だい３の　ＮＭＬＳが　あらわれるだろう．．．" };
+            battleCtrl.textBuff[2] = { frm: 300, cmd: TEXT_BUFFER_CMD.FINISH };
         // fall through
         case GAME_SUB_MODE.MAIN:
             messageAndModeCtrl();
@@ -3062,8 +3062,8 @@ function calcAttackDamage(myStat, eneStat, scaleFactor) {
 
     if (tmpDmg.val > 0) dmg = tmpDmg;
     if (eneStat.statToxic) {
-        // どく状態の敵には最低でも+1のダメージ
-        dmg.val += 1;
+        // どく状態の敵には+1~5のダメージ
+        dmg.val += (Math.floor(Math.random() * 5) + 1);
     }
     console.log(">>>>dmg=" + JSON.stringify(dmg));
     return dmg;
