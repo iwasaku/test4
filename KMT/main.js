@@ -1,12 +1,12 @@
 console.log = function () { };  // ログを出す時にはコメントアウトする
 
-let SCREEN_WIDTH = 640;              // スクリーン幅
-let SCREEN_HEIGHT = 1136;              // スクリーン高さ
-let SCREEN_CENTER_X = SCREEN_WIDTH / 2;   // スクリーン幅の半分
-let SCREEN_CENTER_Y = SCREEN_HEIGHT / 2;  // スクリーン高さの半分
+const SCREEN_WIDTH = 640;              // スクリーン幅
+const SCREEN_HEIGHT = 1136;              // スクリーン高さ
+const SCREEN_CENTER_X = SCREEN_WIDTH / 2;   // スクリーン幅の半分
+const SCREEN_CENTER_Y = SCREEN_HEIGHT / 2;  // スクリーン高さの半分
 
-let FONT_FAMILY = "'misaki_gothic','Meiryo',sans-serif";
-let ASSETS = {
+const FONT_FAMILY = "'misaki_gothic','Meiryo',sans-serif";
+const ASSETS = {
     "fade_in": "./resource/fadein_8_amin.png",
 
     "frame_256_288_w": "./resource/frame_256_288_w.png",
@@ -175,33 +175,33 @@ const TEXT_BUFFER_CMD = defineEnum({
 
 // 成長タイプテーブル
 const growthTypeTable = [
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 0.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 0.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 0.0, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 0.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 0.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 0.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 0.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 0.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 0.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 0.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 0.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 0.5, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 1.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 1.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 1.0, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 1.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 1.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 1.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 1.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 1.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 1.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 1.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 1.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 1.5, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 2.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 2.0, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 2.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 2.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 2.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 2.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 2.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 2.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 2.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 2.5, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 3.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 3.0, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 3.0, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 3.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 3.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 3.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 3.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 3.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 3.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 3.5, attr: ITEM_ATTR.FIRE },
 
     { atk: 1.0, agi: 1.0, hp: 1.0, bonus: 4.0, attr: ITEM_ATTR.ALL_P },
 ];
@@ -435,13 +435,13 @@ class CharaStatus {
         if (this.eneDef.hp >= 1) {
             this.maxHpLv = this.eneDef.hp;
         } else {
-            this.maxHpLv = Math.round((li.hp * this.growthType.hp) + this.growthType.bonus);
+            this.maxHpLv = Math.round((li.hp * this.growthType.hp) + (this.growthType.bonus - 0.5));
         }
         this.maxHpOfs = 0;
         this.nowHp = this.maxHpLv + this.maxHpOfs;
-        this.nowAtk = Math.round((li.atk * this.growthType.atk) + this.growthType.bonus);
+        this.nowAtk = Math.round((li.atk * this.growthType.atk) + (this.growthType.bonus - 0.5));
         this.tmpAtk = 0;
-        this.nowAgi = Math.round((li.agi * this.growthType.agi) + this.growthType.bonus);
+        this.nowAgi = Math.round((li.agi * this.growthType.agi) + (this.growthType.bonus - 0.5));
         this.tmpAgi = 0;
         this.krt = this.eneDef.krtRatio;
         this.sleepStat = 0;
@@ -790,7 +790,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nα13 ver.",
+                    text: "NMLS ONE HUNDRED\nβ1 ver.",
                     align: "center",
                 },
                 {
@@ -2951,8 +2951,17 @@ function decideGrowthType(name) {
     nameVal += (decideGrowthTypeSub(name.charAt(3)) * (8 ** 0));
     console.log(name + ":" + nameVal + ":" + (nameVal % 24))
     // ネムレス:83:11
+    // ★うてな:3886:22
+    // う★てな:2542:22
+    // うて★な:2430:6
     // うてな★:2423:23
-    if ((nameVal === 83) || (nameVal === 2423)) {
+    if (
+        (nameVal === 83) ||
+        (nameVal === 3886) ||
+        (nameVal === 2542) ||
+        (nameVal === 2430) ||
+        (nameVal === 2423)
+    ) {
         return growthTypeTable[24];
     } else {
         return growthTypeTable[nameVal % 24];
