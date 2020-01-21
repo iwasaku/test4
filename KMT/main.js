@@ -174,34 +174,68 @@ const TEXT_BUFFER_CMD = defineEnum({
 });
 
 // 成長タイプテーブル
-const growthTypeTable = [
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 0.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 0.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 0.5, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 0.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 0.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 0.5, attr: ITEM_ATTR.FIRE },
+// プレイヤー用テーブル
+const myGrowthTypeTable = [
+    { atk: 1.00, agi: 0.90, hp: 0.80, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.90, agi: 1.00, hp: 0.80, bonus: 2.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.90, agi: 0.80, hp: 1.00, bonus: 2.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.80, hp: 0.90, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.80, agi: 1.00, hp: 0.90, bonus: 2.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.80, agi: 0.90, hp: 1.00, bonus: 2.0, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 1.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 1.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 1.5, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 1.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 1.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 1.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.90, hp: 0.80, bonus: 2.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.90, agi: 1.00, hp: 0.80, bonus: 2.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.90, agi: 0.80, hp: 1.00, bonus: 2.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.80, hp: 0.90, bonus: 2.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.80, agi: 1.00, hp: 0.90, bonus: 2.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.80, agi: 0.90, hp: 1.00, bonus: 2.5, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 2.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 2.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 2.5, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 2.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 2.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 2.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.90, hp: 0.80, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.90, agi: 1.00, hp: 0.80, bonus: 3.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.90, agi: 0.80, hp: 1.00, bonus: 3.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.80, hp: 0.90, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.80, agi: 1.00, hp: 0.90, bonus: 3.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.80, agi: 0.90, hp: 1.00, bonus: 3.0, attr: ITEM_ATTR.FIRE },
 
-    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 3.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 3.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 3.5, attr: ITEM_ATTR.FIRE },
-    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 3.5, attr: ITEM_ATTR.NEUTRAL },
-    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 3.5, attr: ITEM_ATTR.WATER },
-    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 3.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.90, hp: 0.80, bonus: 3.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.90, agi: 1.00, hp: 0.80, bonus: 3.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.90, agi: 0.80, hp: 1.00, bonus: 3.5, attr: ITEM_ATTR.FIRE },
+    { atk: 1.00, agi: 0.80, hp: 0.90, bonus: 3.5, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.80, agi: 1.00, hp: 0.90, bonus: 3.5, attr: ITEM_ATTR.WATER },
+    { atk: 0.80, agi: 0.90, hp: 1.00, bonus: 3.5, attr: ITEM_ATTR.FIRE },
+
+    { atk: 1.00, agi: 1.00, hp: 1.00, bonus: 4.0, attr: ITEM_ATTR.ALL_P },
+];
+
+// 敵用テーブル
+const eneGrowthTypeTable = [
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 0.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 0.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 0.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 0.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 0.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 0.0, attr: ITEM_ATTR.FIRE },
+
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 1.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 1.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 1.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 1.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 1.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 1.0, attr: ITEM_ATTR.FIRE },
+
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 2.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 2.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 2.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 2.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 2.0, attr: ITEM_ATTR.FIRE },
+
+    { atk: 1.0, agi: 0.9, hp: 0.8, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.9, agi: 1.0, hp: 0.8, bonus: 3.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.9, agi: 0.8, hp: 1.0, bonus: 3.0, attr: ITEM_ATTR.FIRE },
+    { atk: 1.0, agi: 0.8, hp: 0.9, bonus: 3.0, attr: ITEM_ATTR.NEUTRAL },
+    { atk: 0.8, agi: 1.0, hp: 0.9, bonus: 3.0, attr: ITEM_ATTR.WATER },
+    { atk: 0.8, agi: 0.9, hp: 1.0, bonus: 3.0, attr: ITEM_ATTR.FIRE },
 
     { atk: 1.0, agi: 1.0, hp: 1.0, bonus: 4.0, attr: ITEM_ATTR.ALL_P },
 ];
@@ -214,6 +248,7 @@ const expTable = [
     { lv: 3, atk: 7, agi: 6, hp: 24, exp: 23 },
     { lv: 4, atk: 7, agi: 8, hp: 31, exp: 47 },
     { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 },
+
     { lv: 6, atk: 16, agi: 10, hp: 38, exp: 220 },
     { lv: 7, atk: 18, agi: 17, hp: 40, exp: 450 },
     { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },
@@ -225,6 +260,7 @@ const expTable = [
     { lv: 13, atk: 52, agi: 48, hp: 70, exp: 5500 },
     { lv: 14, atk: 60, agi: 55, hp: 78, exp: 7500 },
     { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 },
+
     { lv: 16, atk: 72, agi: 70, hp: 92, exp: 13000 },
     { lv: 17, atk: 72, agi: 78, hp: 110, exp: 17000 },
     { lv: 18, atk: 85, agi: 84, hp: 115, exp: 21000 },
@@ -236,6 +272,7 @@ const expTable = [
     { lv: 23, atk: 99, agi: 94, hp: 165, exp: 41000 },
     { lv: 24, atk: 103, agi: 98, hp: 170, exp: 45000 },
     { lv: 25, atk: 113, agi: 100, hp: 174, exp: 49000 },
+
     { lv: 26, atk: 117, agi: 105, hp: 180, exp: 53000 },
     { lv: 27, atk: 125, agi: 107, hp: 189, exp: 57000 },
     { lv: 28, atk: 130, agi: 115, hp: 195, exp: 61000 },
@@ -427,7 +464,7 @@ class CharaStatus {
     }
     initEnemy(enemyDef) {
         this.eneDef = enemyDef;
-        this.growthType = growthTypeTable[Math.floor(Math.random() * (this.eneDef.growthTypeIdx.max - this.eneDef.growthTypeIdx.min) + this.eneDef.growthTypeIdx.min)];
+        this.growthType = eneGrowthTypeTable[Math.floor(Math.random() * (this.eneDef.growthTypeIdx.max - this.eneDef.growthTypeIdx.min) + this.eneDef.growthTypeIdx.min)];
         this.name = this.eneDef.name;
         this.exp = this.eneDef.exp;
         this.lv = this.eneDef.lv;
@@ -435,13 +472,13 @@ class CharaStatus {
         if (this.eneDef.hp >= 1) {
             this.maxHpLv = this.eneDef.hp;
         } else {
-            this.maxHpLv = Math.round((li.hp * this.growthType.hp) + (this.growthType.bonus - 0.5));
+            this.maxHpLv = Math.round((li.hp * this.growthType.hp) + (this.growthType.bonus));
         }
         this.maxHpOfs = 0;
         this.nowHp = this.maxHpLv + this.maxHpOfs;
-        this.nowAtk = Math.round((li.atk * this.growthType.atk) + (this.growthType.bonus - 0.5));
+        this.nowAtk = Math.round((li.atk * this.growthType.atk) + (this.growthType.bonus));
         this.tmpAtk = 0;
-        this.nowAgi = Math.round((li.agi * this.growthType.agi) + (this.growthType.bonus - 0.5));
+        this.nowAgi = Math.round((li.agi * this.growthType.agi) + (this.growthType.bonus));
         this.tmpAgi = 0;
         this.krt = this.eneDef.krtRatio;
         this.sleepStat = 0;
@@ -790,7 +827,7 @@ tm.define("TitleScene", {
                     fillStyle: "#fff",
                     fontSize: 64,
                     fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nβ1 ver.",
+                    text: "NMLS ONE HUNDRED\nβ1.1 ver.",
                     align: "center",
                 },
                 {
@@ -2962,9 +2999,9 @@ function decideGrowthType(name) {
         (nameVal === 2430) ||
         (nameVal === 2423)
     ) {
-        return growthTypeTable[24];
+        return myGrowthTypeTable[24];
     } else {
-        return growthTypeTable[nameVal % 24];
+        return myGrowthTypeTable[nameVal % 24];
     }
 }
 function decideGrowthTypeSub(nameChara) {
