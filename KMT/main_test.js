@@ -241,43 +241,44 @@ const eneGrowthTypeTable = [
 ];
 
 // 経験値テーブル
+// 3.5面ごとにレベルが１上がる
 const expTable = [
     { lv: 0, atk: 2, agi: 2, hp: 7, exp: -32767 },
     { lv: 1, atk: 4, agi: 4, hp: 15, exp: 0 },
-    { lv: 2, atk: 5, agi: 4, hp: 22, exp: 7 },
-    { lv: 3, atk: 7, agi: 6, hp: 24, exp: 23 },
-    { lv: 4, atk: 7, agi: 8, hp: 31, exp: 47 },
-    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 }, //2  2
+    { lv: 2, atk: 5, agi: 4, hp: 22, exp: 7 },          // 3
+    { lv: 3, atk: 7, agi: 6, hp: 24, exp: 23 },         // 6
+    { lv: 4, atk: 7, agi: 8, hp: 31, exp: 47 },         // 9
+    { lv: 5, atk: 12, agi: 10, hp: 35, exp: 110 },      // 12
 
-    { lv: 6, atk: 16, agi: 10, hp: 38, exp: 220 },
-    { lv: 7, atk: 18, agi: 17, hp: 40, exp: 450 },
-    { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },
-    { lv: 9, atk: 30, agi: 22, hp: 50, exp: 1300 },
-    { lv: 10, atk: 35, agi: 31, hp: 54, exp: 2000 }, //4    3
+    { lv: 6, atk: 16, agi: 10, hp: 38, exp: 220 },      // 15
+    { lv: 7, atk: 18, agi: 17, hp: 40, exp: 450 },      // 18
+    { lv: 8, atk: 22, agi: 20, hp: 46, exp: 800 },      // 21
+    { lv: 9, atk: 30, agi: 22, hp: 50, exp: 1300 },     // 24
+    { lv: 10, atk: 35, agi: 31, hp: 54, exp: 2000 },    // 27
 
-    { lv: 11, atk: 40, agi: 35, hp: 62, exp: 2900 },
-    { lv: 12, atk: 48, agi: 40, hp: 63, exp: 4000 },
-    { lv: 13, atk: 52, agi: 48, hp: 70, exp: 5500 },
-    { lv: 14, atk: 60, agi: 55, hp: 78, exp: 7500 },
-    { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 }, //7   6
+    { lv: 11, atk: 40, agi: 35, hp: 62, exp: 2900 },    // 30
+    { lv: 12, atk: 48, agi: 40, hp: 63, exp: 4000 },    // 34
+    { lv: 13, atk: 52, agi: 48, hp: 70, exp: 5500 },    // 37
+    { lv: 14, atk: 60, agi: 55, hp: 78, exp: 7500 },    // 41
+    { lv: 15, atk: 68, agi: 64, hp: 86, exp: 10000 },   // 44
 
-    { lv: 16, atk: 72, agi: 70, hp: 92, exp: 13000 },
-    { lv: 17, atk: 72, agi: 78, hp: 110, exp: 17000 },
-    { lv: 18, atk: 85, agi: 84, hp: 115, exp: 21000 },
-    { lv: 19, atk: 87, agi: 86, hp: 130, exp: 25000 },
-    { lv: 20, atk: 92, agi: 88, hp: 138, exp: 29000 }, //9  9
+    { lv: 16, atk: 72, agi: 70, hp: 92, exp: 13000 },   // 48
+    { lv: 17, atk: 72, agi: 78, hp: 110, exp: 17000 },  // 51
+    { lv: 18, atk: 85, agi: 84, hp: 115, exp: 21000 },  // 55
+    { lv: 19, atk: 87, agi: 86, hp: 130, exp: 25000 },  // 58
+    { lv: 20, atk: 92, agi: 88, hp: 138, exp: 29000 },  // 62
 
-    { lv: 21, atk: 95, agi: 90, hp: 149, exp: 33000 },
-    { lv: 22, atk: 97, agi: 90, hp: 158, exp: 37000 },
-    { lv: 23, atk: 99, agi: 94, hp: 165, exp: 41000 },
-    { lv: 24, atk: 103, agi: 98, hp: 170, exp: 45000 },
-    { lv: 25, atk: 113, agi: 100, hp: 174, exp: 49000 }, //11   10
+    { lv: 21, atk: 95, agi: 90, hp: 149, exp: 33000 },  // 65
+    { lv: 22, atk: 97, agi: 90, hp: 158, exp: 37000 },  // 69
+    { lv: 23, atk: 99, agi: 94, hp: 165, exp: 41000 },  // 72
+    { lv: 24, atk: 103, agi: 98, hp: 170, exp: 45000 }, // 75
+    { lv: 25, atk: 113, agi: 100, hp: 174, exp: 49000 },// 79
 
-    { lv: 26, atk: 117, agi: 105, hp: 180, exp: 53000 },
-    { lv: 27, atk: 125, agi: 107, hp: 189, exp: 57000 },
-    { lv: 28, atk: 130, agi: 115, hp: 195, exp: 61000 },
-    { lv: 29, atk: 135, agi: 120, hp: 200, exp: 65000 },
-    { lv: 30, atk: 140, agi: 130, hp: 210, exp: 65535 }, //14   13
+    { lv: 26, atk: 117, agi: 105, hp: 180, exp: 53000 },// 84
+    { lv: 27, atk: 125, agi: 107, hp: 189, exp: 57000 },// 90
+    { lv: 28, atk: 130, agi: 115, hp: 195, exp: 61000 },// 97
+    { lv: 29, atk: 135, agi: 120, hp: 200, exp: 65000 },// 105
+    { lv: 30, atk: 140, agi: 130, hp: 210, exp: 65535 },// 114
 
     { lv: -1, atk: -1, agi: -1, hp: -1, exp: 2147483647 },
 ];
