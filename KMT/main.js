@@ -1,73 +1,105 @@
+phina.globalize();
+
 console.log = function () { };  // ログを出す時にはコメントアウトする
 
-const SCREEN_WIDTH = 640;              // スクリーン幅
-const SCREEN_HEIGHT = 1136;              // スクリーン高さ
+const SCREEN_WIDTH = 640;                   // スクリーン幅
+const SCREEN_HEIGHT = 1136;                 // スクリーン高さ
 const SCREEN_CENTER_X = SCREEN_WIDTH / 2;   // スクリーン幅の半分
 const SCREEN_CENTER_Y = SCREEN_HEIGHT / 2;  // スクリーン高さの半分
 
 const FONT_FAMILY = "'misaki_gothic','Meiryo',sans-serif";
 const ASSETS = {
-    "fade_in": "./resource/fadein_8_amin.png",
+    font: {
+        misaki_gothic: "https://cdn.leafscape.be/misaki/misaki_gothic_web.woff2"
+    },
+    image: {
+        "fade_in": "./resource/fadein_8_amin.png",
 
-    "frame_256_288_w": "./resource/frame_256_288_w.png",
-    "frame_256_288_g": "./resource/frame_256_288_g.png",
-    "frame_256_288_o": "./resource/frame_256_288_o.png",
-    "frame_256_288_r": "./resource/frame_256_288_r.png",
-    "frame_256_288_p": "./resource/frame_256_288_p.png",
-    "frame_576_192_w": "./resource/frame_576_192_w.png",
-    "frame_576_192_g": "./resource/frame_576_192_g.png",
-    "frame_576_192_o": "./resource/frame_576_192_o.png",
-    "frame_576_192_r": "./resource/frame_576_192_r.png",
-    "frame_576_192_p": "./resource/frame_576_192_p.png",
-    "frame_320_96_w": "./resource/frame_320_96_w.png",
-    "frame_320_96_g": "./resource/frame_320_96_g.png",
-    "frame_320_96_o": "./resource/frame_320_96_o.png",
-    "frame_320_96_r": "./resource/frame_320_96_r.png",
-    "frame_320_96_p": "./resource/frame_320_96_p.png",
+        "frame_256_288_w": "./resource/frame_256_288_w.png",
+        "frame_256_288_g": "./resource/frame_256_288_g.png",
+        "frame_256_288_o": "./resource/frame_256_288_o.png",
+        "frame_256_288_r": "./resource/frame_256_288_r.png",
+        "frame_256_288_p": "./resource/frame_256_288_p.png",
+        "frame_576_192_w": "./resource/frame_576_192_w.png",
+        "frame_576_192_g": "./resource/frame_576_192_g.png",
+        "frame_576_192_o": "./resource/frame_576_192_o.png",
+        "frame_576_192_r": "./resource/frame_576_192_r.png",
+        "frame_576_192_p": "./resource/frame_576_192_p.png",
+        "frame_320_96_w": "./resource/frame_320_96_w.png",
+        "frame_320_96_g": "./resource/frame_320_96_g.png",
+        "frame_320_96_o": "./resource/frame_320_96_o.png",
+        "frame_320_96_r": "./resource/frame_320_96_r.png",
+        "frame_320_96_p": "./resource/frame_320_96_p.png",
 
-    "rip": "./resource/rip.png?20190831",
-    "maria": "./resource/maria.png?20190831",
+        "rip": "./resource/rip.png?20190831",
+        "maria": "./resource/maria.png?20190831",
 
-    "pizzza": "./resource/pizzza.png?20190831",
-    "negi": "./resource/negi.png?20190831",
-    "gohan": "./resource/gohan.png?20190831",
-    "meat": "./resource/meat.png?20190831",
-    "small": "./resource/small.png?20190831",
-    "tissue": "./resource/tissue.png?20190831",
-    "ika": "./resource/ika.png?20190831",
-    "assassin": "./resource/assassin.png?20190831",
-    "cheese": "./resource/cheese.png?20190831",
-    "meso": "./resource/meso.png?20190831",
-    "nasa": "./resource/nasa.png?20190831",
-    "femo": "./resource/femo.png?20190831",
-    "perfect": "./resource/perfect.png?20190831",
-    "denden": "./resource/denden.png?20190831",
-    "baby": "./resource/baby.png?20190831",
-    "girl": "./resource/girl.png?20190831",
-    "kakin": "./resource/kakin.png?20190831",
-    "brachio": "./resource/brachio.png?20190831",
-    "ninja": "./resource/ninja.png?20190831",
-    "saint": "./resource/saint.png?20190831",
-    "champ": "./resource/champ.png?20190831",
-    "party": "./resource/party.png?20190831",
-    "glutton": "./resource/glutton.png?20190831",
-    "anger": "./resource/anger.png?20190831",
-    "comp": "./resource/comp.png?20190831",
+        "pizzza": "./resource/pizzza.png?20190831",
+        "negi": "./resource/negi.png?20190831",
+        "gohan": "./resource/gohan.png?20190831",
+        "meat": "./resource/meat.png?20190831",
+        "small": "./resource/small.png?20190831",
+        "tissue": "./resource/tissue.png?20190831",
+        "ika": "./resource/ika.png?20190831",
+        "assassin": "./resource/assassin.png?20190831",
+        "cheese": "./resource/cheese.png?20190831",
+        "meso": "./resource/meso.png?20190831",
+        "nasa": "./resource/nasa.png?20190831",
+        "femo": "./resource/femo.png?20190831",
+        "perfect": "./resource/perfect.png?20190831",
+        "denden": "./resource/denden.png?20190831",
+        "baby": "./resource/baby.png?20190831",
+        "girl": "./resource/girl.png?20190831",
+        "kakin": "./resource/kakin.png?20190831",
+        "brachio": "./resource/brachio.png?20190831",
+        "ninja": "./resource/ninja.png?20190831",
+        "saint": "./resource/saint.png?20190831",
+        "champ": "./resource/champ.png?20190831",
+        "party": "./resource/party.png?20190831",
+        "glutton": "./resource/glutton.png?20190831",
+        "anger": "./resource/anger.png?20190831",
+        "comp": "./resource/comp.png?20190831",
 
-    "negikko": "./resource/negikko.png?20190831",
-    "ice": "./resource/ice.png?20190831",
-    "kedama": "./resource/kedama.png?20190831",
-    "yurusan": "./resource/yurusan.png?20190831",
-    "stress": "./resource/stress.png?20190831",
-    "vibes": "./resource/vibes.png?20190831",
-    "maane": "./resource/maane.png?20190831",
-    "kikumimi": "./resource/kikumimi.png?20190831",
-    "nemimi": "./resource/nemimi.png?20190831",
-    "runaway": "./resource/runaway.png?20190831",
-    "ikacos": "./resource/ikacos.png?20190831",
-    "sad": "./resource/sad.png?20190831",
+        "negikko": "./resource/negikko.png?20190831",
+        "ice": "./resource/ice.png?20190831",
+        "kedama": "./resource/kedama.png?20190831",
+        "yurusan": "./resource/yurusan.png?20190831",
+        "stress": "./resource/stress.png?20190831",
+        "vibes": "./resource/vibes.png?20190831",
+        "maane": "./resource/maane.png?20190831",
+        "kikumimi": "./resource/kikumimi.png?20190831",
+        "nemimi": "./resource/nemimi.png?20190831",
+        "runaway": "./resource/runaway.png?20190831",
+        "ikacos": "./resource/ikacos.png?20190831",
+        "sad": "./resource/sad.png?20190831",
 
-    "last": "./resource/last.png?20191205",
+        "last": "./resource/last.png?20191205",
+    },
+    spritesheet: {
+        "fade_in_ss":
+        {
+            // フレーム情報
+            "frame": {
+                "width": 8, // 1フレームの画像サイズ（横）
+                "height": 8, // 1フレームの画像サイズ（縦）
+                "cols": 16, // フレーム数（横）
+                "rows": 1, // フレーム数（縦）
+            },
+            // アニメーション情報
+            "animations": {
+                "start": {
+                    "frames": Array.range(16),
+                    "next": "stop",
+                    "frequency": 3,
+                },
+                "stop": {
+                    "frames": [15],
+                    "next": "stop",
+                    "frequency": 1,
+                },
+            }
+        },
+    }
 };
 
 // 定義
@@ -93,17 +125,17 @@ const GAME_MODE = defineEnum({
     BATTLE_START: {
         func: function () { GameBattleStart(); },
     },
-    CMD_PRE_SELECTER: {
-        func: function () { CmdPreSelecter(); },
+    CMD_PRE_SELECTOR: {
+        func: function () { CmdPreSelector(); },
     },
-    CMD_SELECTER: {
+    CMD_SELECTOR: {
         func: function () { CmdSelector(); },
     },
     CMD_ATTACK: {
         func: function () { CmdAttack(); },
     },
-    CMD_DEFENCE: {
-        func: function () { CmdDefence(); },
+    CMD_DEFENSE: {
+        func: function () { CmdDefense(); },
     },
     CMD_ITEM: {
         func: function () { CmdItem(); },
@@ -118,7 +150,7 @@ const GAME_MODE = defineEnum({
         func: function () { CmdSnatch(); },
     },
     BATTLE_FINISH: {
-        func: function () { GameBatleFinish(); },
+        func: function () { GameBattleFinish(); },
     },
     CMD_ITEM_USE: {
         func: function () { CmdItemUse(); },
@@ -650,7 +682,7 @@ class CharaStatus {
             }
         }
         let ret = ((this.getAgi() / 2) * this.tmpAgiScf) + shieldValue;
-        console.log("calcDefence=" + ret);
+        console.log("calcDefense=" + ret);
         return ret;
     }
 
@@ -716,7 +748,7 @@ let battleCtrl = {
     isDead: false,
     isEscape: false,
     isWin: false,   // true:自分の勝利 false:敵の勝利
-    isItemFull: false,   // true:持ち物がいっぱい false:まだ持てる
+    isItemFull: false,  // true:持ち物がいっぱい false:まだ持てる
     gameModeOld: null,
     useItemIdx: -1,
     getItemName: "",
@@ -724,6 +756,7 @@ let battleCtrl = {
 }
 let enemyCount = 0;
 let fadeInSprite = null;
+let fadeInAnimation = null;
 let statusWindowSprite = null;
 let statusWindowNameLabel = null;
 let statusWindowHpLabel = null;
@@ -752,109 +785,145 @@ let tweetStr = null;
 let endingGraphicSprite = null;
 let endingNameLabel = null;
 
-tm.main(function () {
-    // アプリケーションクラスを生成
-    let app = tm.display.CanvasApp("#world");
-    app.resize(SCREEN_WIDTH, SCREEN_HEIGHT);    // サイズ(解像度)設定
-    app.canvas.imageSmoothingEnabled = false;
-    app.fitWindow();                            // 自動フィッティング有効
-    app.background = "rgba(77, 136, 255, 1.0)"; // 背景色
-    app.fps = 30;                               // フレーム数
-
-    let loading = tm.ui.LoadingScene({
-        assets: ASSETS,
+phina.main(function () {
+    var app = GameApp({
+        startLabel: 'logo',
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
+        fps: 30,
+        assets: ASSETS,
+        // シーンのリストを引数で渡す
+        scenes: [
+            {
+                className: 'LogoScene',
+                label: 'logo',
+                nextLabel: 'title',
+            },
+            {
+                className: 'TitleScene',
+                label: 'title',
+                nextLabel: 'game',
+            },
+            {
+                className: 'GameScene',
+                label: 'game',
+                nextLabel: 'title',
+            },
+        ]
     });
-
-    // 読み込み完了後に呼ばれるメソッドを登録
-    loading.onload = function () {
-        app.replaceScene(LogoScene());
-    };
-
-    // ローディングシーンに入れ替える
-    app.replaceScene(loading);
 
     // 実行
     app.run();
 });
 
+
+phina.define('LoadingScene', {
+    superClass: 'DisplayScene',
+
+    init: function (options) {
+        this.superInit(options);
+        // 背景色
+        this.backgroundColor = 'black';
+        var self = this;
+        var loader = phina.asset.AssetLoader();
+
+        // 明滅するラベル
+        let label = phina.display.Label({
+            text: "",
+            fontSize: 64,
+            fill: 'white',
+        }).addChildTo(this).setPosition(SCREEN_CENTER_X, SCREEN_CENTER_Y);
+
+        // ロードが進行したときの処理
+        loader.onprogress = function (e) {
+            // 進捗具合を％で表示する
+            label.text = "{0}%".format((e.progress * 100).toFixed(0));
+        };
+
+        // ローダーによるロード完了ハンドラ
+        loader.onload = function () {
+            // Appコアにロード完了を伝える（==次のSceneへ移行）
+            self.flare('loaded');
+        };
+
+        // ロード開始
+        loader.load(options.assets);
+    },
+
+});
+
+
 /*
  * ロゴ
  */
-tm.define("LogoScene", {
-    superClass: "tm.app.Scene",
+phina.define("LogoScene", {
+    superClass: "DisplayScene",
 
-    init: function () {
-        this.superInit();
-        this.fromJSON({
-            children: [
-                {
-                    type: "Label", name: "logoLabel",
-                    x: SCREEN_CENTER_X,
-                    y: SCREEN_CENTER_Y,
-                    fillStyle: "#888",
-                    fontSize: 64,
-                    fontFamily: FONT_FAMILY,
-                    text: "UNOFFICIAL GAME",
-                    align: "center",
-                },
-            ]
-        });
+    init: function (option) {
+        console.log("LogoScene");
+        this.superInit(option);
+        this.backgroundColor = 'black';
+        //        LabelArea({
+        //            text: "Logo",
+        //            width: 480,
+        //            height: 320,
+        //            fontSize: 32,
+        //            fontFamily: FONT_FAMILY,
+        //            align: "left",
+        //            fill: 'yellow',
+        //            //            backgroundColor: "lightgreen",
+        //            shadow: "#000",
+        //            shadowBlur: 0,
+        //            x: 32 + 16,
+        //            y: SCREEN_CENTER_Y + 192 + 24,
+        //        }).addChildTo(this);
         this.localTimer = 0;
     },
 
     update: function (app) {
         // 時間が来たらタイトルへ
         //if (++this.localTimer >= 5 * app.fps)
-        this.app.replaceScene(TitleScene());
+        this.exit();
     }
 });
 
 /*
  * タイトル
  */
-tm.define("TitleScene", {
-    superClass: "tm.app.Scene",
-    init: function () {
-        this.superInit();
-        this.fromJSON({
-            children: [
-                {
-                    type: "Label", name: "titleLabel",
-                    x: SCREEN_CENTER_X,
-                    y: 320,
-                    fillStyle: "#fff",
-                    fontSize: 64,
-                    fontFamily: FONT_FAMILY,
-                    text: "NMLS ONE HUNDRED\nβ1.2 ver.",
-                    align: "center",
-                },
-                {
-                    type: "Label", name: "namaeLabel",
-                    x: SCREEN_CENTER_X,
-                    y: SCREEN_CENTER_Y + (32 * 0),
-                    fillStyle: "#fff",
-                    fontSize: 32,
-                    fontFamily: FONT_FAMILY,
-                    text: "",
-                    align: "center",
-                },
-                {
-                    type: "FlatButton", name: "startButton",
-                    init: [
-                        {
-                            text: "はじめる",
-                            fontFamily: FONT_FAMILY,
-                            fontSize: 32,
-                            bgColor: "hsl(240, 0%, 70%)",
-                        }
-                    ],
-                    x: SCREEN_CENTER_X,
-                    y: SCREEN_CENTER_Y + (SCREEN_CENTER_Y / 2),
-                },
-            ]
-        });
+phina.define("TitleScene", {
+    superClass: "DisplayScene",
+    init: function (option) {
+        console.log("TitleScene");
+        this.superInit(option);
+        this.backgroundColor = 'black';
+
+        titleLabel = Label({
+            text: 'NMLS ONE HUNDRED\nβ1.4 ver.',
+            fontSize: 64,
+            fontFamily: FONT_FAMILY,
+            align: "center",
+            fill: '#fff',
+            x: SCREEN_CENTER_X,
+            y: 320,
+        }).addChildTo(this);
+        nameLabel = Label({
+            text: '',
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "center",
+            fill: '#fff',
+            x: SCREEN_CENTER_X,
+            y: SCREEN_CENTER_Y + (32 * 0),
+        }).addChildTo(this);
+        startButton = Button({
+            text: "はじめる",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            fill: "#444",
+            x: SCREEN_CENTER_X,
+            y: SCREEN_CENTER_Y + (SCREEN_CENTER_Y / 2),
+        }).addChildTo(this)
+
         this.localTimer = 0;
         mkNameCnt = 0;
         let self = this;
@@ -868,11 +937,8 @@ tm.define("TitleScene", {
             endingNameLabel.remove();
         }
 
-        this.startButton.onpointingstart = function () {
-            if (mkNameCnt >= 3) {
-                self.app.replaceScene(GameScene());
-                myStatus.initPlayer();
-            } else {
+        startButton.onpush = function () {
+            if (mkNameCnt < 3) {
                 mkNameCnt++;
             }
         };
@@ -888,282 +954,312 @@ tm.define("TitleScene", {
         for (let ii = 0; ii < 4; ii++) {
             tmpName += nameCharaReel[mkNameIdx[ii]];
         }
-        this.namaeLabel.text = "ゆうしゃ：" + tmpName;
+        nameLabel.text = "ゆうしゃ：" + tmpName;
         myStatus.name = tmpName;
+        if (mkNameCnt >= 3) {
+            myStatus.initPlayer();
+            this.exit();
+        }
     }
 });
 
 /*
  * ゲーム
  */
-tm.define("GameScene", {
-    superClass: "tm.app.Scene",
+phina.define("GameScene", {
+    superClass: "DisplayScene",
 
-    init: function () {
-        this.superInit();
+    init: function (option) {
+        console.log("GameScene");
+        this.superInit(option);
+        this.backgroundColor = 'black';
 
         // 表示プライオリティは 0：奥 → 3：手前 の順番
-        group0 = tm.display.CanvasElement().addChildTo(this);   // status,cmd,message,enemy
-        group1 = tm.display.CanvasElement().addChildTo(this);   // item
-        group2 = tm.display.CanvasElement().addChildTo(this);   // itemcmd
-        group3 = tm.display.CanvasElement().addChildTo(this);   // fadeIn
+        group0 = DisplayElement().addChildTo(this);   // status,cmd,message,enemy
+        group1 = DisplayElement().addChildTo(this);   // item
+        group2 = DisplayElement().addChildTo(this);   // itemcmd
+        group3 = DisplayElement().addChildTo(this);   // fadeIn
 
         // ゲーム中のウィンドウやメニューはここで定義しておく
         // フェードイン
         fadeInSprite = new FadeInSprite().addChildTo(group3);
+        fadeInAnimation = FrameAnimation("fade_in_ss").attachTo(fadeInSprite);
+        fadeInAnimation.fit = false;
+        fadeInAnimation.gotoAndPlay("stop");
 
         // ステータスウインドウ
         statusWindowSprite = new FrameSprite("frame_256_288_w", 256 / 2 + 32, 288 / 2 + 32, 1, 1).addChildTo(group0);
 
-        statusWindowNameLabel = tm.display.Label("NAME").addChildTo(group0);
-        statusWindowNameLabel.setPosition(256 / 2 - 32 * 1, 288 / 2 - 32 * 2)
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        statusWindowNameLabel.shadowColor = "#000";
-        statusWindowNameLabel.shadowBlur = 0;
-        statusWindowNameLabel.alpha = 0;
+        statusWindowNameLabel = Label({
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            baseline: "bottom",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: 256 / 2 - 32 * 1,
+            y: 288 / 2 - 32 * 2,
+        }).addChildTo(group0);
+        statusWindowNameLabel.alpha = 0.0;
         statusWindowNameLabel.text = myStatus.getName();
 
-        statusWindowHpLabel = tm.display.Label("HP").addChildTo(group0);
-        statusWindowHpLabel.setPosition(256 / 2 - 32 * 2.5, 288 / 2 - 32 * 0)
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        statusWindowHpLabel.shadowColor = "#000";
-        statusWindowHpLabel.shadowBlur = 0;
-        statusWindowHpLabel.alpha = 0;
+        statusWindowHpLabel = Label({
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            baseline: "bottom",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: 256 / 2 - 32 * 2.5,
+            y: 288 / 2 - 32 * 0,
+        }).addChildTo(group0);
+        statusWindowHpLabel.alpha = 0.0;
         statusWindowHpLabel.text = "ＨＰ：" + toZenkaku(0, 4);
 
-        statusWindowMpLabel = tm.display.Label("MP").addChildTo(group0);
-        statusWindowMpLabel.setPosition(256 / 2 - 32 * 2.5, 288 / 2 - 32 * -1.5)
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        statusWindowMpLabel.shadowColor = "#000";
-        statusWindowMpLabel.shadowBlur = 0;
-        statusWindowMpLabel.alpha = 0;
+        statusWindowMpLabel = Label({
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            baseline: "bottom",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: 256 / 2 - 32 * 2.5,
+            y: 288 / 2 - 32 * -1.5,
+        }).addChildTo(group0);
+        statusWindowMpLabel.alpha = 0.0;
         statusWindowMpLabel.text = "ＭＰ：" + toZenkaku(0, 4);
 
-        statusWindowLvLabel = tm.display.Label("LV").addChildTo(group0);
-        statusWindowLvLabel.setPosition(256 / 2 - 32 * 2.5, 288 / 2 - 32 * -3)
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        statusWindowLvLabel.shadowColor = "#000";
-        statusWindowLvLabel.shadowBlur = 0;
-        statusWindowLvLabel.alpha = 0;
+        statusWindowLvLabel = Label({
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            baseline: "bottom",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: 256 / 2 - 32 * 2.5,
+            y: 288 / 2 - 32 * -3,
+        }).addChildTo(group0);
+        statusWindowLvLabel.alpha = 0.0;
         statusWindowLvLabel.text = "ＬＶ：" + toZenkaku(1, 4);
 
-        statusWindowGavasssLabel = tm.display.Label("GAVASSS").addChildTo(group0);
-        statusWindowGavasssLabel.setPosition(256 / 2 - 32 * 2.5, 288 / 2 - 32 * -4.5)
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        statusWindowGavasssLabel.shadowColor = "#000";
-        statusWindowGavasssLabel.shadowBlur = 0;
-        statusWindowGavasssLabel.alpha = 0;
+        statusWindowGavasssLabel = Label({
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            baseline: "bottom",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: 256 / 2 - 32 * 2.5,
+            y: 288 / 2 - 32 * -4.5,
+        }).addChildTo(group0);
+        statusWindowGavasssLabel.alpha = 0.0;
         statusWindowGavasssLabel.text = "Ｇ　" + toZenkaku(10000, 5);
 
         // コマンドウィンドウ
         cmdWindowSprite = new FrameSprite("frame_256_288_w", 256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160), 1, 1).addChildTo(group1);
-        cmdWindowAtkButton = tm.app.FlatButton({
+        cmdWindowAtkButton = Button({
             width: 160,
             height: 60,
             text: "こうげき",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#444",
+            fill: "#444",
         }).addChildTo(group1);
         cmdWindowAtkButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) - 105);
-        cmdWindowAtkButton.onpointingstart = function () {
+        cmdWindowAtkButton.onpush = function () {
             gameModeReq = GAME_MODE.CMD_ATTACK;
         };
-        cmdWindowAtkButton.setAlpha(0);
+        cmdWindowAtkButton.alpha = 0.0;
         cmdWindowAtkButton.sleep();
-        cmdWindowEscButton = tm.app.FlatButton({
+        cmdWindowEscButton = Button({
             width: 160,
             height: 60,
             text: "にげる",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#444",
+            fill: "#444",
         }).addChildTo(group1);
         cmdWindowEscButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) - 35);
-        cmdWindowEscButton.onpointingstart = function () {
+        cmdWindowEscButton.onpush = function () {
             gameModeReq = GAME_MODE.CMD_ESCAPE;
         };
-        cmdWindowEscButton.setAlpha(0);
+        cmdWindowEscButton.alpha = 0.0;
         cmdWindowEscButton.sleep();
-        cmdWindowDefButton = tm.app.FlatButton({
+        cmdWindowDefButton = Button({
             width: 160,
             height: 60,
             text: "ぼうぎょ",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#444",
+            fill: "#444",
         }).addChildTo(group1);
         cmdWindowDefButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) + 35);
-        cmdWindowDefButton.onpointingstart = function () {
-            gameModeReq = GAME_MODE.CMD_DEFENCE;
+        cmdWindowDefButton.onpush = function () {
+            gameModeReq = GAME_MODE.CMD_DEFENSE;
         };
-        cmdWindowDefButton.setAlpha(0);
+        cmdWindowDefButton.alpha = 0.0;
         cmdWindowDefButton.sleep();
-        cmdWindowItemButton = tm.app.FlatButton({
+        cmdWindowItemButton = Button({
             width: 160,
             height: 60,
             text: "どうぐ",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#444",
+            fill: "#444",
         }).addChildTo(group1);
         cmdWindowItemButton.setPosition(256 / 2 + 32, SCREEN_HEIGHT - (288 / 2 + 160) + 105);
-        cmdWindowItemButton.onpointingstart = function () {
+        cmdWindowItemButton.onpush = function () {
             gameModeReq = GAME_MODE.CMD_ITEM;
         };
-        cmdWindowItemButton.setAlpha(0);
+        cmdWindowItemButton.alpha = 0.0;
         cmdWindowItemButton.sleep();
 
         // メッセージウィンドウ
         messageWindowSprite = new FrameSprite("frame_576_192_w", SCREEN_CENTER_X, SCREEN_CENTER_Y + 256, 1, 1).addChildTo(group0);
-        messageWindowLabel = tm.display.Label("").addChildTo(group0);
-        messageWindowLabel.setPosition(32 + 16, SCREEN_CENTER_Y + 192 + 24)
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        messageWindowLabel.shadowColor = "#000";
-        messageWindowLabel.shadowBlur = 0;
-        messageWindowLabel.alpha = 0;
+        messageWindowLabel = LabelArea({
+            width: 576 - 20,
+            height: 192 - 20,
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            fill: '#fff',
+            //backgroundColor: "orange",
+            padding: 8,
+            shadow: "#000",
+            shadowBlur: 0,
+            x: SCREEN_CENTER_X,
+            y: SCREEN_CENTER_Y + 264 - 8,
+        }).addChildTo(group0);
+        messageWindowLabel.alpha = 0.0;
 
         // 敵ウィンドウ
         enemyWindowSprite = new FrameSprite("frame_320_96_w", SCREEN_CENTER_X + 160 - 32, SCREEN_CENTER_Y + (32 * 4), 1, 1).addChildTo(group0);
-        enemyWindowLabel = tm.display.Label("").addChildTo(group0);
-        enemyWindowLabel.setPosition(SCREEN_CENTER_X - 16, SCREEN_CENTER_Y + (32 * 4.5))
-            .setFillStyle("#fff")
-            .setAlign("left")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        enemyWindowLabel.shadowColor = "#000";
-        enemyWindowLabel.shadowBlur = 0;
-        enemyWindowLabel.alpha = 0;
+        enemyWindowLabel = Label({
+            text: "",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "left",
+            baseline: "bottom",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: SCREEN_CENTER_X - 16,
+            y: SCREEN_CENTER_Y + (32 * 4.5),
+        }).addChildTo(group0);
+        enemyWindowLabel.alpha = 0.0;
 
         // 敵画像
         enemyGraphicSprite = new EnemySprite("pizzza", SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 3, 3).addChildTo(group0);
 
         // 道具ウィンドウ
         itemWindowSprite = new FrameSprite("frame_256_288_w", SCREEN_CENTER_X, SCREEN_CENTER_Y - 8 + (32 * 6), 2.3, 2.4).addChildTo(group2);
-        itemWindowLabel = tm.display.Label("どうぐ").addChildTo(group2);
-        itemWindowLabel.setPosition(SCREEN_CENTER_X, SCREEN_CENTER_Y - 32 * 4)
-            .setFillStyle("#fff")
-            .setAlign("center")
-            .setBaseline("center")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(32);
-        itemWindowLabel.shadowColor = "#000";
-        itemWindowLabel.shadowBlur = 0;
-        itemWindowLabel.alpha = 0;
+        itemWindowLabel = Label({
+            text: "どうぐ",
+            fontSize: 32,
+            fontFamily: FONT_FAMILY,
+            align: "center",
+            baseline: "middle",
+            fill: '#fff',
+            shadow: "#000",
+            shadowBlur: 0,
+            x: SCREEN_CENTER_X,
+            y: SCREEN_CENTER_Y - 32 * 4,
+        }).addChildTo(group2);
+        itemWindowLabel.alpha = 0.0;
 
         for (let ii = 0; ii < 16; ii++) {
-            itemWindowItemButton[ii] = tm.app.FlatButton({
+            itemWindowItemButton[ii] = Button({
                 width: 280,
                 height: 64,
                 text: "",
                 fontFamily: FONT_FAMILY,
                 fontSize: 32,
-                bgColor: "#888",
+                fill: "#888",
             }).addChildTo(group2);
             let xIdx = (ii % 2) * 2 - 1;    // -1:左 1:右
             let yIdx = Math.floor(ii / 2);
             itemWindowItemButton[ii].setPosition(SCREEN_CENTER_X + (32 * 4.5 * xIdx), 70 * 7 + (yIdx * 70));
-            itemWindowItemButton[ii].onpointingstart = function () {
+            itemWindowItemButton[ii].onpush = function () {
                 CmdItemExec(this);
             };
-            itemWindowItemButton[ii].setAlpha(0);
+            itemWindowItemButton[ii].alpha = 0.0;
             itemWindowItemButton[ii].sleep();
             itemWindowItemButton[ii].itemIdx = ii;
             itemWindowItemButton[ii].isDrop = false;
 
-            itemWindowItemLabel[ii] = tm.display.Label("").addChildTo(group2);
-            itemWindowItemLabel[ii].setPosition(SCREEN_CENTER_X + (32 * 4.5 * xIdx) - 32 * 4, 70 * 7 + (yIdx * 70))
-                .setFillStyle("#fff")
-                .setAlign("left")
-                .setBaseline("center")
-                .setFontFamily(FONT_FAMILY)
-                .setFontSize(32);
-            itemWindowItemLabel[ii].shadowColor = "#000";
-            itemWindowItemLabel[ii].shadowBlur = 0;
-            itemWindowItemLabel[ii].alpha = 0;
+            itemWindowItemLabel[ii] = Label({
+                text: "",
+                fontSize: 32,
+                fontFamily: FONT_FAMILY,
+                align: "left",
+                baseline: "middle",
+                fill: '#fff',
+                shadow: "#000",
+                shadowBlur: 0,
+                x: SCREEN_CENTER_X + (32 * 4.5 * xIdx) - 32 * 4,
+                y: 70 * 7 + (yIdx * 70),
+            }).addChildTo(group2);
+            itemWindowItemLabel[ii].alpha = 0.0;
         }
         {
             let ii = 16;
-            itemWindowReturnButton = tm.app.FlatButton({
+            itemWindowReturnButton = Button({
                 width: 280,
                 height: 64,
                 text: "もどる",
                 fontFamily: FONT_FAMILY,
                 fontSize: 32,
-                bgColor: "#444",
+                fill: "#444",
             }).addChildTo(group2);
             let yIdx = Math.floor(ii / 2);
             itemWindowReturnButton.setPosition(SCREEN_CENTER_X, 70 * 7 + (yIdx * 70));
-            itemWindowReturnButton.onpointingstart = function () {
-                gameModeReq = GAME_MODE.CMD_PRE_SELECTER;
+            itemWindowReturnButton.onpush = function () {
+                gameModeReq = GAME_MODE.CMD_PRE_SELECTOR;
             };
-            itemWindowReturnButton.setAlpha(0);
+            itemWindowReturnButton.alpha = 0.0;
             itemWindowReturnButton.sleep();
         }
 
-        restartButton = tm.app.FlatButton({
-            width: 160,
-            height: 60,
+        restartButton = Button({
             text: "もう一度",
             fontFamily: FONT_FAMILY,
             fontSize: 32,
-            bgColor: "#444",
+            fill: "#444",
+            x: SCREEN_CENTER_X + 160,
+            y: 650,
+            width: 160,
+            height: 60,
         }).addChildTo(group1);
-        restartButton.setPosition(SCREEN_CENTER_X + 160, 650);
         let self = this;
-        restartButton.onpointingstart = function () {
-            self.app.replaceScene(TitleScene());
+        restartButton.onpush = function () {
+            self.exit();
         };
-        restartButton.setAlpha(0);
+        restartButton.alpha = 0.0;
         restartButton.sleep();
 
-        this.fromJSON({
-            children: [
-                {
-                    type: "FlatButton", name: "tweetButton",
-                    init: [
-                        {
-                            text: "ツイート",
-                            fontFamily: FONT_FAMILY,
-                            fontSize: 32,
-                            width: 160,
-                            height: 60,
-                            bgColor: "#444",
-                        }
-                    ],
-                    x: SCREEN_CENTER_X - 160,
-                    y: 650,
-                    alpha: 0.0,
-                },
-            ]
-        });
-        this.tweetButton.onclick = function () {
-            var twitterURL = tm.social.Twitter.createURL({
+        tweetButton = Button({
+            text: "ポスト",
+            fontFamily: FONT_FAMILY,
+            fontSize: 32,
+            fill: "#444",
+            x: SCREEN_CENTER_X - 160,
+            y: 650,
+            width: 160,
+            height: 60,
+        }).addChildTo(group1);
+        tweetButton.onclick = function () {
+            var twitterURL = phina.social.Twitter.createURL({
                 type: "tweet",
                 text: "勇者" + myStatus.name + "は" + tweetStr,
                 hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
@@ -1171,19 +1267,22 @@ tm.define("GameScene", {
             });
             window.open(twitterURL);
         };
-        this.tweetButton.setAlpha(0);
-        this.tweetButton.sleep();
+        tweetButton.alpha = 0.0;
+        tweetButton.sleep();
         tweetButtonSwitch = false;
 
-        endingNameLabel = tm.display.Label(" R.I.P.\n" + myStatus.name).addChildTo(group2);
-        endingNameLabel.setPosition(SCREEN_CENTER_X + 16, SCREEN_CENTER_Y - 32 * 7)
-            .setFillStyle("#222")
-            .setAlign("center")
-            .setBaseline("bottom")
-            .setFontFamily(FONT_FAMILY)
-            .setFontSize(48);
-        endingNameLabel.shadowColor = "#000";
-        endingNameLabel.shadowBlur = 20;
+        endingNameLabel = Label({
+            text: " R.I.P.\n" + myStatus.name,
+            fontSize: 48,
+            fontFamily: FONT_FAMILY,
+            align: "center",
+            baseline: "bottom",
+            fill: '#222',
+            shadow: "#000",
+            shadowBlur: 20,
+            x: SCREEN_CENTER_X + 16,
+            y: SCREEN_CENTER_Y - 32 * 6,
+        }).addChildTo(group2);
         endingNameLabel.alpha = 0;
 
         enemyCount = 0;
@@ -1191,7 +1290,7 @@ tm.define("GameScene", {
         gameSubMode = GAME_SUB_MODE.INIT;
     },
 
-    onpointingstart: function () {
+    onpush: function () {
         //初期化
         //        gameMode = GAME_MODE.FADE_IN;
     },
@@ -1207,11 +1306,11 @@ tm.define("GameScene", {
 
         if (tweetButtonSwitch != null) {
             if (tweetButtonSwitch) {
-                this.tweetButton.setAlpha(1);
-                this.tweetButton.wakeUp();
+                tweetButton.alpha = 1.0;
+                tweetButton.wakeUp();
             } else {
-                this.tweetButton.setAlpha(0);
-                this.tweetButton.sleep();
+                tweetButton.alpha = 0.0;
+                tweetButton.sleep();
             }
             tweetButtonSwitch = null;
         }
@@ -1254,14 +1353,14 @@ function setColor(flag) {
             }
         }
     }
-    statusWindowNameLabel.setFillStyle(fontColor);
-    statusWindowHpLabel.setFillStyle(fontColor);
-    statusWindowMpLabel.setFillStyle(fontColor);
-    statusWindowLvLabel.setFillStyle(fontColor);
-    statusWindowGavasssLabel.setFillStyle(fontColor);
-    messageWindowLabel.setFillStyle(fontColor);
-    enemyWindowLabel.setFillStyle(fontColor);
-    itemWindowLabel.setFillStyle(fontColor);
+    statusWindowNameLabel.fill = fontColor;
+    statusWindowHpLabel.fill = fontColor;
+    statusWindowMpLabel.fill = fontColor;
+    statusWindowLvLabel.fill = fontColor;
+    statusWindowGavasssLabel.fill = fontColor;
+    messageWindowLabel.fill = fontColor;
+    enemyWindowLabel.fill = fontColor;
+    itemWindowLabel.fill = fontColor;
 
     statusWindowSprite.setImage(frame256x288Color);
     cmdWindowSprite.setImage(frame256x288Color);
@@ -1271,23 +1370,23 @@ function setColor(flag) {
 }
 
 function statusWindowCtrl(flag) {
-    statusWindowSprite.alpha = flag ? 1 : 0;
-    statusWindowNameLabel.alpha = flag ? 1 : 0;
-    statusWindowHpLabel.alpha = flag ? 1 : 0;
-    statusWindowMpLabel.alpha = flag ? 1 : 0;
-    statusWindowLvLabel.alpha = flag ? 1 : 0;
-    statusWindowGavasssLabel.alpha = flag ? 1 : 0;
+    statusWindowSprite.alpha = flag ? 1.0 : 0.0;
+    statusWindowNameLabel.alpha = flag ? 1.0 : 0.0;
+    statusWindowHpLabel.alpha = flag ? 1.0 : 0.0;
+    statusWindowMpLabel.alpha = flag ? 1.0 : 0.0;
+    statusWindowLvLabel.alpha = flag ? 1.0 : 0.0;
+    statusWindowGavasssLabel.alpha = flag ? 1.0 : 0.0;
 }
 function messageWindowCtrl(flag) {
-    messageWindowSprite.alpha = flag ? 1 : 0;
-    messageWindowLabel.alpha = flag ? 1 : 0;
+    messageWindowSprite.alpha = flag ? 1.0 : 0.0;
+    messageWindowLabel.alpha = flag ? 1.0 : 0.0;
 }
 function cmdWindowCtrl(flag) {
-    cmdWindowSprite.alpha = flag ? 1 : 0;
-    cmdWindowAtkButton.setAlpha(flag ? 1 : 0);
-    cmdWindowEscButton.setAlpha(flag ? 1 : 0);
-    cmdWindowDefButton.setAlpha(flag ? 1 : 0);
-    cmdWindowItemButton.setAlpha(flag ? 1 : 0);
+    cmdWindowSprite.alpha = flag ? 1.0 : 0.0;
+    cmdWindowAtkButton.alpha = flag ? 1.0 : 0.0;
+    cmdWindowEscButton.alpha = flag ? 1.0 : 0.0;
+    cmdWindowDefButton.alpha = flag ? 1.0 : 0.0;
+    cmdWindowItemButton.alpha = flag ? 1.0 : 0.0;
     if (flag) {
         cmdWindowAtkButton.wakeUp();
         cmdWindowEscButton.wakeUp();
@@ -1301,15 +1400,15 @@ function cmdWindowCtrl(flag) {
     }
 }
 function enemyWindowCtrl(flag) {
-    enemyWindowSprite.alpha = flag ? 1 : 0;
-    enemyWindowLabel.alpha = flag ? 1 : 0;
+    enemyWindowSprite.alpha = flag ? 1.0 : 0.0;
+    enemyWindowLabel.alpha = flag ? 1.0 : 0.0;
 }
 function enemyGraphicCtrl(flag) {
-    enemyGraphicSprite.alpha = flag ? 1 : 0;
+    enemyGraphicSprite.alpha = flag ? 1.0 : 0.0;
 }
 function itemWindowCtrl(itemFlag, isDrop) {
-    itemWindowSprite.alpha = itemFlag ? 1 : 0;
-    itemWindowLabel.alpha = itemFlag ? 1 : 0;
+    itemWindowSprite.alpha = itemFlag ? 1.0 : 0.0;
+    itemWindowLabel.alpha = itemFlag ? 1.0 : 0.0;
     if (isDrop) {
         itemWindowLabel.text = "すてるどうぐをせんたく";
     } else {
@@ -1317,17 +1416,17 @@ function itemWindowCtrl(itemFlag, isDrop) {
     }
     // ボタンを一旦初期化
     for (let ii = 0; ii < 16; ii++) {
-        itemWindowItemButton[ii].setAlpha(0);
+        itemWindowItemButton[ii].alpha = 0.0;
         itemWindowItemButton[ii].sleep();
         itemWindowItemButton[ii].isDrop = isDrop;
-        itemWindowItemLabel[ii].setAlpha(0);
+        itemWindowItemLabel[ii].alpha = 0.0;
     }
-    itemWindowReturnButton.setAlpha(0);
+    itemWindowReturnButton.alpha = 0.0;
     itemWindowReturnButton.sleep();
 
     if (itemFlag) {
         for (let ii = 0; ii < myStatus.itemList.length; ii++) {
-            itemWindowItemButton[ii].setAlpha(1);
+            itemWindowItemButton[ii].alpha = 1.0;
             itemWindowItemButton[ii].wakeUp();
             let tmpItemStr;
             if (myStatus.itemList[ii].eqp) {
@@ -1337,11 +1436,11 @@ function itemWindowCtrl(itemFlag, isDrop) {
             }
             tmpItemStr += myStatus.itemList[ii].def.name;
             itemWindowItemLabel[ii].text = tmpItemStr;
-            itemWindowItemLabel[ii].setAlpha(1);
+            itemWindowItemLabel[ii].alpha = 1.0;
         }
 
         if (isDrop == false) {
-            itemWindowReturnButton.setAlpha(1);
+            itemWindowReturnButton.alpha = 1.0;
             itemWindowReturnButton.wakeUp();
         }
     }
@@ -1365,9 +1464,9 @@ function GameFadeIn() {
             enemyGraphicCtrl(false);
             itemWindowCtrl(false, false);
 
-            fadeInSprite.alpha = 1;
+            fadeInSprite.alpha = 1.0;
             fadeInSprite.counter = 0;
-            fadeInSprite.gotoAndPlay("start");
+            fadeInAnimation.gotoAndPlay("start");
             gameSubMode = GAME_SUB_MODE.MAIN;
         // fall through
         case GAME_SUB_MODE.MAIN:
@@ -1376,7 +1475,7 @@ function GameFadeIn() {
             }
             break;
         case GAME_SUB_MODE.FINISH:
-            fadeInSprite.alpha = 0;
+            fadeInSprite.alpha = 0.0;
             gameMode = GAME_MODE.INTRO;
             gameSubMode = GAME_SUB_MODE.INIT;
             break;
@@ -1406,7 +1505,7 @@ function GameIntro() {
             enemyWindowLabel.text = eneStatus.name;
             enemyGraphicSprite.remove();
             enemyGraphicSprite = new EnemySprite(eneStatus.eneDef.spriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 32, 3, 3).addChildTo(group0);
-            let tmpText = makeMessageWindowString("ちか" + toZenkaku((enemyCount + 1), 1) + "かい") + "\n";
+            let tmpText = "ちか" + toZenkaku((enemyCount + 1), 1) + "かい\n";
             tmpText += eneStatus.eneDef.name + "があらわれた！";
             battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
             battleCtrl.textBuff[1] = { frm: 30, cmd: TEXT_BUFFER_CMD.FINISH };
@@ -1446,7 +1545,7 @@ function GameIntro() {
             break;
         case GAME_SUB_MODE.FINISH:
             if (battleCtrl.initTurnOwner !== 1) {
-                gameMode = GAME_MODE.CMD_PRE_SELECTER;
+                gameMode = GAME_MODE.CMD_PRE_SELECTOR;
                 gameSubMode = GAME_SUB_MODE.INIT;
             } else {
                 initBattleCtrl();
@@ -1461,7 +1560,7 @@ function GameIntro() {
 /*
 コマンドセレクターに入る前のモード
 */
-function CmdPreSelecter() {
+function CmdPreSelector() {
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             // 表示内容設定
@@ -1535,7 +1634,7 @@ function CmdPreSelecter() {
             break;
         case GAME_SUB_MODE.FINISH:
             if (myStatus.sleepStat === 0) {
-                gameMode = GAME_MODE.CMD_SELECTER;
+                gameMode = GAME_MODE.CMD_SELECTOR;
             } else {
                 gameMode = GAME_MODE.CMD_SLEEP;
             }
@@ -1620,7 +1719,7 @@ function CmdAttack() {
 /*
 『ぼうぎょ』コマンド
 */
-function CmdDefence() {
+function CmdDefense() {
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             // 表示内容設定
@@ -1906,7 +2005,7 @@ function GameBattleStart() {
                     (myStatus.statToxic !== true) &&
                     (Math.random() <= 0.031)
                 ) {
-                    tmpGameModeOld = GAME_MODE.CMD_DEFENCE;
+                    tmpGameModeOld = GAME_MODE.CMD_DEFENSE;
                 } else if (
                     (eneStatus.eneDef.isSnatch === true) &&
                     (myStatus.itemList.length >= 1) &&
@@ -1972,6 +2071,7 @@ function GameBattleStart() {
                             battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
                             battleCtrl.textBuff[buffIdx++] = { frm: 35, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
                             battleCtrl.textBuff[buffIdx++] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
+                            battleCtrl.textBuff[buffIdx++] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 0, y: 0 } };
                             battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                         } else {
                             battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　ひらりと　みをかわした！" };
@@ -1979,7 +2079,7 @@ function GameBattleStart() {
                         }
                     }
                     break;
-                case GAME_MODE.CMD_DEFENCE:
+                case GAME_MODE.CMD_DEFENSE:
                     console.log("DEFENCE");
                     if (isPlayer) {
                         battleCtrl.textBuff[buffIdx++] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: myStatus.name + "は　みをまもっている！" };
@@ -2215,7 +2315,7 @@ function GameBattleStart() {
                                 } else {
                                     let dmgVal = Math.round(getNormalDistribution(tmpItem.min, tmpItem.max) * calcMagicDmgRatio(tmpItem.attr, eneStatus.eneDef.attr) * getNormalDistribution(1.0, 2.5));
                                     let tmpText = "";
-                                    tmpText += makeMessageWindowString(eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
+                                    tmpText += eneStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ";
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: false, prm: -dmgVal };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SPRITE_OFF };
@@ -2312,13 +2412,14 @@ function GameBattleStart() {
                                     let dmg2 = getRandomValue(tmpItem.min, tmpItem.max);
                                     let dmgVal = Math.round(((dmg1 + dmg2) / 2.0) * calcMagicDmgRatio(tmpItem, myStatus.growthType.attr));
                                     let tmpText = "";
-                                    tmpText += makeMessageWindowString(myStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ");
+                                    tmpText += myStatus.name + "は　" + toZenkaku(dmgVal, 1) + "のダメージ";
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpText };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 30, cmd: TEXT_BUFFER_CMD.ADD_HP, isPlayer: true, prm: -dmgVal };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 31, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 33, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 35, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 5, y: -5 } };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: -5, y: 5 } };
+                                    battleCtrl.textBuff[buffIdx++] = { frm: 37, cmd: TEXT_BUFFER_CMD.SHAKE, prm: { x: 0, y: 0 } };
                                     battleCtrl.textBuff[buffIdx++] = { frm: 60, cmd: TEXT_BUFFER_CMD.FINISH };
                                 }
                                 break;
@@ -2394,7 +2495,7 @@ function GameBattleStart() {
                 if (battleCtrl.turnCnt < 2) {
                     gameMode = GAME_MODE.BATTLE_START;
                 } else {
-                    gameMode = GAME_MODE.CMD_PRE_SELECTER;
+                    gameMode = GAME_MODE.CMD_PRE_SELECTOR;
                 }
             }
             gameSubMode = GAME_SUB_MODE.INIT;
@@ -2403,7 +2504,7 @@ function GameBattleStart() {
 }
 /*
 */
-function GameBatleFinish() {
+function GameBattleFinish() {
     switch (gameSubMode) {
         case GAME_SUB_MODE.INIT:
             battleCtrl.textBuff = [];
@@ -2415,27 +2516,27 @@ function GameBatleFinish() {
             } else if (battleCtrl.isWin) {
                 let tmpExp = getRandomValue(eneStatus.eneDef.exp.min, eneStatus.eneDef.exp.max);
                 let tmpGavasss = getRandomValue(eneStatus.eneDef.gavasss.min, eneStatus.eneDef.gavasss.max);
-                tmpStr += makeMessageWindowString("ちか" + toZenkaku((enemyCount + 1), 1) + "かいの　" + eneStatus.name + "を　やっつけた！") + "\n";
+                tmpStr += "ちか" + toZenkaku((enemyCount + 1), 1) + "かいの　" + eneStatus.name + "を　やっつけた！\n";
                 battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
 
-                tmpStr = makeMessageWindowString(toZenkaku(tmpExp) + "ポイントの　けいけんちを　かくとく！") + "\n";
+                tmpStr = toZenkaku(tmpExp) + "ポイントの　けいけんちを　かくとく！\n";
                 myStatus.addExp(tmpExp);
-                tmpStr += makeMessageWindowString(toZenkaku(tmpGavasss, 1) + "ガバスを　てにいれた！") + "\n";
+                tmpStr += toZenkaku(tmpGavasss, 1) + "ガバスを　てにいれた！\n";
                 myStatus.addGavasss(tmpGavasss);
                 battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
 
                 // レベルアップ処理
                 let result = checkLevelUp();
                 if (result.isLevelUp) {
-                    tmpStr = makeMessageWindowString(myStatus.name + "は　レベルが上った") + "\n";
+                    tmpStr = myStatus.name + "は　レベルが上った\n";
                     if (result.hp > 0) {
-                        tmpStr += makeMessageWindowString("さいだいＨＰが　" + toZenkaku(result.hp) + "あがった！") + "\n";
+                        tmpStr += "さいだいＨＰが　" + toZenkaku(result.hp) + "あがった！\n";
                     }
                     if (result.atk > 0) {
-                        tmpStr += makeMessageWindowString("ちからが　" + toZenkaku(result.atk) + "あがった！") + "\n";
+                        tmpStr += "ちからが　" + toZenkaku(result.atk) + "あがった！\n";
                     }
                     if (result.agi > 0) {
-                        tmpStr += makeMessageWindowString("すばやさが　" + toZenkaku(result.agi) + "あがった！");
+                        tmpStr += "すばやさが　" + toZenkaku(result.agi) + "あがった！";
                     }
                     battleCtrl.textBuff[tmpIdx++] = { frm: (tmpIdx - 1) * 30, cmd: TEXT_BUFFER_CMD.DISP_NO_CHK, text: tmpStr };
                 }
@@ -2445,13 +2546,13 @@ function GameBatleFinish() {
                 if (tmpItem === null) {
                     battleCtrl.isItemFull = false;
                 } else {
-                    tmpStr = makeMessageWindowString(eneStatus.name + "は　" + tmpItem.name + "　を　もっていた！") + "\n";
+                    tmpStr = eneStatus.name + "は　" + tmpItem.name + "　を　もっていた！\n";
                     myStatus.addItemList(tmpItem)
                     if (myStatus.itemList.length <= 15) {
-                        tmpStr += makeMessageWindowString(myStatus.name + "は　" + tmpItem.name + "　を　てにいれた！");
+                        tmpStr += myStatus.name + "は　" + tmpItem.name + "　を　てにいれた！";
                         battleCtrl.isItemFull = false;
                     } else {
-                        tmpStr += makeMessageWindowString("しかし　これいじょう　どうぐを　もつことはできない！");
+                        tmpStr += "しかし　これいじょう　どうぐを　もつことはできない！";
                         battleCtrl.isItemFull = true;
                         battleCtrl.getItemName = tmpItem.name;
                     }
@@ -2588,7 +2689,7 @@ function GameWin() {
             gameCounter = 0;
             gameSubMode = GAME_SUB_MODE.MAIN;
 
-            battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: "こ．．．このわたしが　やられるとは．．．おまえは　いったい　なにものだ．．．" };
+            battleCtrl.textBuff[0] = { frm: 0, cmd: TEXT_BUFFER_CMD.DISP, text: "こ．．．このわたしが　やられるとは．．．\nおまえは　いったい　なにものだ．．．" };
             battleCtrl.textBuff[1] = { frm: 150, cmd: TEXT_BUFFER_CMD.DISP, text: "しかし　わたしを　たおしても　だい２　だい３の　ＮＭＬＳが　あらわれるだろう．．．" };
             battleCtrl.textBuff[2] = { frm: 300, cmd: TEXT_BUFFER_CMD.FINISH };
         // fall through
@@ -2655,28 +2756,28 @@ function GameEnding() {
             let tmpStr = "";
             let tmpSpriteName = "";
             if (enemyCount === 0) {
-                tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１かいで　ちからつきた") + "\n";
+                tmpStr = "こんかい　" + myStatus.name + "は　ちか１かいで　ちからつきた\n";
                 tweetStr = "地下１階で力尽きた\n";
                 tmpSpriteName = "rip";
                 endingNameLabel.alpha = 0.7;
             } else if (enemyCount === 100) {
-                tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか１００かい　すべてクリアした！") + "\n";
+                tmpStr = "こんかい　" + myStatus.name + "は　ちか１００かい　すべてクリアした！\n";
                 tweetStr = "地下１００階すべてクリアした！\n";
                 tmpSpriteName = "maria";
                 endingNameLabel.alpha = 0;
             } else {
-                tmpStr = makeMessageWindowString("こんかい　" + myStatus.name + "は　ちか" + toZenkaku(enemyCount, 1) + "かいまで　クリアした！") + "\n";
+                tmpStr = "こんかい　" + myStatus.name + "は　ちか" + toZenkaku(enemyCount, 1) + "かいまで　クリアした！\n";
                 tweetStr = "地下" + toZenkaku(enemyCount, 1) + "階までクリアした！\n";
                 tmpSpriteName = "rip";
                 endingNameLabel.alpha = 0.7;
             }
             if (myStatus.gavasss > 0) {
-                tmpStr += makeMessageWindowString("Lv" + toZenkaku(myStatus.lv, 1) + "だった！") + "\n";
-                tmpStr += makeMessageWindowString(toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！") + "\n";
+                tmpStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
+                tmpStr += toZenkaku(myStatus.gavasss, 1) + "ガバス　を　かくとく！\n";
                 tweetStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
                 tweetStr += toZenkaku(myStatus.gavasss, 1) + "ガバスを獲得した！\n";
             } else {
-                tmpStr += makeMessageWindowString("Lv" + toZenkaku(myStatus.lv, 1) + "") + "だった！\n";
+                tmpStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
                 tweetStr += "Lv" + toZenkaku(myStatus.lv, 1) + "だった！\n";
             }
 
@@ -2684,7 +2785,7 @@ function GameEnding() {
             battleCtrl.textBuff[1] = { frm: 90, cmd: TEXT_BUFFER_CMD.FINISH };
 
             restartButton.wakeUp();
-            restartButton.setAlpha(1);
+            restartButton.alpha = 1.0;
             tweetButtonSwitch = true;
 
             endingGraphicSprite = new EnemySprite(tmpSpriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 240, 3, 3).addChildTo(group0);
@@ -2708,7 +2809,7 @@ function messageAndModeCtrl() {
         if (gameCounter != tmp.frm) continue;
         switch (tmp.cmd) {
             case TEXT_BUFFER_CMD.DISP:
-                messageWindowLabel.text = makeMessageWindowString(tmp.text);
+                messageWindowLabel.text = tmp.text;
                 break;
             case TEXT_BUFFER_CMD.DISP_NO_CHK:
                 messageWindowLabel.text = tmp.text;
@@ -2773,36 +2874,26 @@ function messageAndModeCtrl() {
 /*
  * FadeIn用スプライトの定義
  */
-tm.define("FadeInSprite", {
-    superClass: "tm.app.AnimationSprite",
+phina.define("FadeInSprite", {
+    superClass: "Sprite",
 
     init: function () {
-        let ss = tm.asset.SpriteSheet({
-            // 画像
-            image: "fade_in",
-            // １コマのサイズ指定および全コマ数
-            frame: {
-                width: 8,
-                height: 8,
-                count: 16
-            },
-            // アニメーションの定義（開始コマ、終了コマ、次のアニメーション）
-            animations: {
-                "init": [0, 1, "init", 1],
-                "start": [2, 16, "stop", 3],
-                "stop": [15, 16, "stop", 1],
-            }
-        });
-
-        this.superInit(ss, SCREEN_WIDTH, SCREEN_HEIGHT);
+        this.superInit('fade_in', SCREEN_WIDTH, SCREEN_HEIGHT);
         this.direct = '';
         this.zRot = 0;
         this.setPosition(SCREEN_CENTER_X, SCREEN_CENTER_Y).setScale(1, 1);
         this.setInteractive(false);
         this.setBoundingType("rect");
-        this.gotoAndPlay("stop");
-        this.alpha = 0;
+        this.alpha = 0.0;
         this.counter = 0;
+    },
+
+    // canvasのアンチエイリアスを無効にするためにdrawメソッドをオーバーライドする
+    draw: function (canvas) {
+        canvas.save();                          //canvasの状態をスタックに保存
+        canvas.imageSmoothingEnabled = false;   //拡大時の補完を無効にする
+        this.superMethod('draw', canvas);       //Spriteのdrawメソッド呼び出し
+        canvas.restore();                       //他に影響が出ないように状態を戻す
     },
 
     update: function (app) {
@@ -2812,8 +2903,8 @@ tm.define("FadeInSprite", {
 /*
  * フレーム用スプライトの定義
  */
-tm.define("FrameSprite", {
-    superClass: "tm.app.Sprite",
+phina.define("FrameSprite", {
+    superClass: 'Sprite',
 
     init: function (spriteName, xPos, yPos, xScl, yScl) {
         this.superInit(spriteName);
@@ -2822,14 +2913,14 @@ tm.define("FrameSprite", {
         this.setPosition(xPos, yPos).setScale(xScl, yScl);
         this.setInteractive(false);
         this.setBoundingType("rect");
-        this.alpha = 0;
+        this.alpha = 0.0;
     },
 
     update: function (app) {
     },
 });
-tm.define("EnemySprite", {
-    superClass: "tm.app.Sprite",
+phina.define("EnemySprite", {
+    superClass: 'Sprite',
 
     init: function (spriteName, xPos, yPos, xScl, yScl) {
         this.superInit(spriteName);
@@ -2838,7 +2929,7 @@ tm.define("EnemySprite", {
         this.setPosition(xPos, yPos).setScale(xScl, yScl);
         this.setInteractive(false);
         this.setBoundingType("rect");
-        this.alpha = 0;
+        this.alpha = 0.0;
         this.frameIndex = 0;
     },
 
@@ -3113,28 +3204,6 @@ function toZenkaku(hankaku, digit) {
         }
     }
     return tmpStr;
-}
-
-/**
- * メッセージウインドウの幅に合わせて改行した文字列を生成
- * @param {*} inStr 
- */
-function makeMessageWindowString(inStr) {
-    let tmpInStrList = inStr.split('\n');
-    let ret = "";
-    for (let tmpInStr of tmpInStrList) {
-        let tmp = makeMessageWindowStringInternal(tmpInStr) + "\n";
-        ret += tmp.replace('\n\n', '\n');
-    }
-    return ret.replace('\n\n', '\n').slice(0, -1);
-}
-function makeMessageWindowStringInternal(inStr) {
-    let num = 17;   // １行１７文字
-    let ret = "";
-    for (let ii = 0; ii < inStr.length; ii += num) {
-        ret += inStr.slice(ii, ii + num) + "\n";
-    }
-    return ret.replace('\n\n', '\n');
 }
 
 /**
