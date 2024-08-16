@@ -780,10 +780,15 @@ let itemWindowItemLabel = [];
 let itemWindowReturnButton = null;
 let itemWindowItemIdx = -1;
 let restartButton = null;
-let tweetButtonSwitch = false;
+let snsButtonSwitch = false;
 let tweetStr = null;
 let endingGraphicSprite = null;
 let endingNameLabel = null;
+
+// 共有ボタン用
+let postText = null;
+const postURL = "https://iwasaku.github.io/test4/KMT/";
+const postTags = "#ネムレス #NEMLESSS #NMLS100";
 
 phina.main(function () {
     var app = GameApp({
@@ -864,14 +869,22 @@ phina.define("LogoScene", {
         console.log("LogoScene");
         this.superInit(option);
         this.localTimer = 0;
+        this.font1 = false;
+        this.font2 = false;
     },
 
     update: function (app) {
         // フォント読み込み待ち
         var self = this;
         document.fonts.load('12px "misaki_gothic"').then(function () {
-            self.exit();
+            self.font1 = true;
         });
+        document.fonts.load('10pt "icomoon"').then(function () {
+            self.font2 = true;
+        });
+        if (this.font1 && this.font2) {
+            self.exit();
+        }
     }
 });
 
@@ -1234,28 +1247,65 @@ phina.define("GameScene", {
         restartButton.alpha = 0.0;
         restartButton.sleep();
 
-        tweetButton = Button({
-            text: "ポスト",
-            fontFamily: FONT_FAMILY,
+        // X
+        xButton = Button({
+            text: String.fromCharCode(0xe902),
+            fontFamily: "icomoon",
+            fontSize: 32,
+            fill: "#444",
+            x: SCREEN_CENTER_X - 160 - 76,
+            y: 650,
+            width: 60,
+            height: 60,
+        }).addChildTo(group1);
+        xButton.onclick = function () {
+            // https://developer.x.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
+            var shareURL = "https://x.com/intent/tweet?text=" + encodeURIComponent(postText + "\n" + postTags + "\n") + "&url=" + encodeURIComponent(postURL);
+            window.open(shareURL);
+        };
+        xButton.alpha = 0.0;
+        xButton.sleep();
+
+        // threads
+        threadsButton = Button({
+            text: String.fromCharCode(0xe901),
+            fontFamily: "icomoon",
             fontSize: 32,
             fill: "#444",
             x: SCREEN_CENTER_X - 160,
             y: 650,
-            width: 160,
+            width: 60,
             height: 60,
         }).addChildTo(group1);
-        tweetButton.onclick = function () {
-            var twitterURL = phina.social.Twitter.createURL({
-                type: "tweet",
-                text: "勇者" + myStatus.name + "は" + tweetStr,
-                hashtags: ["ネムレス", "NEMLESSS", "NMLS100"],
-                url: "https://iwasaku.github.io/test4/KMT/",
-            });
-            window.open(twitterURL);
+        threadsButton.onclick = function () {
+            // https://developers.facebook.com/docs/threads/threads-web-intents/
+            // web intentでのハッシュタグの扱いが環境（ブラウザ、iOS、Android）によって違いすぎるので『#』を削って通常の文字列にしておく
+            var shareURL = "https://www.threads.net/intent/post?text=" + encodeURIComponent(postText + "\n\n" + postTags.replace(/#/g, "")) + "&url=" + encodeURIComponent(postURL);
+            window.open(shareURL);
         };
-        tweetButton.alpha = 0.0;
-        tweetButton.sleep();
-        tweetButtonSwitch = false;
+        threadsButton.alpha = 0.0;
+        threadsButton.sleep();
+
+        // Bluesky
+        bskyButton = Button({
+            text: String.fromCharCode(0xe900),
+            fontFamily: "icomoon",
+            fontSize: 32,
+            fill: "#444",
+            x: SCREEN_CENTER_X - 160 + 76,
+            y: 650,
+            width: 60,
+            height: 60,
+        }).addChildTo(group1);
+        bskyButton.onclick = function () {
+            // https://docs.bsky.app/docs/advanced-guides/intent-links
+            var shareURL = "https://bsky.app/intent/compose?text=" + encodeURIComponent(postText + "\n" + postTags + "\n" + postURL);
+            window.open(shareURL);
+        };
+        bskyButton.alpha = 0.0;
+        bskyButton.sleep();
+
+        snsButtonSwitch = false;
 
         endingNameLabel = Label({
             text: " R.I.P.\n" + myStatus.name,
@@ -1290,15 +1340,25 @@ phina.define("GameScene", {
         }
         gameMode.func();
 
-        if (tweetButtonSwitch != null) {
-            if (tweetButtonSwitch) {
-                tweetButton.alpha = 1.0;
-                tweetButton.wakeUp();
+        if (snsButtonSwitch != null) {
+            if (snsButtonSwitch) {
+                postText = "勇者" + myStatus.name + "は" + tweetStr;
+
+                xButton.alpha = 1.0;
+                xButton.wakeUp();
+                threadsButton.alpha = 1.0;
+                threadsButton.wakeUp();
+                bskyButton.alpha = 1.0;
+                bskyButton.wakeUp();
             } else {
-                tweetButton.alpha = 0.0;
-                tweetButton.sleep();
+                xButton.alpha = 0.0;
+                xButton.sleep();
+                threadsButton.alpha = 0.0;
+                threadsButton.sleep();
+                bskyButton.alpha = 0.0;
+                bskyButton.sleep();
             }
-            tweetButtonSwitch = null;
+            snsButtonSwitch = null;
         }
         statusWindowHpLabel.text = "ＨＰ：" + toZenkaku(myStatus.getNowHp(), 4);
         let lvStr = (myStatus.statToxic) ? "どく" : "ＬＶ";
@@ -2772,7 +2832,7 @@ function GameEnding() {
 
             restartButton.wakeUp();
             restartButton.alpha = 1.0;
-            tweetButtonSwitch = true;
+            snsButtonSwitch = true;
 
             endingGraphicSprite = new EnemySprite(tmpSpriteName, SCREEN_CENTER_X, SCREEN_CENTER_Y - 240, 3, 3).addChildTo(group0);
             endingGraphicSprite.alpha = 1;
